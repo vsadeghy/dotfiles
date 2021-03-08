@@ -1,0 +1,16 @@
+#!/bin/sh
+
+setxkbmap -option caps:swapescape
+
+xbindkeys -p
+setxkbmap -layout us,ir -option grp:rctrl_rshift_toggle
+
+if [ "$1" == "1" ]; then
+  echo "f3f4 is on"
+  #swap f3 and f4 keys
+  xkbcomp -w0 /home/vahid/.config/xkb/F3-to-F4.xkb $DISPLAY
+else
+  echo "f3f4 is off"
+  #back to default layout
+  xkbcomp -w0 /home/vahid/.config/xkb/default.xkb $DISPLAY
+fi

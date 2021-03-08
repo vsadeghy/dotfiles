@@ -1,0 +1,68 @@
+#!/bin/bash
+
+## app running aliases 
+# colorscript="/opt/shell-color-scripts/colorscript.sh" 
+alias tl="java -jar ~/Downloads/Tlauncher/TLauncher-2.72.jar"
+alias karlson="nohup ~/Downloads/Karlson_linux.x86_64 &"
+alias keytest="xbindkeys -mk"
+alias sdn="sudo shutdown now"
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias 3.="cd ../../.."
+alias 4.="cd ../../../.."
+
+alias v="$EDITOR"
+alias n="$EDITOR"
+
+## change rc files
+alias arc="$EDITOR ~/.config/aliasrc" 
+alias awrc="$EDITOR ~/.config/awesome" 
+alias brc="$EDITOR ~/.bashrc" 
+alias frc="$EDITOR ~/.config/fish/config.fish" 
+alias zrc="$EDITOR ~/.zshrc" 
+alias vrc="$EDITOR ~/.vimrc"
+alias prc="$EDITOR ~/.config/polybar/config" 
+alias nvrc="$EDITOR ~/.config/nvim/init.nvim" 
+alias sxrc="$EDITOR ~/.config/sxhkd/sxhkdrc" 
+alias bsprc="$EDITOR ~/.config/bspwm/bspwmrc" 
+alias pirc="$EDITOR ~/.config/picom/picom.conf" 
+alias xrc="$EDITOR ~/.xinitrc" 
+
+## changing "ls" to "exa"
+alias l="exa -al --color=always --group-directories-first"
+alias ld="exa -alD --color=always --group-directories-first"
+alias ls="exa --color=always --group-directories-first" 
+alias la="exa -a --color=always --group-directories-first" 
+alias ll="exa -lh --color=always --group-directories-first" 
+alias lt="exa -aT --color=always --group-directories-first" 
+alias lf='find . -maxdepth 1 -type d' 
+alias fd='find . -type d -name' 
+alias ff='find . -type f -name' 
+
+
+## package shortcuts
+alias p="sudo pacman"
+alias pi="sudo pacman -S"
+alias pq="sudo pacman -Qi"
+alias pr="sudo pacman -R"
+alias pS="sudo pacman -Ss"
+alias pu="sudo pacman -Syu"
+alias y="yay"
+alias yi="yay -S --nodiffmenu"
+alias ys="yay -Ss"
+alias unlock="sudo rm /var/lib/pacman/db.lck"
+
+alias yd="yarn dev"
+
+## switch between shells
+alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
+alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
+alias tofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
+
+## some other stuff
+alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
+alias su='sudo su'
+alias ging="ping -c4 google.com"
+alias ying="ping -c4 youtube.com"
+#alias android="sudo aft-mtp-mount -o allow_other /root/android"

@@ -1,0 +1,47 @@
+#!/bin/bash
+
+dest=${@:$#}
+initialPath=$(pwd)
+if [ $# == 1 ]; then
+  echo "you should put at least 2 arguments"
+  exit -1
+fi
+
+for i in $@
+do
+  if [ $i != $dest ]; then
+    basename=$(basename $i)
+    dirname=$(dirname $i)
+    currentDest="$dest/$dirname"
+    mkdir -p $currentDest
+    if [ -f $i ]; then
+      mv $i $currentDest
+      ln -s $(readlink -f $initialPath/$currentDest/$basename) $i
+    else
+      mkdir -p $currentDest/$basename
+      mv $i/* $currentDest/$basename
+      dirpath=
+      cd $currentDest
+      stow -t $initialPath/$i $basename
+    fi
+    cd $initialPath
+    echo "done for $i"
+  else
+    echo "done"
+  fi
+done
+
+
+
+# 40_cutom
+# .zshrc
+# .local/share/fish/
+# scripts/
+# .config/alac/
+# .config/awes/
+# .config/bsp/
+# .config/coc/
+# .config/fish/
+# .config/nvim/
+# .config/aliasrc
+# .config/starship.toml

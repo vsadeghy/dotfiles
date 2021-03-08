@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+#killall -p dhcpcd
+#killall -p wpa_supplicant
+ip link set wlp3s0 up
+wpa_supplicant -Bi wlp3s0 -c <(wpa_passphrase HMVR 123452343)
+dhcpcd wlp3s0
+ping google.com -c4

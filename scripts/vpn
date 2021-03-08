@@ -1,0 +1,11 @@
+#!/bin/sh
+USER="km3549159"
+PASSWORD="67253"
+HOST="c$1.from-ok.com:443"
+
+if [ -z $1 ]; then
+  sudo killall -SIGINT openconnect
+else
+  echo "$PASSWORD" | sudo openconnect -u $USER -b $HOST --no-dtls
+  ping -c4 youtube.com
+fi

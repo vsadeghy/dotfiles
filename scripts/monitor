@@ -1,0 +1,9 @@
+#!/bin/sh
+
+intern="eDP1" extern="DP1"
+
+case "$1" in 
+  "dis") xrandr --output "$extern" --off --output "$intern" --auto ;;
+  "ext") xrandr --output "$extern" --set audio force-dvi --mode 1280x1024 && xrandr --output "$intern" --auto --output "$extern" --right-of "$intern";;
+  "dup") xrandr --output "$extern"  --set audio force-dvi --mode 1280x1024 && xrandr --output "$intern" --auto --output "$extern" --same-as "$intern";;
+esac
