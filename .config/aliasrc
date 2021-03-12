@@ -66,3 +66,10 @@ alias su='sudo su'
 alias ging="ping -c4 google.com"
 alias ying="ping -c4 youtube.com"
 #alias android="sudo aft-mtp-mount -o allow_other /root/android"
+
+
+# ubuntu aliases
+if [[ $(grep '^NAME=' /etc/os-release) == *"Ubuntu"* ]]; then
+    alias pi="sudo apt install"
+    alias bat="batcat"
+fi
