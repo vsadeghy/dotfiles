@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/fish
 
 ## app running aliases 
 # colorscript="/opt/shell-color-scripts/colorscript.sh" 
@@ -68,8 +68,10 @@ alias ying="ping -c4 youtube.com"
 #alias android="sudo aft-mtp-mount -o allow_other /root/android"
 
 
+set distro (grep '^NAME=' /etc/os-release | cut -d'=' -f2)
 # ubuntu aliases
-if [[ $(grep '^NAME=' /etc/os-release) == *"Ubuntu"* ]]; then
-    alias pi="sudo apt install"
-    alias bat="batcat"
-fi
+echo "distro: $distro"
+if test "$distro" = '"Ubuntu"'
+	alias pi="sudo apt install"
+	alias bat="batcat"
+end
