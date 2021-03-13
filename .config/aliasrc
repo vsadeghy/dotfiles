@@ -1,5 +1,6 @@
 #!/bin/fish
 
+set distro (grep '^NAME=' /etc/os-release | cut -d'=' -f2)
 ## app running aliases 
 # colorscript="/opt/shell-color-scripts/colorscript.sh" 
 alias tl="java -jar ~/Downloads/Tlauncher/TLauncher-2.72.jar"
@@ -41,17 +42,19 @@ alias fd='find . -type d -name'
 alias ff='find . -type f -name' 
 
 
-## package shortcuts
-alias p="sudo pacman"
-alias pi="sudo pacman -S"
-alias pq="sudo pacman -Qi"
-alias pr="sudo pacman -R"
-alias pS="sudo pacman -Ss"
-alias pu="sudo pacman -Syu"
-alias y="yay"
-alias yi="yay -S --nodiffmenu"
-alias ys="yay -Ss"
-alias unlock="sudo rm /var/lib/pacman/db.lck"
+## Arch package shortcuts
+if test "$distro" = '"Arch Linux"'
+	alias p="sudo pacman"
+	alias pi="sudo pacman -S"
+	alias pq="sudo pacman -Qi"
+	alias pr="sudo pacman -R"
+	alias pS="sudo pacman -Ss"
+	alias pu="sudo pacman -Syu"
+	alias y="yay"
+	alias yi="yay -S --nodiffmenu"
+	alias ys="yay -Ss"
+	alias unlock="sudo rm /var/lib/pacman/db.lck"
+end
 
 alias yd="yarn dev"
 
@@ -69,9 +72,7 @@ alias ying="ping -c4 youtube.com"
 #alias android="sudo aft-mtp-mount -o allow_other /root/android"
 
 
-set distro (grep '^NAME=' /etc/os-release | cut -d'=' -f2)
 # ubuntu aliases
-echo "distro: $distro"
 if test "$distro" = '"Ubuntu"'
 	alias pi="sudo apt install"
 	alias bat="batcat"
