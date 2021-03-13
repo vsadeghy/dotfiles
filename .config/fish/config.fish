@@ -3,7 +3,7 @@ set -x PATH /bin /usr/bin /usr/local/bin /sbin /usr/sbin /usr/local/sbin
 set -x PATH  /home/vahid/scripts $PATH
 set -x PATH /home/vahid/.yarn/bin $PATH
 # set -x SXHKD_SHELL "/bin/sh"
-set EDITOR "nvim"
+set EDITOR "vim"
 set fish_greeting
 set fish_vi_key_bindings
 
