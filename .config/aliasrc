@@ -63,6 +63,7 @@ alias tofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
 ## some other stuff
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 alias su='sudo su'
+alias du='du -sh'
 alias ging="ping -c4 google.com"
 alias ying="ping -c4 youtube.com"
 #alias android="sudo aft-mtp-mount -o allow_other /root/android"
