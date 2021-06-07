@@ -1,60 +1,77 @@
-#!/bin/fish
+#!/bin/sh
 
-set distro (grep '^NAME=' /etc/os-release | cut -d'=' -f2)
+distro=$(grep '^NAME=' /etc/os-release | cut -d'=' -f2)
 ## app running aliases 
-# colorscript="/opt/shell-color-scripts/colorscript.sh" 
 alias tl="java -jar ~/Downloads/Tlauncher/TLauncher-2.72.jar"
-alias karlson="nohup ~/Downloads/Karlson_linux.x86_64 &"
 alias keytest="xbindkeys -mk"
 alias sdn="sudo shutdown now"
 
 alias ..="cd .."
 alias ...="cd ../.."
-alias 3.="cd ../../.."
-alias 4.="cd ../../../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
 
+#alias vim="nvim"
 alias v="$EDITOR"
-alias n="$EDITOR"
+alias vn="$EDITOR --noplugin"
 
 ## change rc files
 alias arc="$EDITOR ~/.config/aliasrc" 
-alias awrc="$EDITOR ~/.config/awesome" 
+alias awrc="$EDITOR ~/.config/awesome/rc.lua" 
 alias brc="$EDITOR ~/.bashrc" 
 alias frc="$EDITOR ~/.config/fish/config.fish" 
 alias zrc="$EDITOR ~/.zshrc" 
 alias vrc="$EDITOR ~/.vimrc"
-alias prc="$EDITOR ~/.config/polybar/config" 
+alias plrc="$EDITOR ~/.config/polybar/config" 
 alias nvrc="$EDITOR ~/.config/nvim/init.nvim" 
 alias sxrc="$EDITOR ~/.config/sxhkd/sxhkdrc" 
 alias bsprc="$EDITOR ~/.config/bspwm/bspwmrc" 
 alias pirc="$EDITOR ~/.config/picom/picom.conf" 
 alias xrc="$EDITOR ~/.xinitrc" 
+alias grc="sudo $EDITOR /etc/default/grub"
+alias gcrc="sudo $EDITOR /boot/grub/grub.cfg"
+alias ldrc="sudo $EDITOR /etc/lightdm/lightdm.conf"
+alias sdrc="sudo nano /etc/sddm.conf"
 
 ## changing "ls" to "exa"
-alias l="exa -al --color=always --group-directories-first"
-alias ld="exa -alD --color=always --group-directories-first"
-alias ls="exa --color=always --group-directories-first" 
-alias la="exa -a --color=always --group-directories-first" 
+alias l="exa -a --color=always --group-directories-first --icons"
+alias la="exa -a --color=always --group-directories-first --icons"
+alias ls="exa --color=always --group-directories-first --icons" 
 alias ll="exa -lh --color=always --group-directories-first" 
+alias ld="exa -alD --color=always"
 alias lt="exa -aT --color=always --group-directories-first" 
-alias lf='find . -maxdepth 1 -type d' 
+alias l.="exa -aF --group-directories-first | egrep '^\.'"
 alias fd='find . -type d -name' 
 alias ff='find . -type f -name' 
 
 
 ## Arch package shortcuts
-if test "$distro" = '"Arch Linux"'
+if [ "$distro" = 'Arch Linux' ] || [ "$distro" = 'ArcoLinux' ]; then
 	alias p="sudo pacman"
 	alias pi="sudo pacman -S"
 	alias pq="sudo pacman -Qi"
 	alias pr="sudo pacman -R"
 	alias pS="sudo pacman -Ss"
-	alias pu="sudo pacman -Syu"
+	alias pu="sudo pacman -Syyu"
 	alias y="yay"
-	alias yi="yay -S --nodiffmenu"
-	alias ys="yay -Ss"
+	alias yi="paru -S --needed"
+	alias ys="paru -Ss"
 	alias unlock="sudo rm /var/lib/pacman/db.lck"
-end
+    #get fastest mirrors in your neighborhood
+    alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
+    alias mirrord="sudo reflector --latest 30 --number 10 --sort delay --save /etc/pacman.d/mirrorlist"
+    alias mirrors="sudo reflector --latest 30 --number 10 --sort score --save /etc/pacman.d/mirrorlist"
+    alias mirrora="sudo reflector --latest 30 --number 10 --sort age --save /etc/pacman.d/mirrorlist"
+    #our experimental - best option for the moment
+    alias mirrorxx="sudo reflector --age 6 --latest 20  --fastest 20 --threads 20 --sort rate --protocol https --save /etc/pacman.d/mirrorlist"
+    alias mirrorx="sudo reflector --age 6 --latest 20  --fastest 20 --threads 5 --sort rate --protocol https --save /etc/pacman.d/mirrorlist"
+    #Cleanup orphaned packages
+    alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
+    #Recent Installed Packages
+    alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
+    alias riplong="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -3000 | nl"
+    alias mlrc="sudo $EDITOR /etc/pacman.d/mirrorlist"
+fi
 
 alias yd="yarn dev"
 
@@ -64,16 +81,107 @@ alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
 alias tofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
 
 ## some other stuff
-alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 alias su='sudo su'
 alias du='du -sh'
+alias df='df -h'
+alias free="free -mt"
 alias ging="ping -c4 google.com"
 alias ying="ping -c4 youtube.com"
+alias wget="wget -c"
+alias psa="ps auxf"
+alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
+alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
+alias hw="hwinfo --short"
+alias sdn="sudo shutdown now"
+alias sr="sudo reboot"
+alias nitro="nitrogen --restore"
+
+#switch between lightdm and sddm
+alias tolightdm="sudo pacman -S lightdm lightdm-gtk-greeter --noconfirm --needed ; sudo systemctl enable lightdm.service -f ; echo 'Lightm is active - reboot now'"
+alias tosddm="sudo pacman -S sddm --noconfirm --needed ; sudo systemctl enable sddm.service -f ; echo 'Sddm is active - reboot now'"
+
+#youtube-dl
+alias yta-aac="youtube-dl --extract-audio --audio-format aac "
+alias yta-best="youtube-dl --extract-audio --audio-format best "
+alias yta-flac="youtube-dl --extract-audio --audio-format flac "
+alias yta-m4a="youtube-dl --extract-audio --audio-format m4a "
+alias yta-mp3="youtube-dl --extract-audio --audio-format mp3 "
+alias yta-opus="youtube-dl --extract-audio --audio-format opus "
+alias yta-vorbis="youtube-dl --extract-audio --audio-format vorbis "
+alias yta-wav="youtube-dl --extract-audio --audio-format wav "
+alias ytv-best="youtube-dl -f bestvideo+bestaudio "
+
+## Colorize the grep command output for ease of use (good for log files)##
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+#use all cores
+alias uac="sh ~/.bin/main/000*"
+
+#merge new settings
+alias merge="xrdb -merge ~/.Xresources"
+
+#check vulnerabilities microcode
+alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
+
 #alias android="sudo aft-mtp-mount -o allow_other /root/android"
 
 
+#iso and version used to install ArcoLinux
+alias iso="cat /etc/dev-rel | awk -F '=' '/ISO/ {print $2}'"
+
+#get the error messages from journalctl
+alias jctl="journalctl -p 3 -xb"
+
+#gpg
+#verify signature for isos
+alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
+alias fix-gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
+#receive the key of a developer
+alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
+alias fix-gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
+alias fix-key="[ -d ~/.gnupg ] || mkdir ~/.gnupg ; cp /etc/pacman.d/gnupg/gpg.conf ~/.gnupg/ ; echo 'done'"
+
+#maintenance
+alias big="expac -H M '%m\t%n' | sort -h | nl"
+alias downgrada="sudo downgrade --ala-url https://bike.seedhost.eu/arcolinux/"
+
+#systeminfo
+alias probe="sudo -E hw-probe -all -upload"
+
 # ubuntu aliases
-if test "$distro" = '"Ubuntu"'
+if test "$distro" = '"Ubuntu"'; then
 	alias pi="sudo apt install"
 	alias bat="batcat"
-end
+fi
+
+#extract all files
+ex () {
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)   tar xjf $1   ;;
+      *.tar.gz)    tar xzf $1   ;;
+      *.bz2)       bunzip2 $1   ;;
+      *.rar)       unrar x $1   ;;
+      *.gz)        gunzip $1    ;;
+      *.tar)       tar xf $1    ;;
+      *.tbz2)      tar xjf $1   ;;
+      *.tgz)       tar xzf $1   ;;
+      *.zip)       unzip $1     ;;
+      *.Z)         uncompress $1;;
+      *.7z)        7z x $1      ;;
+      *.deb)       ar x $1      ;;
+      *.tar.xz)    tar xf $1    ;;
+      *.tar.zst)   unzstd $1    ;;
+      *)           echo "'$1' cannot be extracted via ex()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
+#get keys and keycodes
+keys () {
+	xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'
+}
