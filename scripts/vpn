@@ -1,11 +1,16 @@
 #!/bin/sh
-USER="km3549159"
-PASSWORD="67253"
-HOST="c$1.from-ok.com:443"
+USER=`sed -n "1 p" ~/.vpnrc`
+PASSWORD=`sed -n "2 p" ~/.vpnrc`
 
 if [ -z $1 ]; then
-  sudo killall -SIGINT openconnect
+    sudo killall -SIGINT openconnect
 else
-  echo "$PASSWORD" | sudo openconnect -u $USER -b $HOST --no-dtls
-  ping -c4 youtube.com
-fi
+    server=`sed -n "$(expr $1 + 2) p" ~/.vpnrc`
+
+    HOST=`echo $server | cut -d' ' -f1`
+    country=`echo $server | cut -d' ' -f2`
+
+    echo "connecting to $country"
+    echo "$PASSWORD" | sudo openconnect -u $USER -b $HOST --no-dtls
+    ping -c4 youtube.com
+fi 
