@@ -1,0 +1,151 @@
+{
+  "editor.formatOnPaste": true,
+  "vim.leader": "<space>",
+  "vim.useSystemClipboard": true,
+  "vim.hlsearch": true,
+  "vim.ignorecase": false,
+  "vim.smartcase": false,
+  "vim.easymotion": true,
+  "vim.sneak": true,
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-f>": false,
+    "<C-h>": false,
+    "<C-k>": false,
+    "<C-w>": false,
+    "<C-x>": false,
+    "<C-y>": false,
+    "<C-z>": false,
+    "<Tab>": false
+  },
+  "vim.smartRelativeLine": true,
+  "vim.camelCaseMotion.enable": true,
+  "vim.replaceWithRegister": true,
+  "vim.insertModeKeyBindingsNonRecursive": [
+    {
+      "before": ["j", "k"],
+      "after": ["<Esc>"]
+    },
+    {
+      "before": ["k", "j"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "n"],
+      "commands": [":nohl"]
+    },
+    {
+      "before": ["c"],
+      "after": ["\"", "_", "c"]
+    },
+    {
+      "before": ["<Tab>"],
+      "commands": ["workbench.action.nextEditor"]
+    },
+    {
+      "before": ["<S-Tab>"],
+      "commands": ["workbench.action.previousEditor"]
+    },
+    {
+      "before": ["<leader>", "e"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
+    {
+      "before": ["<leader>", "w", "h"],
+      "commands": ["workbench.files.action.focusFilesExplorer"]
+    },
+    {
+      "before": [">", ">"],
+      "commands": ["workbench.action.moveEditorRightInGroup"]
+    },
+    {
+      "before": ["<", "<"],
+      "commands": ["workbench.action.moveEditorLeftInGroup"]
+    },
+    {
+      "before": ["<leader>", "j"],
+      "after": ["<leader>", "<leader>", "<leader>", "j"]
+    }
+  ],
+
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<space>", "j"],
+      "commands": ["editor.action.smartSelect.expand"]
+    },
+    {
+      "before": ["<space>", "k"],
+      "commands": ["editor.action.smartSelect.shrink"]
+    },
+    {
+      "before": ["J"],
+      "commands": ["editor.action.moveLinesDownAction"]
+    },
+    {
+      "before": ["K"],
+      "commands": ["editor.action.moveLinesUpAction"]
+    },
+    {
+      "before": ["<Esc>"],
+      "after": [":", "<CR>"]
+    }
+  ],
+
+  "vim.statusBarColorControl": true,
+  "vim.statusBarColors.normal": ["#8FBCBB", "#434C5E"],
+  "vim.statusBarColors.insert": "#BF616A",
+  "vim.statusBarColors.visual": "#B48EAD",
+  "vim.statusBarColors.visualline": "#B48EAD",
+  "vim.statusBarColors.visualblock": "#A3BE8C",
+  "vim.statusBarColors.replace": "#D08770",
+  "vim.statusBarColors.commandlineinprogress": "#007ACC",
+  "vim.statusBarColors.searchinprogressmode": "#007ACC",
+  "vim.statusBarColors.easymotionmode": "#007ACC",
+  "vim.statusBarColors.easymotioninputmode": "#007ACC",
+  "vim.statusBajsonrColors.surroundinputmode": "#007ACC",
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "vsicons.dontShowNewVersionMessage": true,
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": { "source.organizeImports": true },
+  "editor.codeLens": false,
+  "editor.lineNumbers": "on",
+  "editor.formatOnType": true,
+  "editor.minimap.enabled": false,
+  "editor.quickSuggestions": true,
+  "files.insertFinalNewline": true,
+  "zenMode.hideLineNumbers": false,
+  "zenMode.hideTabs": false,
+  "window.title": "${dirty}${activeEditorShort}${separator}${rootPath}${separator}${appName}",
+  "window.titleSeparator": " # ",
+  "terminal.external.linuxExec": "alacritty",
+  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+  "vscode-neovim.neovimInitVimPaths.linux": "/home/vahid/.config/nvim/vimscript/lv-vscode/init.vim",
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#8FBCBB",
+    "statusBar.noFolderBackground": "#8FBCBB",
+    "statusBar.debuggingBackground": "#8FBCBB",
+    "statusBar.foreground": "#434C5E"
+  },
+  "gitlens.hovers.currentLine.over": "line",
+  "gitlens.statusBar.enabled": false,
+  "workbench.sideBar.location": "right",
+  "workbench.colorTheme": "Super Contrast (rainglow)",
+  "workbench.iconTheme": "vscode-icons",
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "sync.gist": "43ab1f97a4c43121999ba792964f11f4",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "editor.fontFamily": "'Fira Code', 'monospace', 'Droid Sans Fallback'",
+  "keyboard.dispatch": "keyCode",
+  "git.autofetch": true,
+  "npm.packageManager": "yarn",
+  "window.zoomLevel": 2,
+  "[lua]": {
+    "editor.defaultFormatter": "Koihik.vscode-lua-format"
+  }
+}
