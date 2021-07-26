@@ -35,6 +35,8 @@ naughty.config.defaults['icon_size'] = 100
 local lain          = require("lain")
 local freedesktop   = require("freedesktop")
 
+local gmath = require("gears.math")
+
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 local hotkeys_popup = require("awful.hotkeys_popup").widget
@@ -286,9 +288,9 @@ end)
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(
     function(s) beautiful.at_screen_connect(s)
-    	s.systray = wibox.widget.systray()
-        s.systray.visible = true
-    end)
+    s.systray = wibox.widget.systray()
+    s.systray.visible = true
+end)
 -- }}}
 
 
@@ -355,12 +357,6 @@ globalkeys = my_table.join(
         {description = "arcolinux-logout", group = "alt+ctrl"}),
     awful.key({ modkey1, altkey   }, "p", function() awful.spawn.with_shell("$HOME/.config/awesome/scripts/picom-toggle.sh") end,
         {description = "Picom toggle", group = "alt+ctrl"}),
-    awful.key({ modkey1, altkey   }, "s", function() awful.util.spawn( mediaplayer ) end,
-        {description = mediaplayer, group = "alt+ctrl"}),
-    awful.key({ modkey1, altkey   }, "t", function() awful.util.spawn( terminal ) end,
-        {description = terminal, group = "alt+ctrl"}),
-    awful.key({ modkey1, altkey   }, "Return", function() awful.util.spawn(terminal) end,
-        {description = terminal, group = "alt+ctrl"}),
     awful.key({ modkey1, altkey   }, "m", function() awful.util.spawn( "xfce4-settings-manager" ) end,
         {description = "Xfce settings manager", group = "alt+ctrl"}),
     awful.key({ altkey }, "F2", function () awful.util.spawn( "gmrun" ) end,
@@ -418,14 +414,6 @@ globalkeys = my_table.join(
         end,
         {description = "focus next by index", group = "client"}
     ),
-    --[[
-    awful.key({ altkey,           }, "k",
-        function ()
-            awful.client.focus.byidx(-1)
-        end,
-        {description = "focus previous by index", group = "client"}
-    ),
-    ]]--
 
     -- By direction client focus
     awful.key({ modkey }, "j",
@@ -484,7 +472,7 @@ globalkeys = my_table.join(
 
  -- Show/Hide Systray
     awful.key({ modkey }, "KP_Subtract", function ()
-        awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible
+    awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible
     end, {description = "Toggle systray visibility", group = "awesome"}),
 
 
@@ -532,19 +520,22 @@ globalkeys = my_table.join(
     awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
               {description = "select next", group = "layout"}),
 
-    awful.key({ modkey,           }, "n",
-        function (c)
-            -- The client currently has the input focus, so it cannot be
-            -- minimized, since minimized clients can't have the focus.
-            c.minimized = true
-        end ,
-        {description = "minimize", group = "client"}),
+    awful.key({ modkey, "Shift" }, "n",
+              function ()
+                  local c = awful.client.restore()
+                  -- Focus restored client
+                  if c then
+                      client.focus = c
+                      c:raise()
+                  end
+              end,
+              {description = "restore minimized", group = "client"}),
 
     -- Brightness
     awful.key({ }, "XF86MonBrightnessUp", function () os.execute("light -A 10")  end,
               {description = "+10%", group = "hotkeys"}),
     awful.key({ }, "XF86MonBrightnessDown", function () os.execute("light -U 10") end,
-        {description = "-10%", group = "hotkeys"}),
+              {description = "-10%", group = "hotkeys"}),
 
     -- ALSA volume control
     awful.key({ }, "XF86AudioRaiseVolume",
@@ -598,33 +589,6 @@ globalkeys = my_table.join(
             beautiful.mpd.update()
         end,
         {description = "mpc stop", group = "widgets"})
-        --[[
-    awful.key({ modkey1, "Shift" }, "Left",
-        function ()
-            os.execute("mpc prev")
-            beautiful.mpd.update()
-        end,
-        {description = "mpc prev", group = "widgets"})
-    awful.key({ modkey1, "Shift" }, "Right",
-        function ()
-            os.execute("mpc next")
-            beautiful.mpd.update()
-        end,
-        {description = "mpc next", group = "widgets"})
-    awful.key({ modkey1, "Shift" }, "s",
-        function ()
-            local common = { text = "MPD widget ", position = "top_middle", timeout = 2 }
-            if beautiful.mpd.timer.started then
-                beautiful.mpd.timer:stop()
-                common.text = common.text .. lain.util.markup.bold("OFF")
-            else
-                beautiful.mpd.timer:start()
-                common.text = common.text .. lain.util.markup.bold("ON")
-            end
-            naughty.notify(common)
-        end,
-        {description = "mpc on/off", group = "widgets"})
-        --]]
 
     -- Copy primary to clipboard (terminals to gtk)
     --awful.key({ modkey }, "c", function () awful.spawn.with_shell("xsel | xsel -i -b") end,
@@ -637,7 +601,7 @@ globalkeys = my_table.join(
 clientkeys = my_table.join(
     awful.key({ altkey, "Shift"   }, "m",      lain.util.magnify_client,
               {description = "magnify client", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "f",
+    awful.key({ modkey,           }, "f",
         function (c)
             c.fullscreen = not c.fullscreen
             c:raise()
@@ -651,41 +615,52 @@ clientkeys = my_table.join(
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
-    awful.key({ modkey, "Shift" }, "o",      function (c) c:move_to_screen()               end,
+    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
               {description = "move to screen", group = "client"}),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
-     awful.key({ modkey, "Shift" }, "n",
-              function ()
-                  local c = awful.client.restore()
-                  -- Focus restored client
-                  if c then
-                      client.focus = c
-                      c:raise()
-                  end
-              end,
-              {description = "restore minimized", group = "client"}),
-        -- function (c)
-        --     -- The client currently has the input focus, so it cannot be
-        --     -- minimized, since minimized clients can't have the focus.
-        --     c.minimized = true
-        -- end ,
-        -- {description = "minimize", group = "client"}),
+    awful.key({ modkey,           }, "n",
+        function (c)
+            -- The client currently has the input focus, so it cannot be
+            -- minimized, since minimized clients can't have the focus.
+            c.minimized = true
+        end ,
+        {description = "minimize", group = "client"}),
     awful.key({ modkey,           }, "m",
         function (c)
             c.maximized = not c.maximized
             c:raise()
         end ,
-        {description = "maximize", group = "client"})
+        {description = "maximize", group = "client"}),
 
 
-            -- move client to next tag (not working)
-    -- awful.key({ modkey, "Shift" }, "]",
-    -- function (c)
-    --     local tag = awful.screen.focused().tags[(awful.client.tag.index + 1) % 9]
-    --     c:move_to_tag(tag)
-    -- end,
-    -- {description = "move to next", group = "tag"})
+    -- move client to previous tag
+    awful.key({ modkey, "Shift" }, "[",
+    function ()
+        local c = client.focus
+        if not c then return end
+        local t = c.screen.selected_tag
+        local tags = c.screen.tags
+        local idx = t.index
+        local previoustag = tags[gmath.cycle(#tags, idx-1)]
+        c:move_to_tag(previoustag)
+        awful.tag.viewprev()
+    end,
+    {description = "move to previous", group = "tag"}),
+
+    -- move client to next tag
+    awful.key({ modkey, "Shift" }, "]",
+    function ()
+        local c = client.focus
+        if not c then return end
+        local t = c.screen.selected_tag
+        local tags = c.screen.tags
+        local idx = t.index
+        local nexttag = tags[gmath.cycle(#tags, idx+1)]
+        c:move_to_tag(nexttag)
+        awful.tag.viewnext()
+    end,
+    {description = "move to next", group = "tag"})
 )
 
 -- Bind all key numbers to tags.
@@ -719,7 +694,7 @@ for i = 1, 9 do
                       if tag then
                          awful.tag.viewtoggle(tag)
                       end
-            end,
+                  end,
                   descr_toggle),
         -- Move client to tag.
         awful.key({ modkey, "Shift" }, "#" .. i + 9,
@@ -818,8 +793,8 @@ awful.rules.rules = {
     --{ rule = { class = "Vivaldi-stable" },
         --properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true } },
 
-    --{ rule = { class = "Chromium-devel" },
-      --properties = { screen = 2, tag = awful.util.tagnames[1], switchtotag = true  } },
+    --{ rule = { class = "Chromium" },
+      --properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true  } },
 
     --{ rule = { class = "Opera" },
       --properties = { screen = 1, tag = awful.util.tagnames[1],switchtotag = true  } },
@@ -863,6 +838,9 @@ awful.rules.rules = {
     { rule = { class = "Geany" },
           properties = { maximized = false, floating = false } },
 
+    -- { rule = { class = "Thunar" },
+    --     properties = { maximized = false, floating = false } },
+
     { rule = { class = "Gimp*", role = "gimp-image-window" },
           properties = { maximized = true } },
 
@@ -875,8 +853,8 @@ awful.rules.rules = {
     { rule = { class = mediaplayer },
           properties = { maximized = true } },
 
-    --{ rule = { class = "vlc" },
-          --properties = { maximized = true, tag=awful.util.tagnames[5], switchtotag = true } },
+    { rule = { class = "vlc" },
+          properties = { maximized = true } },
 
     { rule = { class = "VirtualBox Manager" },
           properties = { maximized = true } },
@@ -1027,7 +1005,7 @@ client.connect_signal("request::titlebars", function(c)
             awful.titlebar.widget.stickybutton   (c),
             awful.titlebar.widget.ontopbutton    (c),
             awful.titlebar.widget.closebutton    (c),
-            layout = wibox.layout.fixed.horizontal(),
+            layout = wibox.layout.fixed.horizontal()
         },
         layout = wibox.layout.align.horizontal
     }
