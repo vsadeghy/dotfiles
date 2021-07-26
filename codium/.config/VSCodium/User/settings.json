@@ -33,7 +33,7 @@
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-      "before": ["<leader>", "n"],
+      "before": ["<leader>", "h"],
       "commands": [":nohl"]
     },
     {
@@ -67,17 +67,25 @@
     {
       "before": ["<leader>", "j"],
       "after": ["<leader>", "<leader>", "<leader>", "j"]
+    },
+    {
+      "before": ["<leader>", "/"],
+      "commands": ["editor.action.commentLine"]
     }
   ],
 
   "vim.visualModeKeyBindingsNonRecursive": [
     {
-      "before": ["<space>", "j"],
+      "before": ["<leader>", "j"],
       "commands": ["editor.action.smartSelect.expand"]
     },
     {
-      "before": ["<space>", "k"],
+      "before": ["<leader>", "k"],
       "commands": ["editor.action.smartSelect.shrink"]
+    },
+    {
+      "before": ["<leader>", "/"],
+      "commands": ["editor.action.commentLine"]
     },
     {
       "before": ["J"],
@@ -131,7 +139,6 @@
     "statusBar.foreground": "#434C5E"
   },
   "gitlens.hovers.currentLine.over": "line",
-  "gitlens.statusBar.enabled": false,
   "workbench.sideBar.location": "right",
   "workbench.colorTheme": "Super Contrast (rainglow)",
   "workbench.iconTheme": "vscode-icons",
@@ -147,5 +154,6 @@
   "window.zoomLevel": 2,
   "[lua]": {
     "editor.defaultFormatter": "Koihik.vscode-lua-format"
-  }
+  },
+  "gitlens.statusBar.enabled": false
 }
