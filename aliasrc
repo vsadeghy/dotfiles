@@ -5,6 +5,7 @@ distro=$(grep '^NAME=' /etc/os-release | cut -d'=' -f2)
 alias tl="java -jar ~/Downloads/Tlauncher/TLauncher-2.72.jar"
 alias keytest="xbindkeys -mk"
 alias sdn="sudo shutdown now"
+alias mkdir="mkdir -p"
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -22,7 +23,7 @@ alias erc="$EDITOR ~/.zshenv"
 alias awrc="$EDITOR ~/.config/awesome/rc.lua" 
 alias brc="$EDITOR ~/.bashrc" 
 alias frc="$EDITOR ~/.config/fish/config.fish" 
-alias zrc="$EDITOR ~/.config/zsh/.zshrc" 
+alias zrc="$EDITOR $ZDOTDIR/.zshrc" 
 alias vrc="$EDITOR ~/.vimrc"
 alias plrc="$EDITOR ~/.config/polybar/config" 
 alias nvrc="$EDITOR ~/.config/nvim/init.nvim" 
@@ -46,6 +47,8 @@ alias fd='find . -type d -name'
 alias ff='find . -type f -name' 
 
 alias hist="history 1"
+
+alias rz="source $ZDOTDIR/.zshrc"
 
 ## Arch package shortcuts
 if [ "$distro" = 'Arch Linux' ] || [ "$distro" = 'ArcoLinux' ]; then
