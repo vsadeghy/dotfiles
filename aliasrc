@@ -12,6 +12,8 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
+alias o="xdg-open"
+
 export EDITOR="nvim"
 #alias vim="nvim"
 alias v="$EDITOR"
@@ -31,7 +33,7 @@ alias sxrc="$EDITOR ~/.config/sxhkd/sxhkdrc"
 alias bsprc="$EDITOR ~/.config/bspwm/bspwmrc" 
 alias pirc="$EDITOR ~/.config/picom/picom.conf" 
 alias xrc="$EDITOR ~/.xinitrc" 
-alias grc="sudo $EDITOR /etc/default/grub"
+alias grc="$EDITOR ~/.config/git/config"
 alias gcrc="sudo $EDITOR /boot/grub/grub.cfg"
 alias ldrc="sudo $EDITOR /etc/lightdm/lightdm.conf"
 alias sdrc="sudo nano /etc/sddm.conf"
@@ -47,17 +49,21 @@ alias fd='find . -type d -name'
 alias ff='find . -type f -name' 
 
 alias hist="history 1"
+alias hs="history 1 | rg"
 
-alias rz="source $ZDOTDIR/.zshrc"
+alias rz="source ~/.zshenv && source $ZDOTDIR/.zshrc"
 
 ## Arch package shortcuts
 if [ "$distro" = 'Arch Linux' ] || [ "$distro" = 'ArcoLinux' ]; then
 	alias p="sudo pacman"
 	alias pi="sudo pacman -S"
+	alias pI="sudo pacman -Si"
 	alias pq="sudo pacman -Qi"
 	alias pr="sudo pacman -R"
 	alias pS="sudo pacman -Ss"
-	alias pu="sudo pacman -Syyu"
+	alias pu="sudo pacman -Su"
+	alias py="sudo pacman -Syy"
+	alias pyu="sudo pacman -Syyu"
 	alias y="paru"
 	alias yi="paru -S --needed"
 	alias ys="paru -Ss"
@@ -100,6 +106,7 @@ alias ping="prettyping"
 alias ging="prettyping -c4 google.com"
 alias ying="prettyping -c4 youtube.com"
 alias ling="prettyping -c4 gitlab.com"
+alias myip="curl ident.me."
 
 alias wget="wget -c"
 
@@ -113,11 +120,14 @@ alias sr="sudo reboot"
 
 alias nitro="nitrogen --restore"
 
-alias wsc="windscribe connect"
-alias wsd="windscribe disconnect"
+alias w="windscribe connect"
+alias wd="windscribe disconnect"
+alias ws="windscribe status"
+alias wl="windscribe locations"
 
 alias scim="sc-im"
 alias xc="sc-im"
+alias c="bat"
 
 alias awres='awesome-client "awesome.restart()"'
 
@@ -137,11 +147,15 @@ alias yta-wav="youtube-dl --extract-audio --audio-format wav "
 alias ytv-best="youtube-dl -f bestvideo+bestaudio "
 
 #git aliases
-alias gc="git commit -m"
+alias g="git"
+alias ga="git add"
+alias gb="git branch"
+alias gcm="git commit -m"
+alias gl="git log --all --decorate --oneline --graph"
 alias gs="git status"
-alias gp="git push"
+alias gpu="git push"
 alias gpl="git pull"
-alias gcc="git clone"
+alias gcl="git clone"
 
 ## Colorize the grep command output for ease of use (good for log files)##
 alias grep='grep --color=auto'
