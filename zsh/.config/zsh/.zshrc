@@ -17,6 +17,7 @@ setopt autocd
 
 autoload -Uz compinit
 zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
@@ -32,6 +33,7 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey '^r' history-incremental-search-backward
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select () {
@@ -49,6 +51,14 @@ zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
+function expand-alias() {
+	zle _expand_alias
+	zle self-insert
+}
+zle -N expand-alias
+bindkey -M main '^x' expand-alias
+
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 bindkey -s '^o' 'ranger^M'
 autoload edit-command-line; zle -N edit-command-line
@@ -57,6 +67,10 @@ bindkey -v '^?' backward-delete-char
 bindkey -v '^[[3~' delete-char
 bindkey '^k' up-line-or-beginning-search # Up
 bindkey '^j' down-line-or-beginning-search # Down
+autoload -U select-word-style
+select-word-style bash
+bindkey '^H' backward-delete-word
+bindkey '^[[3;5~' delete-word
 bindkey '^ ' autosuggest-accept
 
 # If not running interactively, don't do anything
@@ -72,20 +86,23 @@ setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_FIND_NO_DUPS
 
+export ANDROID="/run/user/1000/gvfs/mtp:host=Xiaomi_Redmi_Note_9_05c3c8af0405/Internal shared storage/"
+
 #PS1='[\u@\h \W]\$ '
 
-#shopt
+# shopt
 #shopt -s autocd # change to named directory
 #shopt -s cdspell # autocorrects cd misspellings
 #shopt -s cmdhist # save multi-line commands in history as single line
 #shopt -s dotglob
 #shopt -s histappend # do not overwrite history
-#shopt -s expand_aliases # expand aliases
+# shopt -s expand_aliases # expand aliases
 
 [[ -f ~/.config/aliasrc ]] && . ~/.config/aliasrc
+[[ -f ~/.config/personal-aliasrc ]] && . ~/.config/personal-aliasrc
 
 export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
@@ -113,4 +130,5 @@ load-nvmrc() {
 
 
 eval "$(starship init zsh)"
+eval "$(lua $HOME/repos/z.lua/z.lua --init zsh enhanced)"
 #neofetch
