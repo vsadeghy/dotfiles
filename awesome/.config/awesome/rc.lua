@@ -10,7 +10,6 @@
      lain : https://github.com/lcpz/lain
 
 --]]
-
 -- {{{ Required libraries
 local awesome, client, mouse, screen, tag = awesome, client, mouse, screen
 local ipairs, string, os, tostring, type = ipairs, string, os, table, tostring
@@ -43,7 +42,6 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
                       require("awful.hotkeys_popup.keys")
 local my_table      = awful.util.table or gears.table -- 4.{0,1} compatibility
 local dpi           = require("beautiful.xresources").apply_dpi
-local capslock = require("capslock")
 -- }}}
 
 
@@ -120,24 +118,23 @@ local modkey1      = "Control"
 -- personal variables
 --change these variables if you want
 local browser1          = "chromium -no-default-browser-check"
-local browser2          = "firefox"
-local browser3          = "chromium -no-default-browser-check"
+local browser2          = "brave"
+local browser3          = "firefox"
 local editor            = os.getenv("EDITOR") or "nano"
-local editorgui         = "atom"
-local filemanager       = "thunar"
-local mailclient        = "evolution"
+local editorgui         = "codium --disable-extensions"
+local filemanager       = "pcmanfm"
+local mailclient        = "thunderbird"
 local mediaplayer       = "spotify"
 local terminal          = "alacritty"
-local virtualmachine    = "virtualbox"
 
 -- awesome variables
 awful.util.terminal = terminal
-awful.util.tagnames = {  "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒", "➓" }
---awful.util.tagnames = { "⠐", "⠡", "⠲", "⠵", "⠻", "⠿" }
---awful.util.tagnames = { "⌘", "♐", "⌥", "ℵ" }
---awful.util.tagnames = { "www", "edit", "gimp", "inkscape", "music" }
+-- awful.util.tagnames = {  "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒", "➓" }
+-- awful.util.tagnames = { "⠐", "⠡", "⠲", "⠵", "⠻", "⠿" }
+-- awful.util.tagnames = { "⌘", "♐", "⌥", "ℵ" }
+-- awful.util.tagnames = { "www", "edit", "gimp", "inkscape", "music" }
 -- Use this : https://fontawesome.com/cheatsheet
---awful.util.tagnames = { "", "", "", "", "" }
+awful.util.tagnames = { " ", " ", " ", " ", " ", " ", " ", " ", " " }
 awful.layout.suit.tile.left.mirror = true
 awful.layout.layouts = {
     awful.layout.suit.tile,
@@ -240,7 +237,14 @@ local myawesomemenu = {
 awful.util.mymainmenu = freedesktop.menu.build({
     before = {
         { "Awesome", myawesomemenu },
-        --{ "Atom", "atom" },
+        { "Variety", {
+            {"next", "variety -n"},
+            {"previous", "variety -p"},
+            {"favorite", "variety -f"},
+            {"trash", "variety -t"},
+            {"pause/resume", "variety --toggle-pause"},
+            {"open", "variety"},
+        }}
         -- other triads can be put here
     },
     after = {
@@ -307,10 +311,10 @@ root.buttons(my_table.join(
 
 -- {{{ Key bindings
 globalkeys = my_table.join(
-    capslock.key,
-
     -- {{{ Personal keybindings
     awful.key({ modkey }, "b", function () awful.util.spawn( browser1 ) end,
+        {description = browser1, group = "function keys"}),
+    awful.key({ modkey, "Shift"   }, "b", function () awful.util.spawn( browser2 ) end,
         {description = browser1, group = "function keys"}),
     -- dmenu
     awful.key({ modkey, "Shift"   }, "d",
@@ -331,8 +335,8 @@ globalkeys = my_table.join(
     -- super + ...
     awful.key({ modkey }, "c", function () awful.util.spawn( "conky-toggle" ) end,
         {description = "conky-toggle", group = "super"}),
-    awful.key({ modkey }, "r", function () awful.util.spawn( "rofi-theme-selector" ) end,
-        {description = "rofi theme selector", group = "super"}),
+    -- awful.key({ modkey }, "r", function () awful.util.spawn( "rofi-theme-selector" ) end,
+    --     {description = "rofi theme selector", group = "super"}),
     awful.key({ modkey }, "v", function () awful.util.spawn( "pavucontrol" ) end,
         {description = "pulseaudio control", group = "super"}),
 
@@ -359,6 +363,8 @@ globalkeys = my_table.join(
         {description = "Picom toggle", group = "alt+ctrl"}),
     awful.key({ modkey1, altkey   }, "m", function() awful.util.spawn( "xfce4-settings-manager" ) end,
         {description = "Xfce settings manager", group = "alt+ctrl"}),
+    awful.key({ modkey1, altkey   }, "e", function() awful.util.spawn( mailclient ) end,
+        {description = "Xfce settings manager", group = "alt+ctrl"}),
     awful.key({ altkey }, "F2", function () awful.util.spawn( "gmrun" ) end,
         {description = "Gmrun", group = "altkey"}),
 
@@ -383,10 +389,14 @@ globalkeys = my_table.join(
         {description = "view previous", group = "tag"}),
     awful.key({ modkey,           }, "]",  awful.tag.viewnext,
         {description = "view next", group = "tag"}),
+    awful.key({ modkey,           }, "e",   awful.tag.viewprev,
+        {description = "view previous", group = "tag"}),
+    awful.key({ modkey,           }, "r",  awful.tag.viewnext,
+        {description = "view next", group = "tag"}),
 
 
-    awful.key({ altkey,           }, "Escape", awful.tag.history.restore,
-        {description = "go back", group = "tag"}),
+    -- awful.key({ altkey,           }, "Escape", awful.tag.history.restore,
+    --     {description = "go back", group = "tag"}),
 
      -- Tag browsing alt + tab
     awful.key({ altkey,           }, "Tab",   awful.tag.viewnext,
@@ -615,7 +625,7 @@ clientkeys = my_table.join(
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
-    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
+    awful.key({ modkey, "Shift"   }, "o",      function (c) c:move_to_screen()               end,
               {description = "move to screen", group = "client"}),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
@@ -777,77 +787,37 @@ awful.rules.rules = {
     -- Titlebars
     { rule_any = { type = { "dialog", "normal" } },
       properties = { titlebars_enabled = false } },
-          -- Set applications to always map on the tag 2 on screen 1.
-    --{ rule = { class = "Subl3" },
-        --properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
 
-
-    -- Set applications to always map on the tag 1 on screen 1.
     -- find class or role via xprop command
-    --{ rule = { class = browser2 },
-      --properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true  } },
-
-    --{ rule = { class = browser1 },
-      --properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true  } },
-
-    --{ rule = { class = "Vivaldi-stable" },
-        --properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true } },
-
-    --{ rule = { class = "Chromium" },
-      --properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true  } },
-
-    --{ rule = { class = "Opera" },
-      --properties = { screen = 1, tag = awful.util.tagnames[1],switchtotag = true  } },
 
     -- Set applications to always map on the tag 2 on screen 1.
     --{ rule = { class = "Subl3" },
-        --properties = { screen = 1, tag = awful.util.tagnames[2],switchtotag = true  } },
-
-    --{ rule = { class = editorgui },
         --properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
 
-    --{ rule = { class = "Brackets" },
-        --properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
+    { rule = { class = "Codium" },
+        properties = { screen = 1, tag = awful.util.tagnames[3], switchtotag = false  } },
 
-    --{ rule = { class = "Code" },
-        --properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
+    { rule = { class = "Chromium" },
+      properties = { screen = 1, tag = awful.util.tagnames[4], switchtotag = false  } },
 
-    --    { rule = { class = "Geany" },
-         --  properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
+    { rule = { class = "Thunderbird" },
+      properties = { screen = 1, tag = awful.util.tagnames[5], switchtotag = false  } },
 
+    { rule = { class = "Ferdi" },
+      properties = { screen = 1, tag = awful.util.tagnames[5], switchtotag = false  } },
 
-    -- Set applications to always map on the tag 3 on screen 1.
-    --{ rule = { class = "Inkscape" },
-        --properties = { screen = 1, tag = awful.util.tagnames[3], switchtotag = true  } },
-
-    -- Set applications to always map on the tag 4 on screen 1.
-    --{ rule = { class = "Gimp" },
-        --properties = { screen = 1, tag = awful.util.tagnames[4], switchtotag = true  } },
-
-    -- Set applications to always map on the tag 5 on screen 1.
-    --{ rule = { class = "Meld" },
-        --properties = { screen = 1, tag = awful.util.tagnames[5] , switchtotag = true  } },
-
+    { rule = { class = "vlc" },
+        properties = { screen = 1, tag = awful.util.tagnames[6], switchtotag = false  } },
 
     -- Set applications to be maximized at startup.
-    -- find class or role via xprop command
 
     { rule = { class = editorgui },
           properties = { maximized = true } },
-
-    { rule = { class = "Geany" },
-          properties = { maximized = false, floating = false } },
-
-    -- { rule = { class = "Thunar" },
-    --     properties = { maximized = false, floating = false } },
 
     { rule = { class = "Gimp*", role = "gimp-image-window" },
           properties = { maximized = true } },
 
     { rule = { class = "Gnome-disks" },
-          properties = { maximized = true } },
-
-    { rule = { class = "inkscape" },
           properties = { maximized = true } },
 
     { rule = { class = mediaplayer },
@@ -877,11 +847,6 @@ awful.rules.rules = {
 
     { rule = { class = "Xfce4-settings-manager" },
           properties = { floating = false } },
-
-
-
-
-
 
     -- Floating clients.
     { rule_any = {

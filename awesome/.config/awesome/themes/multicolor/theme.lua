@@ -10,7 +10,6 @@ local lain  = require("lain")
 local awful = require("awful")
 local wibox = require("wibox")
 local dpi   = require("beautiful.xresources").apply_dpi
-local capslock = require("capslock")
 
 local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -32,7 +31,7 @@ theme.fg_urgent                                 = "#af1d18"
 theme.fg_minimize                               = "#ffffff"
 theme.border_width                              = dpi(2)
 theme.border_normal                             = "#1c2022"
-theme.border_focus                              = "#5e81ac"
+theme.border_focus                              = "#4DCA7B"
 theme.border_marked                             = "#3ca4d8"
 theme.menu_border_width                         = 0
 theme.menu_height                               = dpi(25)
@@ -308,18 +307,21 @@ function theme.at_screen_connect(s)
             s.mytaglist,
             s.mypromptbox,
         },
-        --s.mytasklist, -- Middle widget
-        nil,
+        -- {
+            -- layout = widget.layout.align.horizontal,
+            s.mytasklist, -- Middle widget
+        -- },
+        -- nil,
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             --mailicon,
             --mail.widget,
             --mpdicon,
             theme.mpd.widget,
-            netdownicon,
-            netdowninfo,
-            netupicon,
-            netupinfo.widget,
+            -- netdownicon,
+            -- netdowninfo,
+            -- netupicon,
+            -- netupinfo.widget,
             volicon,
             theme.volume.widget,
             memicon,
@@ -328,18 +330,18 @@ function theme.at_screen_connect(s)
             cpu.widget,
             -- weathericon,
             -- theme.weather.widget,
-            tempicon,
-            temp.widget,
+            -- tempicon,
+            -- temp.widget,
             -- baticon,
             -- bat.widget,
-            clockicon,
+            -- clockicon,
             mytextclock,
             wibox.widget.systray(),
-            capslock,
         },
     }
 
     -- Create the bottom wibox
+    --[[
     s.mybottomwibox = awful.wibar({ position = "bottom", screen = s, border_width = 0, height = dpi(20), bg = theme.bg_normal, fg = theme.fg_normal })
 
     -- Add widgets to the bottom wibox
@@ -354,6 +356,7 @@ function theme.at_screen_connect(s)
             s.mylayoutbox,
         },
     }
+    --]]
 end
 
 return theme
