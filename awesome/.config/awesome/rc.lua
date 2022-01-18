@@ -117,15 +117,15 @@ local modkey1      = "Control"
 
 -- personal variables
 --change these variables if you want
-local browser1          = "chromium -no-default-browser-check"
-local browser2          = "brave"
+local browser1          = "brave"
+local browser2          = "chromium -no-default-browser-check"
 local browser3          = "firefox"
 local editor            = os.getenv("EDITOR") or "nano"
 local editorgui         = "codium --disable-extensions"
 local filemanager       = "pcmanfm"
 local mailclient        = "thunderbird"
 local mediaplayer       = "spotify"
-local terminal          = "alacritty"
+local terminal          = "kitty"
 
 -- awesome variables
 awful.util.terminal = terminal
@@ -135,6 +135,7 @@ awful.util.terminal = terminal
 -- awful.util.tagnames = { "www", "edit", "gimp", "inkscape", "music" }
 -- Use this : https://fontawesome.com/cheatsheet
 awful.util.tagnames = { " ", " ", " ", " ", " ", " ", " ", " ", " " }
+
 awful.layout.suit.tile.left.mirror = true
 awful.layout.layouts = {
     awful.layout.suit.tile,
@@ -310,7 +311,7 @@ root.buttons(my_table.join(
 
 
 -- {{{ Key bindings
-globalkeys = my_table.join(
+local globalkeys = my_table.join(
     -- {{{ Personal keybindings
     awful.key({ modkey }, "b", function () awful.util.spawn( browser1 ) end,
         {description = browser1, group = "function keys"}),
@@ -330,7 +331,7 @@ globalkeys = my_table.join(
 
 
     -- super + ... function keys
-    awful.key({ modkey }, "F12", function () awful.util.spawn( "rofi -show run" ) end,
+    awful.key({ modkey }, "F12", function () awful.util.spawn( "rofi -modi combi -combi-modi window,run,drun,ssh -show combi -opacity 70" ) end,
         {description = "rofi" , group = "function keys" }),
     -- super + ...
     awful.key({ modkey }, "c", function () awful.util.spawn( "conky-toggle" ) end,
@@ -417,14 +418,6 @@ globalkeys = my_table.join(
     awful.key({ modkey }, "Right", function () lain.util.tag_view_nonempty(1) end,
               {description = "view  next nonempty", group = "tag"}),
 
-    -- Default client focus
-    awful.key({ altkey,           }, "j",
-        function ()
-            awful.client.focus.byidx( 1)
-        end,
-        {description = "focus next by index", group = "client"}
-    ),
-
     -- By direction client focus
     awful.key({ modkey }, "j",
         function()
@@ -496,8 +489,8 @@ globalkeys = my_table.join(
     -- Dynamic tagging
     --awful.key({ modkey, "Shift" }, "n", function () lain.util.add_tag() end,
               --{description = "add new tag", group = "tag"}),
-    awful.key({ modkey, "Control" }, "r", function () lain.util.rename_tag() end,
-              {description = "rename tag", group = "tag"}),
+    -- awful.key({ modkey, "Control" }, "r", function () lain.util.rename_tag() end,
+    --           {description = "rename tag", group = "tag"}),
     --[[
     awful.key({ modkey, "Shift" }, "Left", function () lain.util.move_tag(-1) end,
               {description = "move tag to the left", group = "tag"}),
@@ -608,7 +601,7 @@ globalkeys = my_table.join(
               --{description = "copy gtk to terminal", group = "hotkeys"}),
 )
 
-clientkeys = my_table.join(
+local clientkeys = my_table.join(
     awful.key({ altkey, "Shift"   }, "m",      lain.util.magnify_client,
               {description = "magnify client", group = "client"}),
     awful.key({ modkey,           }, "f",
@@ -744,7 +737,7 @@ for i = 1, 9 do
     )
 end
 
-clientbuttons = gears.table.join(
+local clientbuttons = gears.table.join(
     awful.button({ }, 1, function (c)
         c:emit_signal("request::activate", "mouse_click", {raise = true})
     end),
