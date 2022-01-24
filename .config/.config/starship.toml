@@ -1,10 +1,8 @@
 # Don't print a new line at the start of the prompt
-add_newline = false
+add_newline = true
 command_timeout = 10_000
 
-# makes prompt a single line
-[line_break]
-disabled = true
+format = " $all$fill$time$line_break $character"
 
 # Disable the package module, hiding it from the prompt completely
 [package]
@@ -15,7 +13,7 @@ min_time = 10_000  # Show command duration over 10,000 milliseconds (= 10 sec)
 format = "took [$duration]($style)"
 
 [character]
-error_symbol = "[X](bold red) "
+error_symbol = "[❯](bold red)"
 success_symbol = "[❯](bold green)"
 
 # Clear visibility for exit codes
@@ -24,3 +22,7 @@ style = "bg:red"
 symbol = "💣 "
 format = '[\[$symbol$status\]]($style) '
 disabled = false
+ 
+[time]
+disabled = false
+format = "[$time]($style) "

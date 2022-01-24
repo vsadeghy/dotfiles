@@ -6,13 +6,18 @@ alias tl="java -jar ~/Downloads/Tlauncher/TLauncher-2.72.jar"
 alias keytest="xbindkeys -mk"
 alias sdn="sudo shutdown now"
 alias mkdir="mkdir -p"
+alias md="mkdir -p"
 
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+alias g="goto"
 
 alias o="xdg-open"
+
+alias caps="setxkbmap -option caps:escape && xmodmap -e 'clear lock'"
+alias CAPS="setxkbmap -option caps:escape && xmodmap -e 'clear lock'"
 
 export EDITOR="nvim"
 #alias vim="nvim"
@@ -41,26 +46,23 @@ alias sdrc="sudo nano /etc/sddm.conf"
 ## changing "ls" to "exa"
 alias l="exa --color=always --group-directories-first --icons"
 alias ls="exa -a --color=always --group-directories-first --icons" 
-alias ll="exa -lah --color=always --group-directories-first" 
+alias ll="exa -lah --color=always --group-directories-first --icons" 
 alias ld="exa -alD --color=always"
 alias lt="exa -aT --color=always --group-directories-first" 
-alias l.="exa -aF --group-directories-first | egrep '^\.'"
-alias fd='find . -type d -name' 
-alias ff='find . -type f -name' 
-
-alias hist="history 1"
-alias hs="history 1 | rg"
+alias l.="exa -aF --group-directories-first | egrep "^\.""
+alias fd="find . -type d -name" 
+alias ff="find . -type f -name" 
 
 alias rz="source ~/.zshenv && source $ZDOTDIR/.zshrc"
 
 ## Arch package shortcuts
-if [ "$distro" = 'Arch Linux' ] || [ "$distro" = 'ArcoLinux' ]; then
+if [ "$distro" = '"Arch Linux"' ] || [ "$distro" = "ArcoLinux" ]; then
 	alias p="sudo pacman"
-	alias pi="sudo pacman -S"
-	alias pI="sudo pacman -Si"
+	alias pi="sudo pacman -S --needed"
+	alias pis="sudo pacman -Ss"
+	alias pii="sudo pacman -Si"
 	alias pq="sudo pacman -Qi"
 	alias pr="sudo pacman -R"
-	alias pS="sudo pacman -Ss"
 	alias pu="sudo pacman -Su"
 	alias py="sudo pacman -Syy"
 	alias pyu="sudo pacman -Syyu"
@@ -77,7 +79,7 @@ if [ "$distro" = 'Arch Linux' ] || [ "$distro" = 'ArcoLinux' ]; then
     alias mirrorxx="sudo reflector --age 6 --latest 20  --fastest 20 --threads 20 --sort rate --protocol https --save /etc/pacman.d/mirrorlist"
     alias mirrorx="sudo reflector --age 6 --latest 20  --fastest 20 --threads 5 --sort rate --protocol https --save /etc/pacman.d/mirrorlist"
     #Cleanup orphaned packages
-    alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
+    alias cleanup="sudo pacman -Rns $(pacman -Qtdq)"
     #Recent Installed Packages
     alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
     alias riplong="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -3000 | nl"
@@ -93,13 +95,19 @@ alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
 alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
 alias tofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
 
-## some other stuff
-alias su='sudo su'
-alias du='du -h'
-alias dus='du -sh'
-alias duss='du -sh * | sort -h'
+## xdg compatible
+alias xbindkeys="xbindkeys -f $XDG_CONFIG_HOME/xbindkeys/config"
+alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
+alias wget="wget --hsts-file=$XDG_CACHE_HOME/wget-hsts"
 
-alias df='df -h'
+
+## some other stuff
+alias su="sudo su"
+alias du="du -h"
+alias dus="du -sh"
+alias duss="du -sh * | sort -h"
+
+alias df="df -h"
 alias free="free -mt"
 
 alias ping="prettyping"
@@ -120,6 +128,7 @@ alias sr="sudo reboot"
 
 alias nitro="nitrogen --restore"
 
+alias ww="windscribe"
 alias w="windscribe connect"
 alias wd="windscribe disconnect"
 alias ws="windscribe status"
@@ -147,9 +156,9 @@ alias yta-wav="youtube-dl --extract-audio --audio-format wav "
 alias ytv-best="youtube-dl -f bestvideo+bestaudio "
 
 #git aliases
-alias g="git"
 alias ga="git add"
 alias gb="git branch"
+alias gd="git diff"
 alias gcm="git commit -m"
 alias gl="git log --all --decorate --oneline --graph"
 alias gs="git status"
@@ -158,9 +167,9 @@ alias gpl="git pull"
 alias gcl="git clone"
 
 ## Colorize the grep command output for ease of use (good for log files)##
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
+alias grep="grep --color=auto"
+alias egrep="egrep --color=auto"
+alias fgrep="fgrep --color=auto"
 
 #use all cores
 alias uac="sh ~/.bin/main/000*"
@@ -169,7 +178,7 @@ alias uac="sh ~/.bin/main/000*"
 alias merge="xrdb -merge ~/.Xresources"
 
 #check vulnerabilities microcode
-alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
+alias microcode="grep . /sys/devices/system/cpu/vulnerabilities/*"
 
 #alias android="sudo aft-mtp-mount -o allow_other /root/android"
 
