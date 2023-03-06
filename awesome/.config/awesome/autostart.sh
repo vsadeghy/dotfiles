@@ -14,7 +14,7 @@ run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 run blueberry-tray
 run nm-applet --indicator
-run fcitx5
+run fcitx5 -d
 run xfce4-power-manager
 run numlockx on
 run setxkbmap -option caps:escape && xmodmap -e 'clear lock'

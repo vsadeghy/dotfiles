@@ -59,16 +59,16 @@ font:
   normal:
     family: FiraCode
     style: Regular
-  # bold:
-  #   family: FiraCode
-  #   style: Bold
-  # italic:
-  #   family: FiraCode
-  #   style: Italic
-  # bold_italic:
-  #   family: FiraCode
-  #   style: Bold Italic
-  size: 11.0
+  bold:
+    family: FiraCode
+    style: Bold
+  italic:
+    family: FiraCode
+    style: Italic
+  bold_italic:
+    family: FiraCode
+    style: Bold Italic
+  size: 14.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -498,7 +498,7 @@ schemes:
 # *tokyonight-dark
 # *mine
 
-colors: *mine
+colors: *tokyonight-dark
 bell:
   animation: EaseOutExpo
   duration: 0

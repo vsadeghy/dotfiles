@@ -101,7 +101,7 @@ local markup = lain.util.markup
 -- Textclock
 os.setlocale(os.getenv("LANG")) -- to localize the clock
 local clockicon = wibox.widget.imagebox(theme.widget_clock)
-local mytextclock = wibox.widget.textclock(markup("#7788af", "%A %d %B ") .. markup("#535f7a", ">") .. markup("#de5e1e", " %H:%M "))
+local mytextclock = wibox.widget.textclock(markup("#7788af", "%a %F ") .. markup("#535f7a", ">") .. markup("#de5e1e", " %H:%M "))
 mytextclock.font = theme.font
 
 -- Calendar
@@ -113,53 +113,6 @@ theme.cal = lain.widget.cal({
         bg   = theme.bg_normal
     }
 })
-
--- -- Weather
--- local weathericon = wibox.widget.imagebox(theme.widget_weather)
--- theme.weather = lain.widget.weather({
---     city_id = 2803138, -- placeholder (Belgium)
---     notification_preset = { font = "Noto Sans Mono Medium 10", fg = theme.fg_normal },
---     weather_na_markup = markup.fontfg(theme.font, "#eca4c4", "N/A "),
---     settings = function()
---         descr = weather_now["weather"][1]["description"]:lower()
---         units = math.floor(weather_now["main"]["temp"])
---         widget:set_markup(markup.fontfg(theme.font, "#eca4c4", descr .. " @ " .. units .. "°C "))
---     end
--- })
-
--- / fs
---[[ commented because it needs Gio/Glib >= 2.54
-local fsicon = wibox.widget.imagebox(theme.widget_fs)
-theme.fs = lain.widget.fs({
-    notification_preset = { font = "Noto Sans Mono Medium 10", fg = theme.fg_normal },
-    settings  = function()
-        widget:set_markup(markup.fontfg(theme.font, "#80d9d8", string.format("%.1f", fs_now["/"].used) .. "% "))
-    end
-})
---]]
-
--- Mail IMAP check
---[[ commented because it needs to be set before use
-local mailicon = wibox.widget.imagebox()
-theme.mail = lain.widget.imap({
-    timeout  = 180,
-    server   = "server",
-    mail     = "mail",
-    password = "keyring get mail",
-    settings = function()
-        if mailcount > 0 then
-            mailicon:set_image(theme.widget_mail)
-            widget:set_markup(markup.fontfg(theme.font, "#cccccc", mailcount .. " "))
-        else
-            widget:set_text("")
-            --mailicon:set_image() -- not working in 4.0
-            mailicon._private.image = nil
-            mailicon:emit_signal("widget::redraw_needed")
-            mailicon:emit_signal("widget::layout_changed")
-        end
-    end
-})
---]]
 
 -- CPU
 local cpuicon = wibox.widget.imagebox(theme.widget_cpu)
@@ -209,12 +162,6 @@ local netdowninfo = wibox.widget.textbox()
 local netupicon = wibox.widget.imagebox(theme.widget_netup)
 local netupinfo = lain.widget.net({
     settings = function()
-        -- if iface ~= "network off" and
-        --    string.match(theme.weather.widget.text, "N/A")
-        -- then
-        --     theme.weather.update()
-        -- end
-
         widget:set_markup(markup.fontfg(theme.font, "#e54c62", net_now.sent .. " "))
         netdowninfo:set_markup(markup.fontfg(theme.font, "#87af5f", net_now.received .. " "))
     end
@@ -303,7 +250,7 @@ function theme.at_screen_connect(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            --s.mylayoutbox,
+            -- s.mylayoutbox,
             s.mytaglist,
             s.mypromptbox,
         },
@@ -314,22 +261,18 @@ function theme.at_screen_connect(s)
         -- nil,
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            --mailicon,
-            --mail.widget,
             --mpdicon,
             theme.mpd.widget,
-            -- netdownicon,
-            -- netdowninfo,
-            -- netupicon,
-            -- netupinfo.widget,
+            netdownicon,
+            netdowninfo,
+            netupicon,
+            netupinfo.widget,
             volicon,
             theme.volume.widget,
             memicon,
             memory.widget,
             cpuicon,
             cpu.widget,
-            -- weathericon,
-            -- theme.weather.widget,
             -- tempicon,
             -- temp.widget,
             -- baticon,

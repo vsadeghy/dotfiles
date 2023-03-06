@@ -2,8 +2,9 @@
 [[ $- != *i* ]] && return
 
 typeset -U PATH path
-path=("$HOME/.local/bin" "$XDG_DATA_HOME/yarn/bin" "$path[@]")
+# path=("$HOME/.local/bin" "$XDG_DATA_HOME/yarn/bin" "$path[@]")
 export PATH
+export VISUAL="nvim"
 
 COMPLETION_WAITING_DOTS="true"
 # (man zshoptions)
@@ -87,8 +88,8 @@ setopt INC_APPEND_HISTORY
 [[ -f ~/.config/aliasrc ]] && . ~/.config/aliasrc
 [[ -f ~/.config/personal-aliasrc ]] && . ~/.config/personal-aliasrc
 alias history="history 1"
-alias h="history 1"
-alias hs="history 1 | rg"
+alias h="history"
+alias hs="history | rg"
 
 . /usr/share/nvm/init-nvm.sh
 . /usr/share/goto.sh

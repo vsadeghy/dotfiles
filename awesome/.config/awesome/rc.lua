@@ -327,6 +327,16 @@ root.buttons(my_table.join(
   awful.button({}, 5, awful.tag.viewprev)
 ))
 -- }}}
+local function launcher()
+  awful.spawn(string.format(
+    -- "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn NotoMonoRegular:bold:pixelsize=14",
+    "zsh -c 'rofi -modi combi -combi-modi drun,run,ssh -show combi -opacity 70 -rnow'",
+    beautiful.bg_normal,
+    beautiful.fg_normal,
+    beautiful.bg_focus,
+    beautiful.fg_focus
+  ))
+end
 
 -- {{{ Key bindings
 local globalkeys = my_table.join(
@@ -338,17 +348,8 @@ local globalkeys = my_table.join(
     awful.util.spawn(browser2)
   end, { description = browser1, group = "function keys" }),
   -- dmenu
-  awful.key({ modkey, "Shift" }, "d", function()
-    awful.spawn(
-      string.format(
-        "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn NotoMonoRegular:bold:pixelsize=14",
-        beautiful.bg_normal,
-        beautiful.fg_normal,
-        beautiful.bg_focus,
-        beautiful.fg_focus
-      )
-    )
-  end, { description = "show dmenu", group = "hotkeys" }),
+  awful.key({ modkey, "Shift" }, "d", launcher, { description = "show dmenu", group = "hotkeys" }),
+  awful.key({ altkey }, "\\", launcher, { description = "show dmenu", group = "hotkeys" }),
 
   -- Function keys
   awful.key({}, "F12", function()
@@ -393,8 +394,8 @@ local globalkeys = my_table.join(
     awful.util.spawn "codium"
   end, { description = "codium", group = "alt+ctrl" }),
   awful.key({ modkey1, altkey }, "q", function()
-    awful.util.spawn "arcolinux-logout"
-  end, { description = "arcolinux-logout", group = "alt+ctrl" }),
+    awful.util.spawn "clearine"
+  end, { description = "logout", group = "alt+ctrl" }),
   awful.key({ modkey1, altkey }, "p", function()
     awful.spawn.with_shell "$HOME/.config/awesome/scripts/picom-toggle.sh"
   end, { description = "Picom toggle", group = "alt+ctrl" }),
@@ -512,10 +513,10 @@ local globalkeys = my_table.join(
   end, { description = "Toggle systray visibility", group = "awesome" }),
 
   -- On the fly useless gaps change
-  awful.key({ altkey, "Control" }, "j", function()
+  awful.key({ altkey, "Control", "Shift" }, "j", function()
     lain.util.useless_gaps_resize(1)
   end, { description = "increment useless gaps", group = "tag" }),
-  awful.key({ altkey, "Control" }, "h", function()
+  awful.key({ altkey, "Control", "Shift" }, "h", function()
     lain.util.useless_gaps_resize(-1)
   end, { description = "decrement useless gaps", group = "tag" }),
 
@@ -830,8 +831,13 @@ awful.rules.rules = {
   },
 
   {
+    rule = { class = "Conky" },
+    properties = { screen = 1 },
+  },
+
+  {
     rule = { class = "Chromium" },
-    properties = { screen = 1, tag = awful.util.tagnames[4], switchtotag = false },
+    properties = { screen = 2, tag = awful.util.tagnames[4], switchtotag = true, maximized = true },
   },
 
   {
@@ -859,7 +865,7 @@ awful.rules.rules = {
 
   { rule = { class = mediaplayer }, properties = { maximized = true } },
 
-  { rule = { class = "vlc" }, properties = { maximized = true } },
+  { rule = { class = "vlc", role = "vlc-main" }, properties = { maximized = true } },
 
   { rule = { class = "VirtualBox Manager" }, properties = { maximized = true } },
 
@@ -867,11 +873,14 @@ awful.rules.rules = {
 
   { rule = { class = "Vivaldi-stable" }, properties = { maximized = false, floating = false } },
 
-  { rule = { class = "Vivaldi-stable" }, properties = {
-    callback = function(c)
-      c.maximized = false
-    end,
-  } },
+  {
+    rule = { class = "Vivaldi-stable" },
+    properties = {
+      callback = function(c)
+        c.maximized = false
+      end,
+    },
+  },
 
   --IF using Vivaldi snapshot you must comment out the rules above for Vivaldi-stable as they conflict
   --    { rule = { class = "Vivaldi-snapshot" },
@@ -881,6 +890,8 @@ awful.rules.rules = {
   --          properties = { callback = function (c) c.maximized = false end } },
 
   { rule = { class = "Xfce4-settings-manager" }, properties = { floating = false } },
+
+  -- { rule = { instance = "crx_cinhimbnkkaeohfgghhklpknlkffjgod" }, properties = { floating = false } },
 
   -- Floating clients.
   {
@@ -946,6 +957,7 @@ awful.rules.rules = {
     rule_any = {
       class = {
         "Blueberry",
+        "Windscribe",
       },
     },
     properties = { floating = true },

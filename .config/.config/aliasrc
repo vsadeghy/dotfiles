@@ -1,7 +1,7 @@
 #!/bin/sh
 
 distro=$(grep '^NAME=' /etc/os-release | cut -d'=' -f2)
-## app running aliases 
+## app running aliases
 alias tl="java -jar ~/Downloads/Tlauncher/TLauncher-2.72.jar"
 alias keytest="xbindkeys -mk"
 alias sdn="sudo shutdown now"
@@ -12,12 +12,19 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+alias dc="cd"
 alias g="goto"
 
 alias o="xdg-open"
 
 alias caps="setxkbmap -option caps:escape && xmodmap -e 'clear lock'"
-alias CAPS="setxkbmap -option caps:escape && xmodmap -e 'clear lock'"
+alias LOWER="xdotool key Caps_Lock"
+alias tocmk="setxkbmap -v 9 -layout 'us(cmk_ed_us)' -model 'pc104angle-z' -option '' -option 'misc:cmk_curl_dh,misc:extend,lv5:caps_switch_lock,compose:menu'"
+alias tocmka="setxkbmap -v 9 -layout 'us(cmk_ed_us)' -model 'pc104aw-zqu' -option '' -option 'misc:cmk_curl_dh,misc:extend,lv5:caps_switch_lock,compose:menu'"
+alias toqrt="setxkbmap -v 9 -layout 'us' -model 'pc105' -option '' -option 'caps:escape'"
+alias toqrtx="setxkbmap -v 9 -layout 'us' -model 'pc105' -option '' -option 'misc:extend,lv5:caps_switch_lock,compose:menu'"
+
+alias fixtime="sudo ntpdate pool.ntp.org && sudo hwclock --systohc"
 
 export EDITOR="nvim"
 #alias vim="nvim"
@@ -25,19 +32,19 @@ alias v="$EDITOR"
 alias vn="$EDITOR --noplugin"
 
 ## edit rc files
-alias arc="$EDITOR ~/.config/aliasrc" 
+alias arc="$EDITOR ~/.config/aliasrc"
 alias erc="$EDITOR ~/.zshenv"
-alias awrc="$EDITOR ~/.config/awesome/rc.lua" 
-alias brc="$EDITOR ~/.bashrc" 
-alias frc="$EDITOR ~/.config/fish/config.fish" 
-alias zrc="$EDITOR $ZDOTDIR/.zshrc" 
+alias awrc="$EDITOR ~/.config/awesome/rc.lua"
+alias brc="$EDITOR ~/.bashrc"
+alias frc="$EDITOR ~/.config/fish/config.fish"
+alias zrc="$EDITOR $ZDOTDIR/.zshrc"
 alias vrc="$EDITOR ~/.vimrc"
-alias plrc="$EDITOR ~/.config/polybar/config" 
-alias nvrc="$EDITOR ~/.config/nvim/init.nvim" 
-alias sxrc="$EDITOR ~/.config/sxhkd/sxhkdrc" 
-alias bsprc="$EDITOR ~/.config/bspwm/bspwmrc" 
-alias pirc="$EDITOR ~/.config/picom/picom.conf" 
-alias xrc="$EDITOR ~/.xinitrc" 
+alias plrc="$EDITOR ~/.config/polybar/config"
+alias nvrc="$EDITOR ~/.config/nvim/init.nvim"
+alias sxrc="$EDITOR ~/.config/sxhkd/sxhkdrc"
+alias bsprc="$EDITOR ~/.config/bspwm/bspwmrc"
+alias pirc="$EDITOR ~/.config/picom/picom.conf"
+alias xrc="$EDITOR ~/.xinitrc"
 alias grc="$EDITOR ~/.config/git/config"
 alias gcrc="sudo $EDITOR /boot/grub/grub.cfg"
 alias ldrc="sudo $EDITOR /etc/lightdm/lightdm.conf"
@@ -45,13 +52,13 @@ alias sdrc="sudo nano /etc/sddm.conf"
 
 ## changing "ls" to "exa"
 alias l="exa --color=always --group-directories-first --icons"
-alias ls="exa -a --color=always --group-directories-first --icons" 
-alias ll="exa -lah --color=always --group-directories-first --icons" 
+alias ls="exa -a --color=always --group-directories-first --icons"
+alias ll="exa -lah --color=always --group-directories-first --icons"
 alias ld="exa -alD --color=always"
-alias lt="exa -aT --color=always --group-directories-first" 
+alias lt="exa -aT --color=always --group-directories-first"
 alias l.="exa -aF --group-directories-first | egrep "^\.""
-alias fd="find . -type d -name" 
-alias ff="find . -type f -name" 
+alias fd="find . -type d -name"
+alias ff="find . -type f -name"
 
 alias rz="source ~/.zshenv && source $ZDOTDIR/.zshrc"
 
@@ -70,20 +77,20 @@ if [ "$distro" = '"Arch Linux"' ] || [ "$distro" = "ArcoLinux" ]; then
 	alias yi="paru -S --needed"
 	alias ys="paru -Ss"
 	alias unlock="sudo rm /var/lib/pacman/db.lck"
-    #get fastest mirrors in your neighborhood
-    alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
-    alias mirrord="sudo reflector --latest 30 --number 10 --sort delay --save /etc/pacman.d/mirrorlist"
-    alias mirrors="sudo reflector --latest 30 --number 10 --sort score --save /etc/pacman.d/mirrorlist"
-    alias mirrora="sudo reflector --latest 30 --number 10 --sort age --save /etc/pacman.d/mirrorlist"
-    #our experimental - best option for the moment
-    alias mirrorxx="sudo reflector --age 6 --latest 20  --fastest 20 --threads 20 --sort rate --protocol https --save /etc/pacman.d/mirrorlist"
-    alias mirrorx="sudo reflector --age 6 --latest 20  --fastest 20 --threads 5 --sort rate --protocol https --save /etc/pacman.d/mirrorlist"
-    #Cleanup orphaned packages
-    alias cleanup="sudo pacman -Rns $(pacman -Qtdq)"
-    #Recent Installed Packages
-    alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
-    alias riplong="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -3000 | nl"
-    alias mlrc="sudo $EDITOR /etc/pacman.d/mirrorlist"
+	#get fastest mirrors in your neighborhood
+	alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
+	alias mirrord="sudo reflector --latest 30 --number 10 --sort delay --save /etc/pacman.d/mirrorlist"
+	alias mirrors="sudo reflector --latest 30 --number 10 --sort score --save /etc/pacman.d/mirrorlist"
+	alias mirrora="sudo reflector --latest 30 --number 10 --sort age --save /etc/pacman.d/mirrorlist"
+	#our experimental - best option for the moment
+	alias mirrorxx="sudo reflector --age 6 --latest 20  --fastest 20 --threads 20 --sort rate --protocol https --save /etc/pacman.d/mirrorlist"
+	alias mirrorx="sudo reflector --age 6 --latest 20  --fastest 20 --threads 5 --sort rate --protocol https --save /etc/pacman.d/mirrorlist"
+	#Cleanup orphaned packages
+	alias cleanup="sudo pacman -Rns $(pacman -Qtdq)"
+	#Recent Installed Packages
+	alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
+	alias riplong="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -3000 | nl"
+	alias mlrc="sudo $EDITOR /etc/pacman.d/mirrorlist"
 fi
 
 #alias yd="yarn dev"
@@ -99,7 +106,6 @@ alias tofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
 alias xbindkeys="xbindkeys -f $XDG_CONFIG_HOME/xbindkeys/config"
 alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
 alias wget="wget --hsts-file=$XDG_CACHE_HOME/wget-hsts"
-
 
 ## some other stuff
 alias su="sudo su"
@@ -180,8 +186,8 @@ alias merge="xrdb -merge ~/.Xresources"
 #check vulnerabilities microcode
 alias microcode="grep . /sys/devices/system/cpu/vulnerabilities/*"
 
-#alias android="sudo aft-mtp-mount -o allow_other /root/android"
-
+# alias android="sudo aft-mtp-mount -o allow_other /root/android"
+alias android="aft-mtp-mount -o allow_other ~/mnt"
 
 #iso and version used to install ArcoLinux
 alias iso="cat /etc/dev-rel | awk -F '=' '/ISO/ {print $2}'"
@@ -212,43 +218,48 @@ if test "$distro" = '"Ubuntu"'; then
 fi
 
 #extract all files
-ex () {
-  if [ -f $1 ] ; then
-    case $1 in
-      *.tar.bz2)   tar xjf $1   ;;
-      *.tar.gz)    tar xzf $1   ;;
-      *.bz2)       bunzip2 $1   ;;
-      *.rar)       unrar x $1   ;;
-      *.gz)        gunzip $1    ;;
-      *.tar)       tar xf $1    ;;
-      *.tbz2)      tar xjf $1   ;;
-      *.tgz)       tar xzf $1   ;;
-      *.zip)       unzip $1     ;;
-      *.Z)         uncompress $1;;
-      *.7z)        7z x $1      ;;
-      *.deb)       ar x $1      ;;
-      *.tar.xz)    tar xf $1    ;;
-      *.tar.zst)   unzstd $1    ;;
-      *)           echo "'$1' cannot be extracted via ex()" ;;
-    esac
-  else
-    echo "'$1' is not a valid file"
-  fi
+ex() {
+	if [ -f $1 ]; then
+		case $1 in
+		*.tar.bz2) tar xjf $1 ;;
+		*.tar.gz) tar xzf $1 ;;
+		*.bz2) bunzip2 $1 ;;
+		*.rar) unrar x $1 ;;
+		*.gz) gunzip $1 ;;
+		*.tar) tar xf $1 ;;
+		*.tbz2) tar xjf $1 ;;
+		*.tgz) tar xzf $1 ;;
+		*.zip) unzip $1 ;;
+		*.Z) uncompress $1 ;;
+		*.7z) 7z x $1 ;;
+		*.deb) ar x $1 ;;
+		*.tar.xz) tar xf $1 ;;
+		*.tar.zst) unzstd $1 ;;
+		*) echo "'$1' cannot be extracted via ex()" ;;
+		esac
+	else
+		echo "'$1' is not a valid file"
+	fi
 }
 
 #get keys and keycodes
-keys () {
+keys() {
 	xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'
 }
 
-rown () {
-  sed -n "$1 p" $2
+#kill port
+kp() {
+	kill $(lsof -ti:$1)
 }
 
-coln () {
-  echo "$2" | cut -d' ' -sf$1
+rown() {
+	sed -n "$1 p" $2
 }
 
-cds () {
-    cd "$1" && ls
+coln() {
+	echo "$2" | cut -d' ' -sf$1
+}
+
+cds() {
+	cd "$1" && ls
 }
