@@ -7,6 +7,8 @@ alias keytest="xbindkeys -mk"
 alias sdn="sudo shutdown now"
 alias mkdir="mkdir -p"
 alias md="mkdir -p"
+# alias sudo='doas'
+# alias sudoedit='doas nvim'
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -111,7 +113,12 @@ alias wget="wget --hsts-file=$XDG_CACHE_HOME/wget-hsts"
 alias su="sudo su"
 alias du="du -h"
 alias dus="du -sh"
-alias duss="du -sh * | sort -h"
+# alias duss="du -sh * | sort -h"
+duss() {
+	pushd "$1" >/dev/null
+	du -sh * | sort -h
+	popd >/dev/null
+}
 
 alias df="df -h"
 alias free="free -mt"
@@ -143,6 +150,10 @@ alias wl="windscribe locations"
 alias scim="sc-im"
 alias xc="sc-im"
 alias c="bat"
+alias bathelp='bat --plain --language=help'
+help() {
+	"$@" --help 2>&1 | bathelp
+}
 
 alias awres='awesome-client "awesome.restart()"'
 
@@ -212,10 +223,12 @@ alias downgrada="sudo downgrade --ala-url https://bike.seedhost.eu/arcolinux/"
 alias probe="sudo -E hw-probe -all -upload"
 
 # ubuntu aliases
-if test "$distro" = '"Ubuntu"'; then
+if [ "$distro" = '"Ubuntu"' ]; then
 	alias pi="sudo apt install"
 	alias bat="batcat"
 fi
+
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
 #extract all files
 ex() {
