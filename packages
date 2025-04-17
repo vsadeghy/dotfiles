@@ -1,0 +1,56 @@
+# linux & tools
+base-devel
+polkit-gnome
+networkmanager
+network-manager-applet
+bluez
+bluez-utils
+bluez-deprecated-tools
+blueberry
+i3
+rofi
+dmenu
+qt5ct
+pavucontrol
+dex
+xsel
+xorg-xrandr
+
+## terminal
+ttf-jetbrains-mono-nerd
+ghostty
+tmux
+github-cli
+vim
+stow
+zsh
+starship
+eza
+fzf
+exa
+bat
+htop
+tmux
+#screenshot
+scrot
+#image tools
+imagemagick
+
+# coding & LSPs
+nvim
+lua-language-server
+typescript-language-server
+tailwindcss-language-server
+bash-language-server
+pnpm
+typescript
+prettier
+biome
+shfmt
+rust
+
+# gui
+galculator
+pcmanfm
+nitrogen
+mpv

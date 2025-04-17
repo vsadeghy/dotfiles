@@ -1,0 +1,217 @@
+(defcfg
+  linux-continue-if-no-devs-found yes
+  process-unmapped-keys yes
+  concurrent-tap-hold yes
+  chords-v2-min-idle 50
+  danger-enable-cmd yes
+)
+;; keys to be used in the layers
+(defsrc
+  ⎋  1 2 3 4 5 6 7 8 9  0  -  = ⌫
+  ⭾  q w e r t y u i o  p 「 」 \
+  ⇪  a s d f g h j k l ︔ '  ⏎
+  ‹⇧ z x c v b n m ⸴ .  ⁄ ⇧›
+  ‹⌃ ‹❖  ‹⎇   ␣   ⎇› ☰ ⌃›
+)
+
+(defvar
+  tap-timeout 200
+  hold-timeout 150
+  hold-timeout-pinky 200
+  hold-timeout-long 1000
+  chord-timeout 30
+
+  tt $tap-timeout
+  ht $hold-timeout
+  htp $hold-timeout-pinky
+  htl $hold-timeout-long
+  ct $chord-timeout
+)
+
+;; home (top) row mods
+(defalias
+  w   (tap-hold $tt $ht w ‹⎇)
+  e   (tap-hold $tt $ht e ‹⌃)
+  r   (tap-hold $tt $ht r ‹❖)
+  u   (tap-hold $tt $ht u ❖›)
+  i   (tap-hold $tt $ht i ⌃›)
+  o   (tap-hold $tt $ht o ⎇›)
+  aNm (tap⬓↑    $tt $htp  a (layer-toggle num))
+  sNv (tap⬓↑    $tt $ht   s (layer-toggle nav-misc))
+ ︔Sm (tap⬓↑    $tt $htp ︔ (layer-toggle sym))
+  qMs (tap-hold $tt $ht   q (layer-toggle mouse))
+
+  ⟳ (tap-hold $tt $ht rpt rpt-any)
+
+  meh (multi ‹⌃ ‹⎇ ‹⇧)
+  ␣ (tap-hold $tt $ht ␣ @meh)
+)
+
+;;base layer is the first layer defined
+(deflayer base
+;;•   •     •     •     •     •           •     •     •     •     •  • • •
+  •   _     _     _     _     _           _     _     _     _     _  _ _ •
+  •  @qMs  @w    @e    @r     t           y    @u    @i    @o     p  • • •
+  •  @aNm  @sNv   d     f     g           h     j     k     l   @︔Sm  • •
+  •         x     m     c     b    @⟳    ‹⇧     n     ⸴     .     /      •
+  •         •           •          @␣           •           ☰            •
+)
+(defalias
+  ⭾ (tap-hold $tt $ht ⭾  ‹⇧⭾ )
+  cw (word⇪ $htl)
+)
+
+(defchordsv2
+  ;; missing characters
+  (x c)  z $ct first-release (sym)
+  (d f)  v $ct first-release (sym)
+  (j k) @ꞌ $ct first-release ()
+
+  ;; commands
+  (e r) @⭾  $ct first-release (sym)
+  (w e)  ⎋  $ct first-release (sym)
+  (i o)  ⌫  $ct first-release ()
+  (o p)  ⌦  $ct first-release ()
+  (k l)  ⏎  $ct first-release ()
+
+  ;; left hand backspace/enter for mouse use
+  (a s)  ⌫  $ct first-release (sym)
+  (z x)  ⏎  $ct first-release (sym)
+
+  ;; caps
+  (f j) @cw $ct first-release (sym)
+  (q p)  ⇪  $ct first-release (sym)
+
+  ;; vim
+  (z x c) (macro S-(z z)) $ct first-release () ;; ZZ
+  (q w e) (macro S-(z q)) $ct first-release () ;; ZQ
+ )
+
+(defalias
+  !  S-1
+  ＠ S-2
+  ⌗  S-3
+  $  S-4
+  ٪  S-5
+  ∧  S-6
+  ＆ S-7
+  ∗  S-8
+ 〔  S-9
+  〕 S-0
+  ˜  S-ˋ
+  -  min
+  _  S-min
+  ＋ S-eql
+  |  S-\
+  ［ [
+  ］ ]
+  ❴  S-[
+  ❵  S-]
+  :  S-;
+  ⟨  S-,
+  ⟩  S-.
+  ?  S-⁄
+  ”   (tap-hold $tt $ht S-' ‹⌃)
+  spc (tap-hold $tt $ht ␣ ‹❖)
+  ꞌ  '
+)
+(deflayer sym
+  •   •     •     •     •     •           •     •     •     •     •  • • •
+  •  @⟨     =    @⟩    @$    @˜          @٪    @_     `     \     •  • • •
+  •  @”     [    @〔   @❴    @⌗          @∗    @❵    @〕    ]     _    • •
+  •        @|    @＆   @!    @?    @∧    @:     -    @＋   @＠    •      •
+  •         •           •          @spc         •           ☰             •
+)
+
+(defalias
+  bse (tap-hold $tt $htl nop0 (layer-switch base))
+  grp (tap-hold $tt $htl nop0 (layer-switch graphite))
+  qwr (tap-hold $tt $htl nop0 (layer-switch qwerty))
+  zy  (tap-hold $tt $ht ‹⌃z ‹⌃y)
+  fa (cmd sh -c 'setxkbmap -layout "ir"')
+) ;;
+(deflayer nav-misc
+  •   •     •     •     •     •           •     •     •     •     •  • • •
+  •   •     •    ‹⌃    ‹❖    @grp         ◀◀    ↖     ▲     ↘     ▶▶ • • •
+  •  ‹⎇     _   ‹⌃c   ‹⌃v    @bse         ⇞     ◀     ▼     ▶     ⇟    • •
+  •        @fa  ‹⌃x    @zy   @qwr   •    ‹⇧     ▶⏸    🔉    🔊    🔇     •
+  •         •           •           ⏎           •           ☰             •
+)
+
+(defalias
+  1  (tap-hold $tt $htl 1    f1)
+  2  (tap-hold $tt $htl 2    f2)
+  3  (tap-hold $tt $htl 3    f3)
+  4  (tap-hold $tt $htl 4    f4)
+  5  (tap-hold $tt $htl 5    f5)
+  6  (tap-hold $tt $htl 6    f6)
+  7  (tap-hold $tt $htl 7    f7)
+  8  (tap-hold $tt $htl 8    f8)
+  9  (tap-hold $tt $htl 9    f9)
+  in (tap-hold $tt $htl ⎀    f10)
+  br (tap-hold $tt $htl brk  f11)
+  pr (tap-hold $tt $htl prnt f12)
+)
+(deflayer num
+  •   •     •     •     •     •           •     •     •     •     •  • • •
+  •   •    ‹⎇    ‹⌃    ‹❖     ⁄          @in   @4    @5    @6     •  • • •
+  •   _     .     ⸴    @＋   @∗          @br   @1    @2    @3     0    • •
+  •         •     =     ‐     •    @pr   @pr   @7    @8    @9     •      •
+  •         •           •          @␣           •           ☰            •
+)
+
+(defalias
+  ;; mousewheel: interval, distance
+  wu (🖱☸↑ 50 120)
+  wd (🖱☸↓ 50 120)
+  wl (🖱☸← 50 120)
+  wr (🖱☸→ 50 120)
+
+  ;; movemouse-speed: percent
+  s0 (🖱speed 25)
+  s1 (🖱speed 50)
+  s2 (🖱speed 150)
+  s3 (🖱speed 250)
+
+  ;; movemouse: interval, distance
+  mu (🖱↑ 8 4)
+  md (🖱↓ 8 4)
+  ml (🖱← 8 4)
+  mr (🖱→ 8 4)
+)
+(deflayer mouse
+  •   •     •     •     •     •           •     •     •     •     •  • • •
+  •   •    @wu   @mu   @wd    •           •    @s2   @s1   @s3   @s0 • • •
+  •   •    @ml   @md   @mr    •           •     mlft  mrgt ‹⌃    ‹❖    • •
+  •        @wl    mmid @wr    •     _     _     •     •     •    ‹⇧      •
+  •         •           •           ⏎           •           ☰            •
+)
+
+(defalias
+  lg  (tap-hold $tt $ht l ‹⎇)
+  dg  (tap-hold $tt $ht d ‹⌃)
+  wg  (tap-hold $tt $ht w ‹❖)
+  fg  (tap-hold $tt $ht f ❖›)
+  og  (tap-hold $tt $ht o ⌃›)
+  ug  (tap-hold $tt $ht u ⎇›)
+  nNm (tap-hold-release $tt $htp n (layer-toggle num))
+  rNv (tap-hold-release $tt $ht  r (layer-toggle nav-misc))
+  iSm (tap-hold-release $tt $htp i (layer-toggle sym))
+  bMs (tap-hold $tt $ht b (layer-toggle mouse))
+  /   (tap-hold $tt $htl / (layer-switch base))
+)
+(deflayer graphite
+  •   •     •     •     •     •           •     •     •     •     •  • • •
+  •  @bMs  @lg   @dg   @wg    v           k    @fg   @og   @ug    j  • • •
+  •  @nNm  @rNv   t     s     g           y     h     a     e    @iSm  • •
+  •         x     m     c     z     q     ⇧›    p     ⸴     .    @/      •
+  •         •           •          @␣           •           ☰            •
+)
+
+(deflayer qwerty
+  _   _     _     _     _     _           _     _     _     _     _  _ _ _
+  _   q     w     e     r     t           y     u     i     o     p  _ _ _
+  _   a     s     d     f     g           h     j     k     l    ︔    _ _
+  _   z     x     c     v     b           n     m     ⸴     .    @/      _
+  _         _           _           ␣           _           ☰            _
+)

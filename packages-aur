@@ -1,0 +1,14 @@
+# terminal
+gh
+pfetch-rs-bin
+blesh
+kanata-git
+
+# coding & LSPs
+vscode-langservers-extracted
+prettierd
+
+# gui
+zen-browser-bin
+nekoray-bin
+catppuccin-gtk-theme-macchiato

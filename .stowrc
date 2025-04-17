@@ -1,0 +1,6 @@
+--target=~/.config
+--ignore=packages.*
+--ignore=setup.sh
+--ignore=tmux/plugins
+--ignore=.stowrc
+--ignore=zsh/.zcompdump
