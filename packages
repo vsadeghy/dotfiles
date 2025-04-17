@@ -1,27 +1,126 @@
-# linux & tools
+### linux & tools
+linux-lts
+linux-lts-headersu
 base-devel
-polkit-gnome
+
+## X11
+xorg-xrandr
+xorg-xkill
+xorg-xinput
+xorg-xinit
+xorg-server
+xf86-input-libinput
+
+## Hardware
+dmidecode
+dmraid
+hdparm
+hwdetect
+mtools
+sof-firmware
+
+## GPU
+xf86-video-ati
+xf86-video-amdgpu
+
+## Powermanagement (performance/balanced/saver)
+# Power-profiles-daemon
+# upower
+
+## CPU microcode (prevents craches, ...)
+amd-ucode
+intel-ucode
+
+## Network
+dnsmasq
+dnsutils
+ethtool
+iwd
 networkmanager
-network-manager-applet
+
+## Packages
+pacman-contrib
+reflector
+rebuild-detector
+pkgfile
+
+## Filesystem
+efitools
+nfs-utils
+nilfs-utils
+ntp
+unrar
+unzip
+zip
+xz
+
+
+### Desktop
+## Desktop manager
+lightdm
+lightdm-slick-greeter
+## Window manager
+i3-wm
+i3blocks
+i3lock
+i3status
+xss-lock
+dex
+rofi
+dmenu
+## Tools
 bluez
 bluez-utils
 bluez-deprecated-tools
 blueberry
-i3
-rofi
-dmenu
+network-manager-applet
+playerctl
+polkit-gnome
 qt5ct
 pavucontrol
-dex
 xsel
-xorg-xrandr
+ffmpegthumbnailer
+xdg-utils
+xdg-user-dirs
+# Battery/Power/Thermal:
+acpi
+# Notifications:
+dunst
+# Image viewer:
+feh
+scrot
+# performance monitor
+sysstat
+
+## Fonts
+ttf-jetbrains-mono-nerd
+freetype2
+noto-fonts
+noto-fonts-emoji
+noto-fonts-cjk
+noto-fonts-extra
+ttf-dejavu
+ttf-liberation
+awesome-terminal-fonts
+
+## Audio
+alsa-firmware
+alsa-plugins
+alsa-utils
+pavucontrol
+pipewire-pulse
+wireplumer
+pipewire-alsa
+pipewire-jack
+rtkit
 
 ## terminal
-ttf-jetbrains-mono-nerd
+git
+vi
+vim
 ghostty
 tmux
 github-cli
-vim
 stow
 zsh
 starship
@@ -31,12 +130,32 @@ exa
 bat
 htop
 tmux
-#screenshot
-scrot
-#image tools
 imagemagick
+duf
+findutils
+# crossplatform system monitor:
+glances
+gwinfo
+# system info:
+inxi
+# difftool for files and FOLDERS
+meld
+rsync
+tldr
+sed
+# json query
+jq
+# yaml/toml/xml query
+yq
 
-# coding & LSPs
+## language spellcheck
+aspell
+aspell-en
+## firewall
+firewalld
+python-pyqt6
+
+## coding & LSPs
 nvim
 lua-language-server
 typescript-language-server
@@ -49,8 +168,17 @@ biome
 shfmt
 rust
 
-# gui
+### gui
 galculator
-pcmanfm
 nitrogen
 mpv
+## file manager
+pcmanfm
+gvfs
+gvfs-afc
+gvfs-gphoto2
+gvfs-mtp
+gvfs-nfs
+gvfs-smb
+xdg-user-dirs-gtk
+xarchiver
