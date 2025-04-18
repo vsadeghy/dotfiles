@@ -3,7 +3,8 @@
 
 add_newline = false
 palette = "catppuccin_macchiato"
-format = """$directory$line_break $character"""
+# format = """$directory$line_break $character"""
+format = """$directory$character"""
 right_format = """$all"""
 command_timeout = 1000
 

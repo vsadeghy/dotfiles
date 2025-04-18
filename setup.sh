@@ -28,7 +28,7 @@ grep -v '^#' $SCRIPT_DIR/packages-aur | xargs -a /dev/stdin -r yay -S --noconfir
 
 if ! gh auth status >/dev/null 2>&1; then
     print "Please log in to your GitHub Account"
-    gh auth login -w -s admin:public_key 1>/dev/null || return
+    gh auth login -w -s admin:public_key 1>/dev/null || exit 1
     gh ssh-key add $SSH_KEY.pub 1>/dev/null
     gh config set git_protocol ssh 1>/dev/null
 fi
@@ -49,10 +49,16 @@ if ! id -u kanata >/dev/null 2>&1; then
     print "Adding kanata"
     ! getent group uinput >/dev/null && sudo groupadd uinput
     sudo useradd -MG input,uinput -s /bin/false -U kanata
-    sudo echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"' \
-        >/etc/udev/rules.d/50-kanata.rules
+    sudo mkdir -p /etc/udev/rules.d
+    sudo echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"' |
+        sudo tee /etc/udev/rules.d/50-kanata.rules >/dev/null
     sudo chown root:kanata /usr/bin/kanata
-    sudo chmod 755 /usr/bin/kanata
-    sudo cp $SCRIPT_DIR/kanata/kanata.service /etc/systemd/system/kanata.service
+    sudo chmod 754 /usr/bin/kanata
+    sudo cat $SCRIPT_DIR/kanata/kanata.service | sudo tee /etc/systemd/system/kanata.service >/dev/null
+    sudo udevadm control --reload-rules && sudo udevadm trigger
+    sudo modprobe uinput
+    sudo systemctl daemon-reload
     sudo systemctl enable kanata.service
+    sudo systemctl start kanata.service
+    sudo systemctl status kanata.service 1>/dev/null
 fi

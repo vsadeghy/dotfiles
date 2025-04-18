@@ -21,7 +21,9 @@ zinit ice wait"2" as"command" from"gh-r" lucid \
   atpull"%atclone" src"init.zsh" nocompile"!"
 zinit light ajeetdsouza/zoxide
 
-autoload -Uz compinit && compinit
+[ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
+autoload -Uz compinit && compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
 zinit cdreplay -q
 
 bindkey "^[[A" history-search-backward

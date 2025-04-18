@@ -62,9 +62,8 @@ workspace $ws7 output $monitor1
 workspace $ws8 output $monitor1
 workspace $ws9 output $monitor1
 workspace $ws0 output $monitor2
-exec --no-startup-id xrandr --output $monitor1 --primary --auto --right-of $monitor2
-exec --no-startup-id ~/.screenlayout/monitor.sh
-exec --no-startup-id sleep 2 && nitrogen --restore
+exec --no-startup-id ~.config/screenlayout/monitor.sh
+exec --no-startup-id sleep 3 && nitrogen --restore
 
 ## bind programs to workspaces
 assign [class="zen"] $ws4
@@ -75,6 +74,7 @@ for_window [class="Galculator" instance="galculator"] floating enable
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 for_window [class="qt5ct" instance="qt5ct"] floating enable
 for_window [class="Nitrogen"] floating enable
+for_window [class="Blueberry.py"] floating enable
 
 
 ## keybindings
@@ -269,7 +269,7 @@ client.background        $base
 bar {
     font pango: Noto Sans Regular 10
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
-    i3bar_command i3bar --transparency
+    i3bar_command i3bar
     position bottom
     tray_padding 0
     strip_workspace_numbers yes
