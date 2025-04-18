@@ -1,6 +1,6 @@
 ### linux & tools
 linux-lts
-linux-lts-headersu
+linux-lts-headers
 base-devel
 
 ## X11
@@ -91,6 +91,7 @@ feh
 scrot
 # performance monitor
 sysstat
+libayatana-appindicator
 
 ## Fonts
 ttf-jetbrains-mono-nerd
@@ -109,7 +110,7 @@ alsa-plugins
 alsa-utils
 pavucontrol
 pipewire-pulse
-wireplumer
+wireplumber
 pipewire-alsa
 pipewire-jack
 rtkit
@@ -135,7 +136,7 @@ duf
 findutils
 # crossplatform system monitor:
 glances
-gwinfo
+#gwinfo
 # system info:
 inxi
 # difftool for files and FOLDERS

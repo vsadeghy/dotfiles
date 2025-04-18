@@ -52,3 +52,6 @@ RestrictSUIDSGID=true
 RestrictRealtime=true
 MemoryDenyWriteExecute=true
 UMask=0077
+
+[Install]
+WantedBy=multi-user.target
