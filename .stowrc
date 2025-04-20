@@ -3,4 +3,5 @@
 --ignore=setup.sh
 --ignore=tmux/plugins
 --ignore=.stowrc
---ignore=zsh/.zcompdump
+--ignore=zen
+--ignore=home

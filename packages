@@ -134,9 +134,10 @@ tmux
 imagemagick
 duf
 findutils
+yazi
 # crossplatform system monitor:
 glances
-#gwinfo
+hwinfo
 # system info:
 inxi
 # difftool for files and FOLDERS
