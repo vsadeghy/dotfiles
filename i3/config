@@ -2,7 +2,7 @@ set $alt Mod1
 set $mod Mod4
 set $mod1 Control
 set $mod2 $alt
-set $meh Mod1+Mod4+Control
+set $meh Control+Mod1+Shift
 
 set $terminal ghostty
 set $browser zen-browser
@@ -62,8 +62,7 @@ workspace $ws7 output $monitor1
 workspace $ws8 output $monitor1
 workspace $ws9 output $monitor1
 workspace $ws0 output $monitor2
-exec --no-startup-id ~.config/screenlayout/monitor.sh
-exec --no-startup-id sleep 3 && nitrogen --restore
+exec --no-startup-id nitrogen --restore
 
 ## bind programs to workspaces
 assign [class="zen"] $ws4
@@ -273,6 +272,28 @@ bar {
     position bottom
     tray_padding 0
     strip_workspace_numbers yes
+    output $monitor1
+    colors {
+        background         $base
+        statusline         $text
+        focused_statusline $text
+        focused_separator  $base
+
+        # target           border bg        text
+        focused_workspace  $base  $mauve    $crust
+        active_workspace   $base  $surface2 $text
+        inactive_workspace $base  $base     $text
+        urgent_workspace   $base  $red      $crust
+    }
+}
+bar {
+    font pango: Noto Sans Regular 10
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    i3bar_command i3bar
+    position bottom
+    tray_padding 0
+    strip_workspace_numbers yes
+    output $monitor2
     colors {
         background         $base
         statusline         $text

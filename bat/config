@@ -1,0 +1,7 @@
+# bat --list-themes:
+--theme="catppuccin-macchiato"
+#--italic-text=always
+#--paging=never
+#--pager="less --RAW-CONTROL-CHARS --quit-if-one-screen --mouse"
+#--map-syntax "*.ino:C++"
+#--map-syntax ".ignore:Git Ignore"

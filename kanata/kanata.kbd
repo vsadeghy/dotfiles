@@ -21,11 +21,11 @@
   hold-timeout-long 1000
   chord-timeout 30
 
-  tt $tap-timeout
-  ht $hold-timeout
+  tt  $tap-timeout
+  ht  $hold-timeout
   htp $hold-timeout-pinky
   htl $hold-timeout-long
-  ct $chord-timeout
+  ct  $chord-timeout
 )
 
 ;; home (top) row mods
