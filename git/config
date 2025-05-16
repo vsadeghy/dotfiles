@@ -1,0 +1,37 @@
+[user]
+	email = v.sadeghy@gmail.com
+	name = vsadeghy
+[alias]
+	aliases = !git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\=\\/
+	staash = stash --all
+	blaame = blame -wCCC
+	l = log --oneline --decorate
+	ll = log --oneline --graph --decorate
+	lg = log --pretty=format:'%Cred%h%Creset %C(bold blue)%an%Creset  %Cgreen(%cr) -%C(yellow)%d%Creset %s' --abbrev-commit --date=relative
+	rs = restore
+	rss = restore --staged
+	track = add --intent-to-add
+	diff-inline = diff --color-words
+	recover = !~/.config/git/recover.sh
+[rerere]
+	enabled = true
+; [column]
+; 	ui = auto
+[branch]
+	sort = -committerdate
+
+[includeIf "gitdir:~/projects/work"]
+	path = ~/projects/work/.gitconfig
+[maintenance]
+	repo = ~/projects/bot/server
+	repo = ~/projects/bot/web
+	repo = ~/.dotfiles
+[fetch]
+	writeCommitGraph = true
+[rebase]
+	updateRefs = true
+[core]
+	excludesfile = ~/.config/git/ignore
+[grep]
+	lineNumber = true
+	patternType = perl

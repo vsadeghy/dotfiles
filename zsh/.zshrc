@@ -21,6 +21,7 @@ zinit ice wait"2" as"command" from"gh-r" lucid \
   atpull"%atclone" src"init.zsh" nocompile"!"
 zinit light ajeetdsouza/zoxide
 
+source $ZDOTDIR/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 [ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
 zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
 autoload -Uz compinit && compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
@@ -75,6 +76,7 @@ alias -g ...="../.."
 alias -g ....="../../.."
 alias -g .....="../../../.."
 alias -g ......="../../../../.."
+source ~/.local/bin/*
 
 pfetch
 
