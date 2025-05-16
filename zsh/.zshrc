@@ -45,12 +45,26 @@ zstyle ":completion:*" menu no
 zstyle ":fzf-tab:complete:cd:*" fzf-preview "exa -1 --color=always --group-directories-first --icons $realpath"
 # bindkey "^r" history-incremental-search-backward
 
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^e" edit-command-line
+bindkey -s "^f" " yazi\n"
+
 alias bathelp="bat -plain --language help"
 alias -g -- -h="-h 2>&1 | bathelp"
 alias -g -- --help="--help 2>&1 | bathelp"
-help() {
-    "$@" --help 2>&1 | bathelp
-}
+
+alias yi="yay -S"
+alias yf="yay -Ss"
+alias pi="sudo pacman -S"
+alias pf="pacman -Ss"
+alias pr="sudo pacman -R"
+alias pu="sudo pacman -Sy"
+alias pU="sudo pacman -Syyu"
+alias pI="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
+alias yI="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
+alias pR="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
+alias yR="yay -Qq | fzf --multi --preview 'yay -Qi {1}' | xargs -ro sudo pacman -Rns"
 
 alias v="nvim"
 alias ls="exa --group-directories-first"
