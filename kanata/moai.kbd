@@ -1,0 +1,279 @@
+(defcfg
+  linux-continue-if-no-devs-found yes
+  process-unmapped-keys yes
+  concurrent-tap-hold yes
+  chords-v2-min-idle 50
+  danger-enable-cmd yes
+)
+;; keys to be used in the layers
+;; (defsrc
+;;   1 2 3 4 5   7 8 9  0 -
+;;   q w e r t   u i o  p [
+;;   a s d f g   j k l ︔ '
+;;         c v   m ⸴
+;; )
+(defsrc
+  q w e r t   y u i o  p
+  a s d f g   h j k l ︔
+  z x c v b   n m ⸴ .  ⁄
+        3 4   7 8
+)
+(defchordsv2
+  (t! crd (j k) ')
+  (t! crd (x c) C-c)
+  (t! crd (c v) C-v)
+  (t! crd (x v) C-x)
+  (t! crd (z x) C-z)
+  (t! crd (w e) ⎋)
+  (t! crd (i o) ⌫)
+  (t! crd (s d) ⏎)
+  (t! crd (d f) ⭾)
+  (t! crd (k l) ⏎)
+  (t! crd (l ;) ⌦)
+)
+
+(defvar
+  tap-timeout 200
+  hold-timeout 150
+  hold-timeout-pinky 200
+  hold-timeout-long 1000
+  chord-timeout 30
+
+  tt  $tap-timeout
+  ht  $hold-timeout
+  htp $hold-timeout-pinky
+  htl $hold-timeout-long
+  ct  $chord-timeout
+)
+
+;; home (top) row mods
+(defalias
+  q (tap-hold $tt $htp (multi q u) q)
+  s (tap-hold $tt $ht s ‹⎇)
+  e (tap-hold $tt $ht e ‹⌃)
+  f (tap-hold $tt $ht f ‹❖)
+  j (tap-hold $tt $ht j ❖›)
+  i (tap-hold $tt $ht i ⌃›)
+  l (tap-hold $tt $ht l ⎇›)
+
+  🔠 (layer-switch base)
+  ↑↓ (layer-toggle navigation)
+  🔢 (chord layers 🔢)
+  🔣 (chord layers 🔣)
+  🖱️ (layer-switch mouse)
+
+  ⟳ rpt
+
+  meh (multi ‹⌃ ‹⎇ ‹⇧)
+
+  ␣↑↓ (chord layers ␣↑↓)
+  ⇧   (chord layers ⇧)
+
+  ⮸ (caps-word-custom $htl
+      (a b c d e f g h i j k l m n o p q r s t u v w x y z)
+      (⌫ ⌦ ▲ ◀ ▼ ▶)
+  )
+)
+(defchords layers $ct
+  (🔢   ) (layer-toggle num)
+  (   🔣) (layer-toggle sym)
+  (🔢 🔣) @🖱️
+  (␣↑↓  ) (tap⬓↑ $tt $ht ␣ @↑↓)
+  (    ⇧) ‹⇧
+  (␣↑↓ ⇧) (tap-hold $tt $htl @⮸ ⇪)
+  (🔢 ␣↑↓) @meh
+)
+;;base layer is the first layer defined
+(deflayer base
+  @q     w    @e     r     t     y     u    @i     o     p
+   a    @s     d    @f     g     h    @j     k    @l    ︔
+   z     x     c     v     b     n     m     ⸴     .     /
+                   @🔢    @␣↑↓  @⇧    @🔣
+)
+(defalias
+)
+
+(deftemplate crdx (chord action disabled-layer)
+  $chord $action $ct first-release ($disabled-layer)
+)
+(deftemplate crd (chord action)
+  $chord $action $ct first-release ()
+)
+
+(defalias
+  !  S-1
+  ＠ S-2
+  ⌗  S-3
+  $  S-4
+  ٪  S-5
+  ∧  S-6
+  ＆ S-7
+  ∗  S-8
+ 〔  S-9
+  〕 S-0
+  ˜  S-ˋ
+  -  min
+  _  S-min
+  ＋ S-eql
+  |  S-\
+ ［  [
+  ］ ]
+  ❴  S-[
+  ❵  S-]
+  :  S-;
+  ⟨  S-,
+  ⟩  S-.
+  ?  S-⁄
+  ”  S-'
+  ꞌ  '
+)
+(deflayer sym
+   `    @⟨     =    @⟩    @⌗    @_    @∗     -    @＋    \
+  @”     [    @〔   @❴    @!    @˜    @❵    @〕    ]    ︔
+   •    @＆   @|    @?    @＠   @∧    @:    @$    @٪     •
+                    ‹⌃     ␣     •     •
+)
+
+(defalias
+  grp (layer-switch graphite)
+  qwr (layer-switch qwerty)
+
+  →↑↓ (layer-switch navigation)
+  🔠🔢 (tap⬓↑ $tt $ht @🔠 @🔢)
+
+  fa (multi (cmd sh -c 'setxkbmap -layout "ir"') (layer-switch farsi))
+  en (multi (cmd sh -c 'setxkbmap -layout "en"') @🔠)
+)
+
+(deflayer navigation
+   q    @fa   ‹⌃    @en    •     ◀◀    ↖     ▲     ↘     ▶▶
+   •    ‹⎇    ‹⌃    ‹❖     •     🔉    ◀     ▼     ▶     🔊
+  @→↑↓  @🔠   @grp  @qwr   •     ▶⏸    ⇞     o     ⇟     🔇
+                    @🔠🔢  ‹⇧    ␣    @🔣
+)
+
+(defalias
+  1  (tap-hold $tt $htl 1    f1)
+  2  (tap-hold $tt $htl 2    f2)
+  3  (tap-hold $tt $htl 3    f3)
+  4  (tap-hold $tt $htl 4    f4)
+  5  (tap-hold $tt $htl 5    f5)
+  6  (tap-hold $tt $htl 6    f6)
+  7  (tap-hold $tt $htl 7    f7)
+  8  (tap-hold $tt $htl 8    f8)
+  9  (tap-hold $tt $htl 9    f9)
+  in (tap-hold $tt $htl ⎀    f10)
+  br (tap-hold $tt $htl brk  f11)
+  pr (tap-hold $tt $htl prnt f12)
+)
+(deflayer num
+  @∗     ‐    @＋    =    @٪    @in   @4    @5    @6     •
+   ⁄    ‹⎇    ‹⌃    ‹❖     •    @br   @1    @2    @3     0
+   •     •     ⸴     .     •    @pr   @7    @8    @9     •
+                     •     ␣     0    @🖱️
+)
+
+(defalias
+  ;; mousewheel: interval, distance
+  wu (🖱☸↑ 50 120)
+  wd (🖱☸↓ 50 120)
+  wl (🖱☸← 50 480)
+  wr (🖱☸→ 50 480)
+
+  ;; movemouse-speed: percent
+  s0 (🖱speed 25)
+  s1 (🖱speed 150)
+  s2 (🖱speed 250)
+
+  ;; movemouse: interval, distance
+  mu (🖱↑ 8 4)
+  md (🖱↓ 8 4)
+  ml (🖱← 8 4)
+  mr (🖱→ 8 4)
+  🔄🖱️ (layer-switch mouser)
+)
+(deflayer mouse
+   •    @wu   @mu   @wd   @🔄🖱️  •     •    ‹⇧     •    @s2
+  @wl   @ml   @md   @mr   @wr   mmid  ‹❖    ‹⌃    ‹⎇    @s1
+   •     •     •     •     •     •    mbtp  mftp   •    @s0
+                     @🔠   •    mlft  mrgt
+)
+(deflayer mouser
+  @s2    •    ‹⇧     •     •    @🖱️   @wd   @mu   @wu    •
+  @s1   ‹⎇    ‹⌃    ‹❖    mmid  @wl   @ml   @md   @mr   @wr
+  @s0    •     •     •     •     •     •     •     •     •
+                     @🔠   •    mlft  mrgt
+)
+
+(defalias
+  lg  (tap-hold $tt $ht l ‹⎇)
+  dg  (tap-hold $tt $ht d ‹⌃)
+  wg  (tap-hold $tt $ht w ‹❖)
+  fg  (tap-hold $tt $ht f ❖›)
+  og  (tap-hold $tt $ht o ⌃›)
+  ug  (tap-hold $tt $ht u ⎇›)
+)
+(deflayer graphite
+   b    @lg   @dg   @wg   @q     j    @fg   @og   @ug    ;
+   n     r     t     s     g     y     h     a     e     i
+   z     x     m     c     v     k     p     ⸴     .     /
+                   @🔢    @␣↑↓  ‹⇧    @🔣
+)
+
+(defalias
+  ا  h
+  ب  f
+  پ  ,
+  ت  j
+  ث  e
+  ج  [
+  چ  ]
+  ح  p
+  خ  o
+  د  m
+  ذ  n
+  ر  v
+  ز  c
+  ژ  S-c
+  س  s
+  ش  a
+  ص  w
+  ض  q
+  ط  x
+  ظ  z
+  ع  u
+  غ  y
+  ف  t
+  ق  r
+  ک ︔
+  گ  '
+  ل  g
+  م  l
+  ن  k
+  و  ⸴
+  ه  i
+  ی  d
+  ،  S-7
+  .   (tap⬓↑  $tt $htp . @،)
+  گ-م (chord ge  l)
+  گ-ک (chord ge ︔)
+  ̲    (tap-hold $tt $htl _ @🔠)
+)
+(defchords ge 15
+  (l   ) @م
+  (  ︔) @ک
+  (l ︔) @گ
+)
+(deflayer farsi
+  @ض    @ص    @ث    @ق    @ف    @غ    @ع    @ه    @خ    @ح
+  @ش    @س    @ی    @ب    @ل    @ا    @ت    @ن    @گ-م  @گ-ک
+  @ظ    @ط    @ز    @ر    @ذ    @د    @پ    @و    @.     /
+                   @🔢    @␣↑↓  ‹⇧    @🔣
+)
+
+(deflayer qwerty
+   _     _     _     _     _     _     _     _     _     _
+   _     _     _     _     _     _     _     _     _     _
+   _     _     _     _     _     _     _     _     _    @̲
+                     _     _     _     _
+)
