@@ -7,13 +7,13 @@ export XDG_RUNTIME_DIR="/run/user/$UID"
 
 export XDG_DATA_DIRS="/usr/local/share:/usr/share"
 
-export PATH="$HOME/.bin:${PATH}"
+export PATH="$HOME/.local/bin:${PATH}"
 export TERMINAL="kitty"
 export EDITOR="nvim"
 
 # https://wiki.archlinux.org/title/GnuPG#gpg-agent
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
-alias gpg='gpg --homedir "$XDG_DATA_HOME/gnupg"'
+alias gpg="gpg --homedir '$XDG_DATA_HOME/gnupg'"
 alias gpg2='gpg2 --homedir "$XDG_DATA_HOME/gnupg"'
 
 export GTK_RC_FILES="$XDG_CONFIG_HOME/gtk-1.0/gtkrc"
@@ -44,15 +44,15 @@ export ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
 export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
 export XSERVERRC="$XDG_CONFIG_HOME/X11/xserverrc"
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+alias nvidia-settings="nvidia-settings --config='$XDG_CONFIG_HOME/nvidia/nvidia-settings.conf'"
 
 export FFMPEG_DATADIR="$XDG_CONFIG_HOME/ffmpeg"
 export HISTFILE="$XDG_STATE_HOME/history"
 export HISTSIZE=5000
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export RXVT_SOCKET="$XDG_RUNTIME_DIR/urxvtd"
-export WGETRC="$XDG_CONFIG_HOME/wgetrc"
-alias wget=wget --hst-file="$XDG_DATA_HOME/wget-hst"
-alias xbindkeys='xbindkeys -f "$XDG_CONFIG_HOME/xbindkeys/config"'
+alias wget="wget --hst-file='$XDG_DATA_HOME/wget-hst'"
+alias xbindkeys="xbindkeys -f '$XDG_CONFIG_HOME/xbindkeys/config'"
 export _Z_DATA="$XDG_DATA_HOME/z"
 
 export GTK_IM_MODULE=fcitx
@@ -60,4 +60,8 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 export GLFW_IM_MODULE=ibus
 
-export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
+export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9j]*m//gj s/.\\x08//g\" | bat -p -lman'"
+
+if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" == 1 ]; then
+    exec startx
+fi
