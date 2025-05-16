@@ -82,6 +82,8 @@ xsel
 ffmpegthumbnailer
 xdg-utils
 xdg-user-dirs
+ripgrep
+ripgrep-all
 # Battery/Power/Thermal:
 acpi
 # Notifications:
@@ -131,7 +133,9 @@ exa
 bat
 htop
 tmux
+lazygit
 imagemagick
+perl-image-exiftool
 duf
 findutils
 yazi
@@ -145,10 +149,11 @@ meld
 rsync
 tldr
 sed
-# json query
+ouch
 jq
-# yaml/toml/xml query
 yq
+curlie
+posting
 
 ## language spellcheck
 aspell
@@ -174,6 +179,9 @@ rust
 galculator
 nitrogen
 mpv
+obsidian
+qbittorrent
+zathura
 ## file manager
 pcmanfm
 gvfs

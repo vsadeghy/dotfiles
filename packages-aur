@@ -1,8 +1,10 @@
+i3-swallow-git
 # terminal
 gh
 pfetch-rs-bin
 blesh
 kanata-git
+posting
 
 # coding & LSPs
 vscode-langservers-extracted
