@@ -150,6 +150,10 @@ previewers = [
 	# Fallback
 	{ name = "*", run = "file" },
 ]
+prepend_previewers = [
+	# Archive previewer
+	{ mime = "application/{*zip,x-tar,x-bzip2,x-7z-compressed,x-rar,x-xz,xz}", run = "ouch" },
+]
 
 [input]
 cursor_blink = false

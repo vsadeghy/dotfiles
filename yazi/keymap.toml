@@ -34,16 +34,19 @@ keymap = [
 
 	# Navigation
 	{ on = "h", run = "leave", desc = "Back to the parent directory" },
-	{ on = "l", run = "enter", desc = "Enter the child directory" },
+	# { on = "l", run = "enter", desc = "Enter the child directory" },
+	{ on = "l", run = "plugin fast-enter", desc = "Smart enter the subfolder, or open the file" },
 
 	{ on = "<Left>",  run = "leave", desc = "Back to the parent directory" },
-	{ on = "<Right>", run = "enter", desc = "Enter the child directory" },
+	# { on = "<Right>", run = "enter", desc = "Enter the child directory" },
+	{ on = "<Right>", run = "plugin fast-enter", desc = "Smart enter the subfolder, or open the file" },
 
-	{ on = "H", run = "back",    desc = "Back to previous directory" },
-	{ on = "L", run = "forward", desc = "Forward to next directory" },
+	# { on = "H", run = "back",    desc = "Back to previous directory" },
+	# { on = "L", run = "forward", desc = "Forward to next directory" },
 
 	# Toggle
-	{ on = "<Space>", run = [ "toggle", "arrow next" ], desc = "Toggle the current selection state" },
+	# { on = "<Space>", run = [ "toggle", "arrow next" ], desc = "Toggle the current selection state" },
+	{ on = "<C-s>", run = [ "toggle", "arrow next" ], desc = "Toggle the current selection state" },
 	{ on = "<C-a>",   run = "toggle_all --state=on",    desc = "Select all files" },
 	{ on = "<C-r>",   run = "toggle_all",               desc = "Invert selection of all files" },
 
@@ -78,10 +81,11 @@ keymap = [
 	{ on = "r",         run = "rename --cursor=before_ext",  desc = "Rename selected file(s)" },
 	{ on = ";",         run = "shell --interactive",         desc = "Run a shell command" },
 	{ on = ":",         run = "shell --block --interactive", desc = "Run a shell command (block until finishes)" },
-	{ on = ".",         run = "hidden toggle",               desc = "Toggle the visibility of hidden files" },
+	{ on = "H",         run = "hidden toggle",               desc = "Toggle the visibility of hidden files" },
 	{ on = "s",         run = "search --via=fd",             desc = "Search files by name via fd" },
-	{ on = "S",         run = "search --via=rg",             desc = "Search files by content via ripgrep" },
-	{ on = "<C-s>",     run = "escape --search",             desc = "Cancel the ongoing search" },
+	# { on = "S",         run = "search --via=rg",             desc = "Search files by content via ripgrep" },
+	{ on = "S",         run = "plugin fr rg",             desc = "Search files by content via ripgrep" },
+	# { on = "<C-s>",     run = "escape --search",             desc = "Cancel the ongoing search" },
 	{ on = "z",         run = "plugin fzf",                  desc = "Jump to a file/directory via fzf" },
 	{ on = "Z",         run = "plugin zoxide",               desc = "Jump to a directory via zoxide" },
 
@@ -100,7 +104,8 @@ keymap = [
 	{ on = [ "c", "n" ], run = "copy name_without_ext", desc = "Copy the filename without extension" },
 
 	# Filter
-	{ on = "f", run = "filter --smart", desc = "Filter files" },
+	{ on = "F", run = "filter --smart", desc = "Filter files" },
+	{ on = "f", run = "plugin smart-filter", desc = "Smart filter" },
 
 	# Find
 	{ on = "/", run = "find --smart",            desc = "Find next file" },
@@ -131,7 +136,7 @@ keymap = [
 	{ on = [ "g", "f" ],       run = "follow",           desc = "Follow hovered symlink" },
 
 	# Tabs
-	{ on = "t", run = "tab_create --current", desc = "Create a new tab with CWD" },
+	{ on = "T", run = "tab_create --current", desc = "Create a new tab with CWD" },
 
 	{ on = "1", run = "tab_switch 0", desc = "Switch to first tab" },
 	{ on = "2", run = "tab_switch 1", desc = "Switch to second tab" },
@@ -157,7 +162,19 @@ keymap = [
 	{ on = "<F1>", run = "help", desc = "Open help" },
 
 	# others
-	{ on  = "<C-n>", run = 'shell -- dragon-drop -x -i -T "$1"', desc = "drag from yazi" }
+	{ on = "<C-n>", run = 'shell -- dragon-drop -x -i -T "$1"', desc = "drag from yazi" },
+	{ on = ["t", "p"], run = 'plugin toggle-pane min-preview', desc = "toggle preview" },
+	{ on = ["t", "t"], run = 'plugin toggle-pane max-current', desc = "toggle zen" },
+	{ on = "C", run = "plugin ouch", desc = "Compress"},
+	{ on = [ ".", "s" ], run = "plugin what-size", desc = "Calc size of selection or cwd" },
+	{ on = [ ".", "S" ], run = "plugin what-size -- '--clipboard'", desc = "Copy size of selection or cwd" },
+	{ on = [ ".", "g" ], run = "plugin lazygit", desc = "Open lazygit" },
+	{ on = [ "<Space>", "g" ], run = "plugin bunny", desc = "Jump" },
+	{ on = ["M", "m"], run = 'plugin mount', desc = "mount Device" },
+	{ on = ["M", "p"], run = 'plugin simple-mtpfs -- select-then-mount --jump', desc = "mount Phone" },
+	{ on = [ "M", "r" ], run = "plugin simple-mtpfs -- remount-current-cwd-device", desc = "Remount Phone" },
+        { on = [ "M", "u" ], run = "plugin simple-mtpfs -- select-then-unmount", desc = "Unmount phone" },
+    
 ]
 
 [tasks]
