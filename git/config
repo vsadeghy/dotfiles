@@ -35,3 +35,5 @@
 [grep]
 	lineNumber = true
 	patternType = perl
+[init]
+	defaultBranch = main

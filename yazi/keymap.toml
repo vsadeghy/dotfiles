@@ -162,6 +162,7 @@ keymap = [
 	{ on = "<F1>", run = "help", desc = "Open help" },
 
 	# others
+	{ on = "i", run = 'plugin easyjump', desc = "easyjump" },
 	{ on = "<C-n>", run = 'shell -- dragon-drop -x -i -T "$1"', desc = "drag from yazi" },
 	{ on = ["t", "p"], run = 'plugin toggle-pane min-preview', desc = "toggle preview" },
 	{ on = ["t", "t"], run = 'plugin toggle-pane max-current', desc = "toggle zen" },
