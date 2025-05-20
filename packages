@@ -153,7 +153,6 @@ ouch
 jq
 yq
 curlie
-posting
 
 ## language spellcheck
 aspell
@@ -182,6 +181,8 @@ mpv
 obsidian
 qbittorrent
 zathura
+libreoffice-still
+boost-libs
 ## file manager
 pcmanfm
 gvfs

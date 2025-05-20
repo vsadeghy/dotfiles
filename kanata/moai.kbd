@@ -85,7 +85,7 @@
 )
 ;;base layer is the first layer defined
 (deflayer base
-  @q     w    @e     r     t     y     u    @i     o     p
+   q     w    @e     r     t     y     u    @i     o     p
    a    @s     d    @f     g     h    @j     k    @l    ︔
    z     x     c     v     b     n     m     ⸴     .     /
                    @🔢    @␣↑↓  @⇧    @🔣
@@ -162,15 +162,15 @@
   7  (tap-hold $tt $htl 7    f7)
   8  (tap-hold $tt $htl 8    f8)
   9  (tap-hold $tt $htl 9    f9)
-  in (tap-hold $tt $htl ⎀    f10)
-  br (tap-hold $tt $htl brk  f11)
-  pr (tap-hold $tt $htl prnt f12)
+  br (tap-hold $tt $htl brk  f10)
+  pr (tap-hold $tt $htl prnt f11)
+  in (tap-hold $tt $htl ⎀    f12)
 )
 (deflayer num
   @∗     ‐    @＋    =    @٪    @in   @4    @5    @6     •
-   ⁄    ‹⎇    ‹⌃    ‹❖     •    @br   @1    @2    @3     0
-   •     •     ⸴     .     •    @pr   @7    @8    @9     •
-                     •     ␣     0    @🖱️
+   ⁄    ‹⎇    ‹⌃    ‹❖     •    @pr   @1    @2    @3     0
+   •     •     ⸴     .     •    @br   @7    @8    @9     •
+                     •     ␣    ‹⇧    @🖱️
 )
 
 (defalias
@@ -214,7 +214,7 @@
   ug  (tap-hold $tt $ht u ⎇›)
 )
 (deflayer graphite
-   b    @lg   @dg   @wg   @q     j    @fg   @og   @ug    ;
+   b    @lg   @dg   @wg    q     j    @fg   @og   @ug    ;
    n     r     t     s     g     y     h     a     e     i
    z     x     m     c     v     k     p     ⸴     .     /
                    @🔢    @␣↑↓  ‹⇧    @🔣
@@ -223,15 +223,15 @@
 (defalias
   ا  h
   ب  f
-  پ  ,
+  پ  m
   ت  j
   ث  e
   ج  [
   چ  ]
   ح  p
   خ  o
-  د  m
-  ذ  n
+  د  n
+  ذ  b
   ر  v
   ز  c
   ژ  S-c

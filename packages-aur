@@ -1,6 +1,5 @@
 i3-swallow-git
 # terminal
-gh
 pfetch-rs-bin
 blesh
 kanata-git
@@ -14,3 +13,4 @@ prettierd
 zen-browser-bin
 nekoray-bin
 catppuccin-gtk-theme-macchiato
+borna-fonts

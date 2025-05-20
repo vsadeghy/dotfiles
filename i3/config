@@ -205,8 +205,11 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause && $refresh_status
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous && $refresh_status
 bindsym XF86AudioNext exec --no-startup-id playerctl next && $refresh_status
-bindsym Print exec --no-startup-id scrot ~/%Y-%m-%d-%T-screenshot.png \
-  && notify-send "Screenshot saved to ~/$(date +"%Y-%m-%d-%T")-screenshot.png"
+
+set $screenshot_path ~/Pictures/screenshot
+bindsym Print exec --no-startup-id scrot $screenshot_path/%Y-%m-%d-%T-screenshot.png \
+  && notify-send "Screenshot saved to $screenshot_path/$(date +"%Y-%m-%d-%T")-screenshot.png" \
+  || notify-send "Screenshot failed. check if $screenshot_path exists"
 
 
 # resize window (you can also use the mouse for that)
