@@ -5,6 +5,7 @@
   chords-v2-min-idle 50
   danger-enable-cmd yes
 )
+
 ;; keys to be used in the layers
 ;; (defsrc
 ;;   1 2 3 4 5   7 8 9  0 -
@@ -23,13 +24,16 @@
   (t! crd (x c) C-c)
   (t! crd (c v) C-v)
   (t! crd (x v) C-x)
-  (t! crd (z x) C-z)
+  (t! crd (x c v) C-z)
   (t! crd (w e) ⎋)
   (t! crd (i o) ⌫)
+  (t! crd (, .) ⌦)
   (t! crd (s d) ⏎)
   (t! crd (d f) ⭾)
   (t! crd (k l) ⏎)
-  (t! crd (l ;) ⌦)
+)
+(deftemplate crd (chord action)
+  $chord $action $ct first-release ()
 )
 
 (defvar
@@ -74,6 +78,13 @@
       (⌫ ⌦ ▲ ◀ ▼ ▶)
   )
 )
+;;base layer is the first layer defined
+(deflayer base
+   q     w    @e     r     t     y     u    @i     o     p
+   a    @s     d    @f     g     h    @j     k    @l    ︔
+   z     x     c     v     b     n     m     ⸴     .     /
+                   @🔢    @␣↑↓  @⇧    @🔣
+)
 (defchords layers $ct
   (🔢   ) (layer-toggle num)
   (   🔣) (layer-toggle sym)
@@ -82,22 +93,6 @@
   (    ⇧) ‹⇧
   (␣↑↓ ⇧) (tap-hold $tt $htl @⮸ ⇪)
   (🔢 ␣↑↓) @meh
-)
-;;base layer is the first layer defined
-(deflayer base
-   q     w    @e     r     t     y     u    @i     o     p
-   a    @s     d    @f     g     h    @j     k    @l    ︔
-   z     x     c     v     b     n     m     ⸴     .     /
-                   @🔢    @␣↑↓  @⇧    @🔣
-)
-(defalias
-)
-
-(deftemplate crdx (chord action disabled-layer)
-  $chord $action $ct first-release ($disabled-layer)
-)
-(deftemplate crd (chord action)
-  $chord $action $ct first-release ()
 )
 
 (defalias
@@ -108,30 +103,38 @@
   ٪  S-5
   ∧  S-6
   ＆ S-7
-  ∗  S-8
+  ∗  (chord syms ∗)
  〔  S-9
   〕 S-0
   ˜  S-ˋ
   -  min
   _  S-min
-  ＋ S-eql
+  ＋ (chord syms ＋)
   |  S-\
- ［  [
-  ］ ]
+  ]  ]
+  [  (chord syms [)
   ❴  S-[
   ❵  S-]
   :  S-;
   ⟨  S-,
   ⟩  S-.
   ?  S-⁄
-  ”  S-'
+  ”  (chord syms ”)
   ꞌ  '
 )
 (deflayer sym
-   `    @⟨     =    @⟩    @⌗    @_    @∗     -    @＋    \
-  @”     [    @〔   @❴    @!    @˜    @❵    @〕    ]    ︔
-   •    @＆   @|    @?    @＠   @∧    @:    @$    @٪     •
-                    ‹⌃     ␣     •     •
+   •     -    @＋   @∗    @⌗     •    @∧    ︔    @$     •
+  @”    @[    @〔   @❴     \     •    @❵    @〕   @]    @٪
+   •    @＆   @|    @!    @⟨    @⟩    @˜    @＠   @_     •
+                     =     ␣     •     _
+)
+(defchords syms $ct
+  (”  ) S-'
+  (  [) [
+  (” [) `
+  (＋  ) S-eql
+  (   ∗) S-8
+  (＋ ∗) (multi = S-.) ;; =>
 )
 
 (defalias
@@ -146,10 +149,10 @@
 )
 
 (deflayer navigation
-   q    @fa   ‹⌃    @en    •     ◀◀    ↖     ▲     ↘     ▶▶
-   •    ‹⎇    ‹⌃    ‹❖     •     🔉    ◀     ▼     ▶     🔊
-  @→↑↓  @🔠   @grp  @qwr   •     ▶⏸    ⇞     o     ⇟     🔇
-                    @🔠🔢  ‹⇧    ␣    @🔣
+   q    @fa   ‹⌃    @en   @qwr   ◀◀    ↖     ▲     ↘     ▶▶
+  @🔠   ‹⎇    ‹⌃    ‹❖    @grp   🔉    ◀     ▼     ▶     🔊
+   •     •     •    @→↑↓   •     ▶⏸    ⇞     o     ⇟     🔇
+                    @🔢   ‹⇧     ␣    @🔣
 )
 
 (defalias
@@ -170,7 +173,7 @@
   @∗     ‐    @＋    =    @٪    @in   @4    @5    @6     •
    ⁄    ‹⎇    ‹⌃    ‹❖     •    @pr   @1    @2    @3     0
    •     •     ⸴     .     •    @br   @7    @8    @9     •
-                     •     ␣    ‹⇧    @🖱️
+                     _     ␣    ‹⇧    @🖱️
 )
 
 (defalias
