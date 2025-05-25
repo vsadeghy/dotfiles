@@ -94,6 +94,7 @@ bindsym $meh+o exec --no-startup-id obsidian
 bindsym $meh+f exec --no-startup-id ferdium
 bindsym $meh+y exec --no-startup-id floorp
 bindsym $meh+c exec --no-startup-id galculator
+bindsym $meh+w exec --no-startup-id variety -n
 bindsym $mod+minus exec --no-startup-id ~/.config/i3/scripts/blur-lock
 bindsym $mod+$mod1+p exec --no-startup-id ~/.config/i3/scripts/power-profiles
 # main
