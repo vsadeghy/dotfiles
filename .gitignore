@@ -1,2 +1,5 @@
 tmux/plugins/
+mpv/watch_later/
+mpv/mpvHistory.log
+mpv/history.log
 zsh/.zcompdump
