@@ -31,6 +31,7 @@
   (t! crd (s d) ⏎)
   (t! crd (d f) ⭾)
   (t! crd (k l) ⏎)
+  (t! crd (u i) =)
 )
 (deftemplate crd (chord action)
   $chord $action $ct first-release ()
@@ -60,18 +61,16 @@
   i (tap-hold $tt $ht i ⌃›)
   l (tap-hold $tt $ht l ⎇›)
 
-  🔠 (layer-switch base)
-  ↑↓ (layer-toggle navigation)
-  🔢 (chord layers 🔢)
-  🔣 (chord layers 🔣)
-  🖱️ (layer-switch mouse)
+  🖱️  (layer-switch mouse)
+  🔠  (layer-switch base)
+  🔢  (chord layers 🔢)
+  ␣🔣 (chord layers ␣🔣)
+  ↑↓  (chord layers ↑↓)
+  ⇧   (chord layers ⇧)
 
   ⟳ rpt
 
   meh (multi ‹⌃ ‹⎇ ‹⇧)
-
-  ␣↑↓ (chord layers ␣↑↓)
-  ⇧   (chord layers ⇧)
 
   ⮸ (caps-word-custom $htl
       (a b c d e f g h i j k l m n o p q r s t u v w x y z)
@@ -83,16 +82,16 @@
    q     w    @e     r     t     y     u    @i     o     p
    a    @s     d    @f     g     h    @j     k    @l    ︔
    z     x     c     v     b     n     m     ⸴     .     /
-                   @🔢    @␣↑↓  @⇧    @🔣
+                   @🔢    @␣🔣  @↑↓   @⇧
 )
+ 
 (defchords layers $ct
-  (🔢   ) (layer-toggle num)
-  (   🔣) (layer-toggle sym)
-  (🔢 🔣) @🖱️
-  (␣↑↓  ) (tap⬓↑ $tt $ht ␣ @↑↓)
-  (    ⇧) ‹⇧
-  (␣↑↓ ⇧) (tap-hold $tt $htl @⮸ ⇪)
-  (🔢 ␣↑↓) @meh
+  (🔢    ) (layer-toggle numbers)
+  (   ␣🔣) (tap⬓↑ $tt $ht ␣ (layer-toggle symbols))
+  (🔢 ␣🔣) @meh
+  (↑↓  ) (layer-toggle navigation)
+  (   ⇧) ‹⇧
+  (␣🔣 ↑↓) (tap-hold $tt $htl @⮸ ⇪)
 )
 
 (defalias
@@ -107,9 +106,9 @@
  〔  S-9
   〕 S-0
   ˜  S-ˋ
-  -  min
+  - (chord syms -)
   _  S-min
-  ＋ (chord syms ＋)
+  ＋ S-eql
   |  S-\
   ]  ]
   [  (chord syms [)
@@ -122,37 +121,40 @@
   ”  (chord syms ”)
   ꞌ  '
 )
-(deflayer sym
-   •     -    @＋   @∗    @⌗     •    @∧    ︔    @$     •
+(deflayer symbols
+   •    @∗    @-    @＋   @⌗     •    @∧    ︔    @$     •
   @”    @[    @〔   @❴     \     •    @❵    @〕   @]    @٪
    •    @＆   @|    @!    @⟨    @⟩    @˜    @＠   @_     •
-                     =     ␣     •     _
+                     •     _     =    ‹⌃
 )
 (defchords syms $ct
   (”  ) S-'
   (  [) [
   (” [) `
-  (＋  ) S-eql
-  (   ∗) S-8
-  (＋ ∗) (multi = S-.) ;; =>
+  (-  ) -
+  (  ∗) S-8
+  (- ∗) (macro = S-.) ;; =>
 )
 
 (defalias
-  grp (layer-switch graphite)
-  qwr (layer-switch qwerty)
+  ;; grp (multi (layer-switch graphite) (cmd dunstify "layout: graphite"))
+  grp nop5
+  ;; qwr (multi (layer-switch qwerty) (cmd dunstify "layout: qwerty"))
+  qwr nop5
 
   →↑↓ (layer-switch navigation)
-  🔠🔢 (tap⬓↑ $tt $ht @🔠 @🔢)
 
-  fa (multi (cmd sh -c 'setxkbmap -layout "ir"') (layer-switch farsi))
-  en (multi (cmd sh -c 'setxkbmap -layout "en"') @🔠)
+  ;; fa A-S-7
+  ;; en A-S-8
+  fa (layer-switch farsi)
+  en @🔠
 )
 
 (deflayer navigation
    q    @fa   ‹⌃    @en   @qwr   ◀◀    ↖     ▲     ↘     ▶▶
   @🔠   ‹⎇    ‹⌃    ‹❖    @grp   🔉    ◀     ▼     ▶     🔊
    •     •     •    @→↑↓   •     ▶⏸    ⇞     o     ⇟     🔇
-                    @🔢   ‹⇧     ␣    @🔣
+                    @🔢    @␣🔣   ␣   ‹⇧
 )
 
 (defalias
@@ -169,11 +171,11 @@
   pr (tap-hold $tt $htl prnt f11)
   in (tap-hold $tt $htl ⎀    f12)
 )
-(deflayer num
-  @∗     ‐    @＋    =    @٪    @in   @4    @5    @6     •
-   ⁄    ‹⎇    ‹⌃    ‹❖     •    @pr   @1    @2    @3     0
-   •     •     ⸴     .     •    @br   @7    @8    @9     •
-                     _     ␣    ‹⇧    @🖱️
+(deflayer numbers
+   •    @＋    -    @∗     •    @in   @4    @5    @6     •
+   .    ‹⎇    ‹⌃    ‹❖    @٪    @pr   @1    @2    @3     0
+   •     •     ⸴     ⁄     •    @br   @7    @8    @9     •
+                     _     ␣     =    @🖱️
 )
 
 (defalias
@@ -220,7 +222,7 @@
    b    @lg   @dg   @wg    q     j    @fg   @og   @ug    ;
    n     r     t     s     g     y     h     a     e     i
    z     x     m     c     v     k     p     ⸴     .     /
-                   @🔢    @␣↑↓  ‹⇧    @🔣
+                   @🔢    @␣🔣  @↑↓   @⇧
 )
 
 (defalias
@@ -248,30 +250,28 @@
   غ  y
   ف  t
   ق  r
-  ک ︔
+  ک (chord ge ک)
   گ  '
   ل  g
-  م  l
+  م (chord ge م)
   ن  k
   و  ⸴
   ه  i
   ی  d
   ،  S-7
-  .   (tap⬓↑  $tt $htp . @،)
-  گ-م (chord ge  l)
-  گ-ک (chord ge ︔)
-  ̲    (tap-hold $tt $htl _ @🔠)
-)
-(defchords ge 15
-  (l   ) @م
-  (  ︔) @ک
-  (l ︔) @گ
+  .  (tap⬓↑  $tt $htp . @،)
+  ̲   (tap-hold $tt $htl _ @🔠)
 )
 (deflayer farsi
   @ض    @ص    @ث    @ق    @ف    @غ    @ع    @ه    @خ    @ح
-  @ش    @س    @ی    @ب    @ل    @ا    @ت    @ن    @گ-م  @گ-ک
+  @ش    @س    @ی    @ب    @ل    @ا    @ت    @ن    @م    @ک
   @ظ    @ط    @ز    @ر    @ذ    @د    @پ    @و    @.     /
-                   @🔢    @␣↑↓  ‹⇧    @🔣
+                   @🔢    @␣🔣  @↑↓   @⇧
+)
+(defchords ge 15
+  (م  )  l
+  (  ک) ︔
+  (م ک)  ' ;; گ
 )
 
 (deflayer qwerty
