@@ -3,6 +3,9 @@
 	name = vsadeghy
 [alias]
 	aliases = !git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\=\\/
+
+  s = status -sb
+  st = status
 	staash = stash --all
 	blaame = blame -wCCC
 	l = log --oneline --decorate
@@ -37,3 +40,5 @@
 	patternType = perl
 [init]
 	defaultBranch = main
+
+; vim: ft=gitconfig

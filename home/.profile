@@ -26,6 +26,9 @@ export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
 
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export PYTHON_HISTORY="$XDG_STATE_HOME/python_history"
+export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME/python"
+export PYTHONUSERBASE="$XDG_DATA_HOME/python"
 
 export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql_history"
 export PSQLRC="$XDG_CONFIG_HOME/pg/psqlrc"
@@ -60,7 +63,7 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 export GLFW_IM_MODULE=ibus
 
-export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9j]*m//gj s/.\\x08//g\" | bat -p -lman'"
+export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
 
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" == 1 ]; then
     exec startx

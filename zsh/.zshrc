@@ -43,7 +43,9 @@ setopt auto_cd
 zstyle ":completion:*" matcher-list "m:{a-z}={A-Z}"
 zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
 zstyle ":completion:*" menu no
-zstyle ":fzf-tab:complete:cd:*" fzf-preview "exa -1 --color=always --group-directories-first --icons $realpath"
+zstyle ':completion:*:git-checkout:*' sort false
+zstyle ":fzf-tab:complete:cd:*" fzf-preview 'exa -1 --color=always --group-directories-first --icons $realpath'
+zstyle ":fzf-tab:complete:nvim:*" fzf-preview 'exa -1 --color=always --group-directories-first --icons $realpath'
 # bindkey "^r" history-incremental-search-backward
 
 autoload -z edit-command-line
@@ -67,7 +69,10 @@ alias yI="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
 alias pR="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 alias yR="yay -Qq | fzf --multi --preview 'yay -Qi {1}' | xargs -ro sudo pacman -Rns"
 
+alias t="tmux a || tmux"
+alias c="z"
 alias v="nvim"
+alias whichport="lsof -i"
 alias ls="exa --group-directories-first"
 alias la="ls -a"
 alias l="la -lh --icons --git"
@@ -76,7 +81,7 @@ alias -g ...="../.."
 alias -g ....="../../.."
 alias -g .....="../../../.."
 alias -g ......="../../../../.."
-source ~/.local/bin/*
+[ -d $ZINIT_HOME ] && source ~/.local/bin/*
 
 pfetch
 
