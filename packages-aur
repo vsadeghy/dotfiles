@@ -1,8 +1,8 @@
 i3-swallow-git
 # terminal
 pfetch-rs-bin
-blesh
-kanata-git
+# blesh
+kanata-bin
 posting
 
 # coding & LSPs
@@ -12,5 +12,5 @@ prettierd
 # gui
 zen-browser-bin
 nekoray-bin
-catppuccin-gtk-theme-macchiato
+# catppuccin-gtk-theme-macchiato
 borna-fonts
