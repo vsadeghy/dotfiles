@@ -18,7 +18,7 @@ alias gpg2='gpg2 --homedir "$XDG_DATA_HOME/gnupg"'
 
 export GTK_RC_FILES="$XDG_CONFIG_HOME/gtk-1.0/gtkrc"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
-export QT_QPA_PLATFORMTHEME="qt5ct:qt6ct"
+export QT_QPA_PLATFORMTHEME="qt5ct"
 
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
