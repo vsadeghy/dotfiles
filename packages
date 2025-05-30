@@ -29,13 +29,12 @@ xf86-video-amdgpu
 
 ## CPU microcode (prevents craches, ...)
 amd-ucode
-intel-ucode
 
 ## Network
-dnsmasq
-dnsutils
-ethtool
-iwd
+# dnsmasq
+# dnsutils
+# ethtool
+# iwd
 networkmanager
 
 ## Packages
@@ -48,11 +47,12 @@ pkgfile
 efitools
 nfs-utils
 nilfs-utils
-ntp
-unrar
-unzip
-zip
-xz
+# ntp
+# unrar
+# unzip
+# zip
+# xz
+ouch
 
 
 ### Desktop
@@ -149,7 +149,6 @@ meld
 rsync
 tldr
 sed
-ouch
 jq
 yq
 curlie
@@ -184,12 +183,12 @@ zathura
 libreoffice-still
 boost-libs
 ## file manager
-pcmanfm
+pcmanfm-gtk
 gvfs
-gvfs-afc
-gvfs-gphoto2
+# gvfs-afc
+# gvfs-gphoto2
 gvfs-mtp
 gvfs-nfs
-gvfs-smb
+# gvfs-smb
 xdg-user-dirs-gtk
 xarchiver
