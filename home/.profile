@@ -57,6 +57,11 @@ export RXVT_SOCKET="$XDG_RUNTIME_DIR/urxvtd"
 alias wget="wget --hst-file='$XDG_DATA_HOME/wget-hst'"
 alias xbindkeys="xbindkeys -f '$XDG_CONFIG_HOME/xbindkeys/config'"
 export _Z_DATA="$XDG_DATA_HOME/z"
+export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
+export W3M_DIR="$XDG_STATE_HOME/w3m"
+export SCREENRC="$XDG_CONFIG_HOME/screen/screenrc"
+export SCREENDIR="$XDG_RUNTIME_DIR/screen"
+export SINGULARITY_CACHEDIR="$XDG_CACHE_HOME/singularity"
 
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx

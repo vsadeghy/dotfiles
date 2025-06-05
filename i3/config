@@ -10,6 +10,7 @@ set $files pcmanfm
 
 set $monitor1 DP-1
 set $monitor2 HDMI-1
+exec --no-startup-id xrandr --output DP-1 --primary --mode 1920x1080 --pos 1285x0 --output HDMI-1 --mode 1280x1024 --pos 0x0
 
 font pango: JetBrainsMono Nerd Font 10
 workspace_auto_back_and_forth yes
@@ -33,26 +34,27 @@ for_window [urgent=latest] focus
 
 ## autostart
 exec --no-startup-id xss-lock -l ~/.config/i3/scripts/blur-lock
-exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id dex -ae i3
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # set powersavings for display:
 exec --no-startup-id xset s 480 dpms 600 600 600
-exec --no-startup-id xfce4-clipman
-exec --no-startup-id nitrogen --restore
-exec --no-startup-id nekoray
-exec --no-startup-id pcmanfm -d
+# exec --no-startup-id xfce4-clipman
+# exec --no-startup-id nitrogen --restore
+# exec --no-startup-id variety
+# exec --no-startup-id nekoray
+# exec --no-startup-id pcmanfm -d
 
 ## workspaces
 set $ws1 "1: "
-set $ws2 "2: "
-set $ws3 "3: "
+set $ws2 "2: "
+set $ws3 "3: "
 set $ws4 "4: "
 set $ws5 "5: "
 set $ws6 "6: "
 set $ws7 "7 "
 set $ws8 "8 "
 set $ws9 "9 "
-set $ws0 "0: "
+set $ws0 "0: "
 
 ## set workspaces to monitors
 workspace $ws1 output $monitor1
@@ -67,11 +69,11 @@ workspace $ws9 output $monitor1
 workspace $ws0 output $monitor1
 
 ## bind programs to workspaces
-assign [class="mpv"] $ws2
+assign [class="mpv"] $ws3
 assign [class="zen"] $ws4
-assign [title="Obsidian"] $ws3
+assign [title="Obsidian"] $ws0
 assign [title="Ferdium"] $ws5
-assign [class="Pcmanfm"] $ws0
+assign [class="Pcmanfm"] $ws2
 
 ## auto focus window
 for_window [class="mpv"] focus
@@ -88,8 +90,8 @@ for_window [class="Blueberry.py"] floating enable
 
 ## keybindings
 # launch programs
-bindsym $meh+e exec --no-startup-id $files
-bindsym $meh+b exec --no-startup-id $browser
+# bindsym $meh+e exec --no-startup-id $files
+bindsym $meh+e exec --no-startup-id $browser
 bindsym $meh+o exec --no-startup-id obsidian
 bindsym $meh+f exec --no-startup-id ferdium
 bindsym $meh+y exec --no-startup-id floorp

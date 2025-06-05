@@ -7,35 +7,46 @@
 )
 
 ;; keys to be used in the layers
-;; (defsrc
-;;   1 2 3 4 5   7 8 9  0 -
-;;   q w e r t   u i o  p [
-;;   a s d f g   j k l ︔ '
-;;         c v   m ⸴
-;; )
 (defsrc
-  q w e r t   y u i o  p
-  a s d f g   h j k l ︔
-  z x c v b   n m ⸴ .  ⁄
-        3 4   7 8
+  1 2 3 4 5   7 8 9  0 -
+  q w e r t   u i o  p [
+  a s d f g   j k l ︔ '
+        c v   m ⸴
 )
 (defchordsv2
-  (t! crd (j k) ')
-  (t! crd (x c) C-c)
-  (t! crd (c v) C-v)
-  (t! crd (x v) C-x)
-  (t! crd (x c v) C-z)
-  (t! crd (w e) ⎋)
-  (t! crd (i o) ⌫)
-  (t! crd (, .) ⌦)
-  (t! crd (s d) ⏎)
-  (t! crd (d f) ⭾)
-  (t! crd (k l) ⏎)
-  (t! crd (u i) =)
+  (t! crd (i o) ')
+  (t! crd (s d) C-c)
+  (t! crd (d f) C-v)
+  (t! crd (s f) C-x)
+  (t! crd (s d f) C-z)
+  (t! crd (2 3) ⎋)
+  (t! crd (9 0) ⌫)
+  (t! crd (l ︔) ⌦)
+  (t! crd (w e) ⏎)
+  (t! crd (e r) ⭾)
+  (t! crd (o p) ⏎)
+  (t! crd (8 9) =)
 )
-(deftemplate crd (chord action)
-  $chord $action $ct first-release ()
-)
+;; (defsrc
+;;   q w e r t   y u i o  p
+;;   a s d f g   h j k l ︔
+;;   z x c v b   n m ⸴ .  ⁄
+;;         3 4   7 8
+;; )
+;; (defchordsv2
+;;   (t! crd (j k) ')
+;;   (t! crd (x c) C-c)
+;;   (t! crd (c v) C-v)
+;;   (t! crd (x v) C-x)
+;;   (t! crd (x c v) C-z)
+;;   (t! crd (w e) ⎋)
+;;   (t! crd (i o) ⌫)
+;;   (t! crd (, .) ⌦)
+;;   (t! crd (s d) ⏎)
+;;   (t! crd (d f) ⭾)
+;;   (t! crd (k l) ⏎)
+;;   (t! crd (u i) =)
+;; )
 
 (defvar
   tap-timeout 200
@@ -84,10 +95,14 @@
    z     x     c     v     b     n     m     ⸴     .     /
                    @🔢    @␣🔣  @↑↓   @⇧
 )
+
+(deftemplate crd (chord action)
+  $chord $action $ct first-release ()
+)
  
 (defchords layers $ct
   (🔢    ) (layer-toggle numbers)
-  (   ␣🔣) (tap⬓↑ $tt $ht ␣ (layer-toggle symbols))
+  (   ␣🔣) (tap-hold $tt $ht ␣ (layer-toggle symbols))
   (🔢 ␣🔣) @meh
   (↑↓  ) (layer-toggle navigation)
   (   ⇧) ‹⇧
@@ -102,13 +117,13 @@
   ٪  S-5
   ∧  S-6
   ＆ S-7
-  ∗  (chord syms ∗)
+  ∗  S-8
  〔  S-9
   〕 S-0
   ˜  S-ˋ
   - (chord syms -)
   _  S-min
-  ＋ S-eql
+  ＋ (chord syms ＋)
   |  S-\
   ]  ]
   [  (chord syms [)
@@ -132,8 +147,8 @@
   (  [) [
   (” [) `
   (-  ) -
-  (  ∗) S-8
-  (- ∗) (macro = S-.) ;; =>
+  (  ＋) S-eql
+  (- ＋) (macro = S-.) ;; =>
 )
 
 (defalias
@@ -172,9 +187,9 @@
   in (tap-hold $tt $htl ⎀    f12)
 )
 (deflayer numbers
-   •    @＋    -    @∗     •    @in   @4    @5    @6     •
+   •    @∗     -    @＋    •    @in   @4    @5    @6     •
    .    ‹⎇    ‹⌃    ‹❖    @٪    @pr   @1    @2    @3     0
-   •     •     ⸴     ⁄     •    @br   @7    @8    @9     •
+   •    @∧     ⸴     ⁄     •    @br   @7    @8    @9     •
                      _     ␣     =    @🖱️
 )
 

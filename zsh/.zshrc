@@ -4,22 +4,19 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
+zinit light jeffreytse/zsh-vi-mode
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 zinit snippet OMZP::command-not-found
 source /usr/share/doc/pkgfile/command-not-found.zsh
+
 # starship
 zinit ice as"command" from"gh-r"\
   atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
   atpull"%atclone" src"init.zsh"
 zinit light starship/starship
-# zoxide
-zinit ice wait"2" as"command" from"gh-r" lucid \
-  atclone"./zoxide init zsh > init.zsh" \
-  atpull"%atclone" src"init.zsh" nocompile"!"
-zinit light ajeetdsouza/zoxide
 
 source $ZDOTDIR/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 [ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
@@ -46,33 +43,23 @@ zstyle ":completion:*" menu no
 zstyle ':completion:*:git-checkout:*' sort false
 zstyle ":fzf-tab:complete:cd:*" fzf-preview 'exa -1 --color=always --group-directories-first --icons $realpath'
 zstyle ":fzf-tab:complete:nvim:*" fzf-preview 'exa -1 --color=always --group-directories-first --icons $realpath'
-# bindkey "^r" history-incremental-search-backward
-
-autoload -z edit-command-line
-zle -N edit-command-line
-bindkey "^e" edit-command-line
-bindkey -s "^f" " yazi\n"
 
 alias bathelp="bat -plain --language help"
 alias -g -- -h="-h 2>&1 | bathelp"
 alias -g -- --help="--help 2>&1 | bathelp"
 
-alias yi="yay -S"
-alias yf="yay -Ss"
-alias pi="sudo pacman -S"
-alias pf="pacman -Ss"
-alias pr="sudo pacman -R"
 alias pu="sudo pacman -Sy"
 alias pU="sudo pacman -Syyu"
-alias pI="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
-alias yI="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
-alias pR="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
-alias yR="yay -Qq | fzf --multi --preview 'yay -Qi {1}' | xargs -ro sudo pacman -Rns"
-
-alias t="tmux a || tmux"
+alias pi="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
+alias yi="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
+alias pr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 alias c="z"
 alias v="nvim"
+alias cp="cp -r"
+alias rm="rm -r"
+alias mkdir="mkdir -p"
 alias whichport="lsof -i"
+alias ser="sudo systemctl"
 alias ls="exa --group-directories-first"
 alias la="ls -a"
 alias l="la -lh --icons --git"
@@ -81,8 +68,19 @@ alias -g ...="../.."
 alias -g ....="../../.."
 alias -g .....="../../../.."
 alias -g ......="../../../../.."
-[ -d $ZINIT_HOME ] && source ~/.local/bin/*
+[ -d ~/.local/scripts ] && source ~/.local/scripts/*
 
 pfetch
+eval "$(zoxide init zsh)"
 
-eval "$(fzf --zsh)"
+function zvm_after_init() {
+  autoload -z edit-command-line
+  zle -N edit-command-line
+  bindkey "^e" edit-command-line
+
+  bindkey -s "^f" " yazi\n"
+  bindkey -s "^g" " lazygit\n"
+  bindkey -s "^o" " tmux-sessionizer\n"
+
+  eval "$(fzf --zsh)"
+}

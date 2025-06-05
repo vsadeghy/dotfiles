@@ -1,4 +1,4 @@
-My dotfiles managed with [stow](https://www.gnu.org/software/stow/) and a setup with [Infrastructure as Code](https://en.wikipedia.org/wiki/Infrastructure_as_code) methodology.
+My dotfiles managed with [stow](https://www.gnu.org/software/stow/).
 
 | Description          | Link                                                                                                                                                   |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
