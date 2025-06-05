@@ -6,6 +6,7 @@
 
   s = status -sb
   st = status
+  co = checkout
 	staash = stash --all
 	blaame = blame -wCCC
 	l = log --oneline --decorate

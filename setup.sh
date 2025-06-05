@@ -130,13 +130,13 @@ gui_setup() {
 stow_setup
 # install_packages
 
-ssh_setup 
- 
-nvim_setup 
+ssh_setup
+
+nvim_setup
 tmux_setup
 
-kanata_setup 
+kanata_setup
 
-gui_setup 
+gui_setup
 
 print "Setup finished"
