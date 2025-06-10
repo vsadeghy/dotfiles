@@ -1,22 +1,22 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "864a021"
-hash = "dd97eede8e20e59cd2604e8006e470e2"
+rev = "63f9650"
+hash = "c0b6cd7dc830b96e77e5c8a71eec7926"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "864a021"
-hash = "f3853bbdd1da2fad09d059ab5464abfd"
+rev = "63f9650"
+hash = "d5d4f3527592da5fbe77fd6f51815f80"
 
 [[plugin.deps]]
 use = "ndtoan96/ouch"
-rev = "2496cd9"
-hash = "5b9dea47776a30946cfbf83232d18fb1"
+rev = "10b4627"
+hash = "3ec6a973d506665f1570a9fe08343fd8"
 
 [[plugin.deps]]
 use = "pirafrank/what-size"
-rev = "f1c6b69"
-hash = "6e789212eb41d937bab04877ca361099"
+rev = "0a4904c"
+hash = "fca231a128488a554823374f8f6d5241"
 
 [[plugin.deps]]
 use = "Lil-Dank/lazygit"
@@ -25,13 +25,13 @@ hash = "a1fa2b3e1826c3a34804ea8c548e9f80"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "864a021"
-hash = "f0c4b41b5d19a3144958383333eff6e7"
+rev = "63f9650"
+hash = "4d82cd9e7534d976f000edf9c0f68d8f"
 
 [[plugin.deps]]
 use = "Rolv-Apneseth/bypass"
-rev = "17e8652"
-hash = "637979a5bf01d9a1c2ad64aad7d1a0e9"
+rev = "c1e5fcf"
+hash = "208e77480824f62558a5b037c8569d61"
 
 [[plugin.deps]]
 use = "ourongxing/fast-enter"
@@ -40,18 +40,18 @@ hash = "b209b5db91df69bdc6a4656cb8276cd9"
 
 [[plugin.deps]]
 use = "stelcodes/bunny"
-rev = "1062775"
-hash = "f9cc64457c9fbab166894c0c8cb5598d"
+rev = "a0b4e18"
+hash = "7acba2bb504c67dd7f2da135b88aae1b"
 
 [[plugin.deps]]
 use = "lpnh/fr"
-rev = "92edf0b"
-hash = "b0edc5e9b7f44b2d3303e74f785d0bc9"
+rev = "6d5e469"
+hash = "d8455f929580ec602b4d0bbd8e96711"
 
 [[plugin.deps]]
 use = "boydaihungst/simple-mtpfs"
-rev = "1e504be"
-hash = "f38c83bf58790013fcf6ffb8d4009421"
+rev = "e2a6f2f"
+hash = "5c2f068b10813be3ce75ce344ec48246"
 
 [[plugin.deps]]
 use = "DreamMaoMao/easyjump"
