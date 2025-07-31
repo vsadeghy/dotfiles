@@ -1,0 +1,8 @@
+[default_session]
+preview_command = "exa --oneline --all --git --group-directories-first --icons=always --color=always {}"
+startup_command = "nvim"
+
+[[session]]
+name = "neovim"
+path = "~/.config/nvim"
+# startup_command = "nvim -c ':lua Snacks.picker.smart()'"
