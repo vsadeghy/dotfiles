@@ -11,7 +11,7 @@
   1 2 3 4 5   7 8 9  0 -
   q w e r t   u i o  p [
   a s d f g   j k l ︔ '
-        c v   m ⸴
+        c v   m ␣
 )
 (defchordsv2
   (t! crd (i o) ')
@@ -27,26 +27,6 @@
   (t! crd (o p) ⏎)
   (t! crd (8 9) =)
 )
-;; (defsrc
-;;   q w e r t   y u i o  p
-;;   a s d f g   h j k l ︔
-;;   z x c v b   n m ⸴ .  ⁄
-;;         3 4   7 8
-;; )
-;; (defchordsv2
-;;   (t! crd (j k) ')
-;;   (t! crd (x c) C-c)
-;;   (t! crd (c v) C-v)
-;;   (t! crd (x v) C-x)
-;;   (t! crd (x c v) C-z)
-;;   (t! crd (w e) ⎋)
-;;   (t! crd (i o) ⌫)
-;;   (t! crd (, .) ⌦)
-;;   (t! crd (s d) ⏎)
-;;   (t! crd (d f) ⭾)
-;;   (t! crd (k l) ⏎)
-;;   (t! crd (u i) =)
-;; )
 
 (defvar
   tap-timeout 200
@@ -97,7 +77,10 @@
 )
 
 (deftemplate crd (chord action)
-  $chord $action $ct first-release ()
+  $chord $action $ct first-release (qwerty)
+)
+(deftemplate crdx (chord action except)
+  $chord $action $ct first-release except
 )
  
 (defchords layers $ct
@@ -137,10 +120,10 @@
   ꞌ  '
 )
 (deflayer symbols
-   •    @∗    @-    @＋   @⌗     •    @∧    ︔    @$     •
-  @”    @[    @〔   @❴     \     •    @❵    @〕   @]    @٪
+   •    @∗    @-    @＋    •     •    @∧    @$    @٪     •
+  @”    @[    @〔   @❴     \    @⌗    @❵    @〕   @]    ︔
    •    @＆   @|    @!    @⟨    @⟩    @˜    @＠   @_     •
-                     •     _     =    ‹⌃
+                     •     _    ‹⌃    •
 )
 (defchords syms $ct
   (”  ) S-'
@@ -151,18 +134,28 @@
   (- ＋) (macro = S-.) ;; =>
 )
 
+(platform (linux)
+  (defalias
+    fafn M-f7
+    enfn M-f8
+  )
+)
+(platform (win winiov2 wintercept)
+  (defalias
+    fafn A-S-7
+    enfn A-S-8
+  )
+)
+
 (defalias
-  ;; grp (multi (layer-switch graphite) (cmd dunstify "layout: graphite"))
-  grp nop5
-  ;; qwr (multi (layer-switch qwerty) (cmd dunstify "layout: qwerty"))
-  qwr nop5
+  grp (tap-hold $tt $htl nop5 (multi (layer-switch graphite) @enfn))
+  qwr (tap-hold $tt $htl nop5 (multi (layer-switch qwerty) @enfn))
 
   →↑↓ (layer-switch navigation)
 
-  ;; fa A-S-7
-  ;; en A-S-8
-  fa (layer-switch farsi)
-  en @🔠
+  ;; fa @fafn
+  fa (multi (layer-switch farsi) @fafn)
+  en (multi (layer-switch base)  @enfn)
 )
 
 (deflayer navigation
@@ -287,6 +280,9 @@
   (م  )  l
   (  ک) ︔
   (م ک)  ' ;; گ
+  ;; (خ  )  l
+  ;; (  ح) ︔
+  ;; (خ ح)  [ ;; گ
 )
 
 (deflayer qwerty

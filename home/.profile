@@ -7,7 +7,7 @@ export XDG_RUNTIME_DIR="/run/user/$UID"
 
 export XDG_DATA_DIRS="/usr/local/share:/usr/share"
 
-export PATH="$HOME/.local/bin:${PATH}"
+PATH="$HOME/.local/bin:${PATH}"
 export TERMINAL="kitty"
 export EDITOR="nvim"
 
@@ -23,6 +23,8 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
+export PNPM_HOME="/home/vss/.local/share/pnpm"
+PATH="$PNPM_HOME:$PATH"
 
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
@@ -47,7 +49,12 @@ export ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
 export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
 export XSERVERRC="$XDG_CONFIG_HOME/X11/xserverrc"
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+
 alias nvidia-settings="nvidia-settings --config='$XDG_CONFIG_HOME/nvidia/nvidia-settings.conf'"
+export $MESA_GLSL_CACHE_DIR="$XDG_CACHE_HOME/mesa"
+export LIBVA_DRIVER_NAME=nvidia
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+export WLR_DRM_NO_ATOMIC=1
 
 export FFMPEG_DATADIR="$XDG_CONFIG_HOME/ffmpeg"
 export HISTFILE="$XDG_STATE_HOME/history"
@@ -68,7 +75,12 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 export GLFW_IM_MODULE=ibus
 
+mkdir -p "$XDG_DATA_HOME/wineprefixes"
+export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
+
 export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
+
+export PATH
 
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" == 1 ]; then
     exec startx

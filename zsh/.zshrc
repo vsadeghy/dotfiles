@@ -4,13 +4,15 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
-zinit light jeffreytse/zsh-vi-mode
+bindkey -e
+# zinit light jeffreytse/zsh-vi-mode
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 zinit snippet OMZP::command-not-found
 source /usr/share/doc/pkgfile/command-not-found.zsh
+
 
 # starship
 zinit ice as"command" from"gh-r"\
@@ -41,18 +43,19 @@ zstyle ":completion:*" matcher-list "m:{a-z}={A-Z}"
 zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
 zstyle ":completion:*" menu no
 zstyle ':completion:*:git-checkout:*' sort false
-zstyle ":fzf-tab:complete:cd:*" fzf-preview 'exa -1 --color=always --group-directories-first --icons $realpath'
-zstyle ":fzf-tab:complete:nvim:*" fzf-preview 'exa -1 --color=always --group-directories-first --icons $realpath'
+zstyle ":fzf-tab:*" fzf-flags --preview-window 'right:40%:wrap:border-left' --bind '?:toggle-preview'
+zstyle ":fzf-tab:complete:*:*" fzf-preview '
+  if [[ -d $realpath ]]; then
+    exa -1 --color=always --group-directories-first --icons "$realpath"
+  elif [[ -f $realpath ]]; then
+    bat --color=always --style=numbers "$realpath"
+  fi
+'
 
 alias bathelp="bat -plain --language help"
 alias -g -- -h="-h 2>&1 | bathelp"
 alias -g -- --help="--help 2>&1 | bathelp"
 
-alias pu="sudo pacman -Sy"
-alias pU="sudo pacman -Syyu"
-alias pi="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
-alias yi="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
-alias pr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 alias c="z"
 alias v="nvim"
 alias cp="cp -r"
@@ -60,7 +63,7 @@ alias rm="rm -r"
 alias mkdir="mkdir -p"
 alias whichport="lsof -i"
 alias ser="sudo systemctl"
-alias ls="exa --group-directories-first"
+alias ls="eza --group-directories-first"
 alias la="ls -a"
 alias l="la -lh --icons --git"
 alias l.="l -1d .*"
@@ -68,19 +71,27 @@ alias -g ...="../.."
 alias -g ....="../../.."
 alias -g .....="../../../.."
 alias -g ......="../../../../.."
-[ -d ~/.local/scripts ] && source ~/.local/scripts/*
+
+scriptdir=~/.local/scripts
+if [ -d $scriptdir ]; then
+  for f in $scriptdir/*; do
+    source $f
+  done
+  unset f
+fi
+unset scriptdir
 
 pfetch
 eval "$(zoxide init zsh)"
 
-function zvm_after_init() {
+# function zvm_after_init() {
   autoload -z edit-command-line
   zle -N edit-command-line
   bindkey "^e" edit-command-line
 
-  bindkey -s "^f" " yazi\n"
+  bindkey -s "^n" " yazi\n"
   bindkey -s "^g" " lazygit\n"
-  bindkey -s "^o" " tmux-sessionizer\n"
+  bindkey -s "^o" " siscon\n"
 
   eval "$(fzf --zsh)"
-}
+# }
