@@ -1,6 +1,9 @@
+blacklist = ["scratch"]
+
 [default_session]
 preview_command = "exa --oneline --all --git --group-directories-first --icons=always --color=always {}"
-startup_command = "nvim"
+startup_command = "nvim -c ':lua require(\"harpoon\"):list():select(1)'"
+
 
 [[session]]
 name = "neovim"

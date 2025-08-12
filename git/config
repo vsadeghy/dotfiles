@@ -17,6 +17,7 @@
 	track = add --intent-to-add
 	diff-inline = diff --color-words
 	recover = !~/.config/git/recover.sh
+  new = !git init && gh repo create --private --source=. --remote=origin && git push -u --all
 [rerere]
 	enabled = true
 ; [column]
@@ -43,3 +44,7 @@
 	defaultBranch = main
 
 ; vim: ft=gitconfig
+[http]
+	proxy = http://127.0.0.1:2080/
+[https]
+	proxy = http://127.0.0.1:2080/

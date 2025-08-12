@@ -192,3 +192,29 @@ gvfs-nfs
 # gvfs-smb
 xdg-user-dirs-gtk
 xarchiver
+
+## Hyprland
+hyprland
+xdg-desktop-portal-hyprland
+waybar
+wofi
+kitty
+hyprpaper
+hyprcursor
+hyprutils
+hyprwayland-scanner
+hyprpicker
+xdg-desktop-portal-wlr
+grim
+slurp
+hyprland-qt-support
+hyprland-qtutils
+hyprpolkitagent
+hyprutils
+wayland-protocols
+qt5-wayland
+qt6-wayland
+egl-wayland
+wl-clipboard
+clipse
+alacritty
