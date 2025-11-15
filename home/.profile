@@ -5,11 +5,12 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_RUNTIME_DIR="/run/user/$UID"
 
-export XDG_DATA_DIRS="/usr/local/share:/usr/share"
+export XDG_DATA_DIRS="$XDG_DATA_HOME/flatpak/exports/share:/usr/local/share:/usr/share"
 
-PATH="$HOME/.local/bin:${PATH}"
+PATH="$HOME/.local/bin:$PATH"
 export TERMINAL="kitty"
 export EDITOR="nvim"
+PATH="$XDG_DATA_HOME/bob/nvim-bin:$PATH"
 
 # https://wiki.archlinux.org/title/GnuPG#gpg-agent
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
@@ -25,6 +26,9 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
 export PNPM_HOME="/home/vss/.local/share/pnpm"
 PATH="$PNPM_HOME:$PATH"
+
+export GOPATH="$XDG_DATA_HOME/go"
+export GOBIN="$HOME/.local/bin"
 
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
@@ -52,9 +56,14 @@ export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 
 alias nvidia-settings="nvidia-settings --config='$XDG_CONFIG_HOME/nvidia/nvidia-settings.conf'"
 export MESA_GLSL_CACHE_DIR="$XDG_CACHE_HOME/mesa"
+export MESA_SHADER_CACHE_DIR="$XDG_CACHE_HOME/mesa_shader_cache"
+export __GL_SHADER_DISK_CACHE=0
+export __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1
+export __GL_SHADER_DISK_CACHE_PATH="$XDG_CACHE_HOME/GLCache"
 export LIBVA_DRIVER_NAME=nvidia
 export __GLX_VENDOR_LIBRARY_NAME=nvidia
-export WLR_DRM_NO_ATOMIC=1
+# export WLR_DRM_NO_ATOMIC=1
+export GSK_RENDERER=ngl
 
 export FFMPEG_DATADIR="$XDG_CONFIG_HOME/ffmpeg"
 export HISTFILE="$XDG_STATE_HOME/history"
@@ -80,6 +89,9 @@ mkdir -p "$XDG_DATA_HOME/wineprefixes"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 
 export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
+
+export TERMINFO="$XDG_DATA_HOME/terminfo"
+export TERMINFO_DIRS="$TERMINFO:/usr/share/terminfo"
 
 export PATH
 
