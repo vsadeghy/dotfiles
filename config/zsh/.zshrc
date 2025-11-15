@@ -21,6 +21,7 @@ zinit ice as"command" from"gh-r"\
 zinit light starship/starship
 
 source $ZDOTDIR/catppuccin_macchiato-zsh-syntax-highlighting.zsh
+fpath=($ZDOTDIR/completions ${fpath})
 [ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
 zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
 autoload -Uz compinit && compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
@@ -58,6 +59,7 @@ alias -g -- --help="--help 2>&1 | bathelp"
 
 alias c="z"
 alias v="nvim"
+alias n="nvim -u ~/.config/nvim2/init.lua"
 alias cp="cp -r"
 alias rm="rm -r"
 alias mkdir="mkdir -p"
