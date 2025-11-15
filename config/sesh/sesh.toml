@@ -1,0 +1,36 @@
+[default_session]
+preview_command = "eza --oneline --all --git --group-directories-first --icons=always --color=always {}"
+startup_command = "nvim ."
+
+blacklist = ["scratch"]
+
+[[session]]
+name = "webbot"
+path = "~/personal/mbot/web"
+startup_command = """
+  tmux new-window -dc "#{pane_current_path}" -n pnpm
+  tmux send-keys -t:pnpm "pnpm dev" C-m
+  nvim -c ':lua require("harpoon"):list():select(1)'
+"""
+
+[[session]]
+name = "vspi"
+startup_command = "ssh vspi.local"
+
+[[session]]
+name = "serverbot"
+path = "~/personal/mbot/server"
+startup_command = """
+  tmux new-window -dc "#{pane_current_path}" -n pnpm
+  tmux send-keys -t:pnpm "pnpm dev" C-m
+  nvim -c ':lua require("harpoon"):list():select(1)'
+"""
+
+[[session]]
+name = "webbot"
+path = "~/personal/mbot/web"
+startup_command = """
+  tmux new-window -dc "#{pane_current_path}" -n pnpm
+  tmux send-keys -t:pnpm "pnpm dev" C-m
+  nvim -c ':lua require("harpoon"):list():select(1)'
+"""

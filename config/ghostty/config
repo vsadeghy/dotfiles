@@ -3,6 +3,7 @@ font-size = 14
 window-decoration = server
 shell-integration-features = true
 confirm-close-surface = false
+keybind = ctrl+shift+p=unbind
 
 palette = 0=#494d64
 palette = 1=#ed8796

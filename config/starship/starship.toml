@@ -25,6 +25,10 @@ fish_style_pwd_dir_length = 3
 truncation_symbol = '…/'
 truncation_length = 1
 
+[hostname]
+format = "[$ssh_symbol$hostname]($style) "
+ssh_symbol = '🔑 '
+
 [direnv]
 disabled = false
 

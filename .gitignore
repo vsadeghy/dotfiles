@@ -1,5 +1,5 @@
-tmux/plugins/
-mpv/watch_later/
-mpv/mpvHistory.log
-mpv/history.log
-zsh/.zcompdump
+config/tmux/plugins/
+config/mpv/watch_later/
+config/mpv/mpvHistory.log
+config/mpv/history.log
+config/zsh/.zcompdump

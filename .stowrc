@@ -1,8 +1,0 @@
---target=~/.config
---ignore=packages.*
---ignore=setup.sh
---ignore=.stowrc
---ignore=zen
---ignore=home
---ignore=nvim
---ignore=themes
