@@ -43,8 +43,10 @@ setopt auto_cd
 zstyle ":completion:*" matcher-list "m:{a-z}={A-Z}"
 zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
 zstyle ":completion:*" menu no
-zstyle ':completion:*:git-checkout:*' sort false
+zstyle ":completion:*:git-checkout:*" sort false
 zstyle ":fzf-tab:*" fzf-flags --preview-window 'right:40%:wrap:border-left' --bind '?:toggle-preview'
+zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
+zstyle ":fzf-tab:complete:pacman:argument-rest" fzf-preview 'pacman -Si $desc'
 zstyle ":fzf-tab:complete:*:*" fzf-preview '
   if [[ -d $realpath ]]; then
     exa -1 --color=always --group-directories-first --icons "$realpath"
