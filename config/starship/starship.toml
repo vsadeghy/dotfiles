@@ -3,22 +3,14 @@
 
 add_newline = false
 palette = "catppuccin_macchiato"
-# format = """$directory$line_break $character"""
-format = """$directory$character"""
+format = """$hostname$directory$character"""
 right_format = """$all"""
 command_timeout = 1000
-
-# Starship modules
-[character]
-
-success_symbol = '[❯](bold green)'
-error_symbol = '[❯](bold red)'
-vimcmd_symbol = "[❮](subtext1)"
 
 [git_branch]
 format = '[$symbol$branch(:$remote_branch)]($style) '
 style = "bold mauve"
-# ignore_branches = ['master', 'main']
+ignore_branches = ['master', 'main']
 
 [directory]
 fish_style_pwd_dir_length = 3
@@ -27,12 +19,17 @@ truncation_length = 1
 
 [hostname]
 format = "[$ssh_symbol$hostname]($style) "
-ssh_symbol = '🔑 '
 
 [direnv]
 disabled = false
 
 [lua]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[package]
 disabled = true
 
 [palettes.catppuccin_macchiato]
@@ -62,15 +59,6 @@ surface0 = "#363a4f"
 base = "#24273a"
 mantle = "#1e2030"
 crust = "#181926"
-
-[kubernetes]
-symbol = '☸ '
-disabled = true
-detect_files = ['Dockerfile']
-format = '[$symbol$context( \($namespace\))]($style) '
-contexts = [
-  { context_pattern = "arn:aws:eks:us-west-2:577926974532:cluster/zd-pvc-omer", style = "green", context_alias = "omerxx", symbol = " " },
-]
 
 [docker_context]
 disabled = true
