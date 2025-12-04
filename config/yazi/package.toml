@@ -19,29 +19,14 @@ rev = "0a4904c"
 hash = "fca231a128488a554823374f8f6d5241"
 
 [[plugin.deps]]
-use = "Lil-Dank/lazygit"
-rev = "7a08a09"
-hash = "a1fa2b3e1826c3a34804ea8c548e9f80"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
 rev = "63f9650"
 hash = "4d82cd9e7534d976f000edf9c0f68d8f"
 
 [[plugin.deps]]
-use = "Rolv-Apneseth/bypass"
-rev = "c1e5fcf"
-hash = "208e77480824f62558a5b037c8569d61"
-
-[[plugin.deps]]
 use = "ourongxing/fast-enter"
 rev = "738356f"
 hash = "b209b5db91df69bdc6a4656cb8276cd9"
-
-[[plugin.deps]]
-use = "stelcodes/bunny"
-rev = "a0b4e18"
-hash = "7acba2bb504c67dd7f2da135b88aae1b"
 
 [[plugin.deps]]
 use = "lpnh/fr"
@@ -52,11 +37,6 @@ hash = "d8455f929580ec602b4d0bbd8e96711"
 use = "boydaihungst/simple-mtpfs"
 rev = "e2a6f2f"
 hash = "5c2f068b10813be3ce75ce344ec48246"
-
-[[plugin.deps]]
-use = "DreamMaoMao/easyjump"
-rev = "6606fb1"
-hash = "9209d17be3c792eda9ad60b447c4db1e"
 
 [flavor]
 deps = []
