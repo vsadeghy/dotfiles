@@ -12,10 +12,7 @@ export TERMINAL="kitty"
 export EDITOR="nvim"
 PATH="$XDG_DATA_HOME/bob/nvim-bin:$PATH"
 
-# https://wiki.archlinux.org/title/GnuPG#gpg-agent
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
-alias gpg="gpg --homedir '$XDG_DATA_HOME/gnupg'"
-alias gpg2='gpg2 --homedir "$XDG_DATA_HOME/gnupg"'
 
 export GTK_RC_FILES="$XDG_CONFIG_HOME/gtk-1.0/gtkrc"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
@@ -54,7 +51,6 @@ export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
 export XSERVERRC="$XDG_CONFIG_HOME/X11/xserverrc"
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 
-alias nvidia-settings="nvidia-settings --config='$XDG_CONFIG_HOME/nvidia/nvidia-settings.conf'"
 export MESA_GLSL_CACHE_DIR="$XDG_CACHE_HOME/mesa"
 export MESA_SHADER_CACHE_DIR="$XDG_CACHE_HOME/mesa_shader_cache"
 export __GL_SHADER_DISK_CACHE=0
@@ -70,8 +66,6 @@ export HISTFILE="$XDG_STATE_HOME/history"
 export HISTSIZE=5000
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export RXVT_SOCKET="$XDG_RUNTIME_DIR/urxvtd"
-alias wget="wget --hst-file='$XDG_DATA_HOME/wget-hst'"
-alias xbindkeys="xbindkeys -f '$XDG_CONFIG_HOME/xbindkeys/config'"
 export _Z_DATA="$XDG_DATA_HOME/z"
 export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 export W3M_DIR="$XDG_STATE_HOME/w3m"
@@ -85,6 +79,7 @@ export XMODIFIERS=@im=fcitx
 export GLFW_IM_MODULE=ibus
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 
+export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 mkdir -p "$XDG_DATA_HOME/wineprefixes"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 

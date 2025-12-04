@@ -53,35 +53,9 @@ zstyle ":fzf-tab:complete:*:*" fzf-preview '
   fi
 '
 
-alias bathelp="bat -plain --language help"
-alias -g -- -h="-h 2>&1 | bathelp"
-alias -g -- --help="--help 2>&1 | bathelp"
-
-alias c="z"
-alias v="nvim"
-alias n="nvim -u ~/.config/nvim2/init.lua"
-alias cp="cp -r"
-alias rm="rm -r"
-alias mkdir="mkdir -p"
-alias whichport="lsof -i"
-alias ser="sudo systemctl"
-alias ls="eza --group-directories-first"
-alias la="ls -a"
-alias l="la -lh --icons --git"
-alias l.="l -1d .*"
-alias -g ...="../.."
-alias -g ....="../../.."
-alias -g .....="../../../.."
-alias -g ......="../../../../.."
-
-scriptdir=~/.local/scripts
-if [ -d $scriptdir ]; then
-  for f in $scriptdir/*; do
-    source $f
-  done
-  unset f
-fi
-unset scriptdir
+for f in ~/.config/shell/*; do
+  source $f
+done
 
 pfetch
 eval "$(zoxide init zsh)"

@@ -4,9 +4,9 @@
 [alias]
 	aliases = !git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\=\\/
 
-  s = status -sb
-  st = status
-  co = checkout
+	s = status -sb
+	st = status
+	co = checkout
 	staash = stash --all
 	blaame = blame -wCCC
 	l = log --oneline --decorate
@@ -14,10 +14,11 @@
 	lg = log --pretty=format:'%Cred%h%Creset %C(bold blue)%an%Creset  %Cgreen(%cr) -%C(yellow)%d%Creset %s' --abbrev-commit --date=relative
 	rs = restore
 	rss = restore --staged
+	rms = rm --staged
 	track = add --intent-to-add
 	diff-inline = diff --color-words
 	recover = !~/.config/git/recover.sh
-  new = !git init && gh repo create --private --source=. --remote=origin && git push -u --all
+	new = !git init && gh repo create --private --source=. --remote=origin && git push -u --all
 [rerere]
 	enabled = true
 ; [column]
@@ -31,6 +32,8 @@
 	repo = ~/projects/bot/server
 	repo = ~/projects/bot/web
 	repo = ~/.dotfiles
+[push]
+	autoSetupRemote = true
 [fetch]
 	writeCommitGraph = true
 [rebase]
@@ -44,7 +47,7 @@
 	defaultBranch = main
 
 ; vim: ft=gitconfig
-[http]
-	proxy = http://127.0.0.1:2080/
-[https]
-	proxy = http://127.0.0.1:2080/
+; [http]
+; 	proxy = http://127.0.0.1:2080/
+; [https]
+; 	proxy = http://127.0.0.1:2080/
