@@ -47,6 +47,7 @@ zstyle ":completion:*:git-checkout:*" sort false
 zstyle ":fzf-tab:*" fzf-flags --preview-window 'right:40%:wrap:border-left' --bind '?:toggle-preview'
 zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
 zstyle ":fzf-tab:complete:pacman:argument-rest" fzf-preview 'pacman -Si $desc'
+zstyle ":fzf-tab:complete:yay:argument-rest" fzf-preview 'yay -Si $desc'
 zstyle ":fzf-tab:complete:*:*" fzf-preview '
   if [[ -d $realpath ]]; then
     exa -1 --color=always --group-directories-first --icons "$realpath"

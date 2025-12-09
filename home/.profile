@@ -94,4 +94,3 @@ export PATH
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" == 1 ]; then
     exec startx
 fi
-[ -x /usr/bin/zsh ] && exec zsh
