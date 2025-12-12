@@ -6,14 +6,20 @@
   "position": "top", // Waybar position (top|bottom|left|right)
   "height": 36, // Waybar height (to be removed for auto height)
   "spacing": 4, // Gaps between modules (4px)
-  "modules-left": ["hyprland/workspaces", "group/hardware", "tray"],
+  "modules-left": [
+    // "hyprland/workspaces",
+    "niri/workspaces",
+    // "ext/workspaces",
+    "group/hardware",
+    "tray"
+  ],
   "modules-center": [
     "clock#time",
-    "custom/separator",
-    "clock#week",
+    // "custom/separator",
+    // "clock#week",
     "custom/separator_dot",
-    "clock#month",
-    "custom/separator",
+    // "clock#month",
+    // "custom/separator",
     "clock#calendar"
   ],
   "modules-right": [
@@ -111,7 +117,7 @@
   },
 
   "clock#calendar": {
-    "format": "{:%d-%m-%Y}",
+    "format": "{:%d-%m}",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
     "actions": {
       "on-click-right": "mode"
@@ -174,7 +180,7 @@
     "on-click-middle": "playerctl prev",
     "on-scroll-up": "playerctl volume 0.05-",
     "on-scroll-down": "playerctl volume 0.05+",
-    "smooth-scrolling-threshold": "0.1"
+    "smooth-scrolling-threshold": "0.5"
   },
 
   "pulseaudio": {
@@ -248,6 +254,7 @@
     "orientation": "horizontal",
     "modules": [
       "custom/media",
+	  "custom/separator",
       "pulseaudio"
       // "custom/dunst"
       // "custom/airplane_mode",

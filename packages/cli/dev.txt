@@ -1,0 +1,39 @@
+# Language Servers
+lua-language-server
+typescript-language-server
+tailwindcss-language-server
+bash-language-server
+pyright
+marksman
+
+# Package Managers
+pnpm
+python-pip
+python-pipenv
+python-pipx
+
+# Programming Languages
+typescript
+rust
+
+# Formatters
+prettier
+biome
+shfmt
+stylua
+
+# Linters
+eslint
+eslint_d
+ruff
+selene
+
+# Development Tools
+bob
+tree-sitter-cli
+typst
+taplo-cli
+
+# Language Servers & Tools (AUR)
+vscode-langservers-extracted
+prettierd

@@ -1,0 +1,52 @@
+# Desktop Manager
+ly
+
+# Fonts
+ttf-jetbrains-mono-nerd
+freetype2
+noto-fonts
+noto-fonts-emoji
+noto-fonts-cjk
+noto-fonts-extra
+ttf-dejavu
+ttf-liberation
+awesome-terminal-fonts
+borna-fonts
+
+# Audio & Bluetooth
+alsa-firmware
+alsa-plugins
+alsa-utils
+pavucontrol
+pipewire-pulse
+wireplumber
+pipewire-alsa
+pipewire-jack
+rtkit
+bluez
+bluez-utils
+bluez-deprecated-tools
+blueberry
+
+# Network
+network-manager-applet
+
+# Media Tools
+playerctl
+ffmpegthumbnailer
+
+# System Integration
+polkit-gnome
+xdg-utils
+xdg-user-dirs
+libayatana-appindicator
+udiskie
+
+# Theming & Appearance
+qt5ct
+python-pyqt6
+gtk3
+gtk4
+qt5-base
+qt6-base
+webkit2gtk-4.1

@@ -90,7 +90,7 @@ export TERMINFO="$XDG_DATA_HOME/terminfo"
 export TERMINFO_DIRS="$TERMINFO:/usr/share/terminfo"
 
 export PATH
-
-if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" == 1 ]; then
-    exec startx
-fi
+#
+# if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" == 1 ]; then
+#     exec startx
+# fi

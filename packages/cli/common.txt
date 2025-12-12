@@ -1,0 +1,101 @@
+# Core CLI Tools
+git
+vi
+vim
+zsh
+stow
+findutils
+sed
+
+# Terminal & Shell
+tmux
+starship
+eza
+bat
+htop
+lazygit
+duf
+tldr
+jq
+yq
+curlie
+
+# Search & Navigation
+ripgrep
+ripgrep-all
+fzf
+zoxide
+
+# File Management
+yazi
+imagemagick
+perl-image-exiftool
+rsync
+meld
+
+# Development Tools
+nvim
+
+# System Information
+pfetch-rs-bin
+glances
+fastfetch
+
+# Downloaders & Transfer
+aria2
+wget
+xh
+
+# Calculators & Converters
+bc
+
+# System Monitors
+btop
+
+# Code Analysis
+cloc
+
+# Disk & File Tools
+dysk
+gdu
+
+# Network Tools
+inetutils
+inotify-tools
+
+# Process Tools
+lsof
+
+# Documentation
+man-db
+man-pages
+
+# Search & Indexing
+plocate
+
+# Data Processing
+fx
+jless
+
+# Fun Utilities
+sl
+
+# Tree Viewers
+tree
+
+# Hardware Tools
+usbutils
+
+# Translation
+translate-shell
+
+# Package Managers
+yay
+yay-debug
+
+# Spellcheck
+aspell
+aspell-en
+
+# Firewall
+firewalld

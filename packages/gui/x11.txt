@@ -1,0 +1,31 @@
+# X11 Server
+xorg-server
+xorg-xinit
+xorg-xrandr
+xorg-xkill
+xorg-xinput
+
+# Input Drivers
+xf86-input-libinput
+
+# X11 Utilities
+xsel
+xss-lock
+dex
+
+# Launchers
+rofi
+dmenu
+
+# Screenshots
+scrot
+xbacklight
+
+# Compositor
+picom
+
+# System Integration
+libayatana-appindicator
+
+# Notifications
+dunst

@@ -11,7 +11,8 @@
   1 2 3 4 5   7 8 9  0 -
   q w e r t   u i o  p [
   a s d f g   j k l ︔ '
-        c v   m ␣
+        b   ␣ v  n
+;;      ␣🔣 ⇧ 🔢 ↑↓
 )
 (defchordsv2
   (t! crd (i o) ')
@@ -40,7 +41,7 @@
   htp $hold-timeout-pinky
   htl $hold-timeout-long
   ct  $chord-timeout
-)
+  )
 
 ;; home (top) row mods
 (defalias
@@ -73,7 +74,7 @@
    q     w    @e     r     t     y     u    @i     o     p
    a    @s     d    @f     g     h    @j     k    @l    ︔
    z     x     c     v     b     n     m     ⸴     .     /
-                   @🔢    @␣🔣  @↑↓   @⇧
+                    @␣🔣  @⇧    @🔢   @↑↓
 )
 
 (deftemplate crd (chord action)
@@ -84,12 +85,13 @@
 )
  
 (defchords layers $ct
-  (🔢    ) (layer-toggle numbers)
-  (   ␣🔣) (tap-hold $tt $ht ␣ (layer-toggle symbols))
-  (🔢 ␣🔣) @meh
-  (↑↓  ) (layer-toggle navigation)
-  (   ⇧) ‹⇧
-  (␣🔣 ↑↓) (tap-hold $tt $htl @⮸ ⇪)
+  (␣🔣) (tap-hold $tt $ht ␣ (layer-toggle symbols))
+  (⇧) ‹⇧
+  ;; (⇧) (tap-hold $tt $htl (one-shot 2000 ‹⇧) ‹⇧)
+  (🔢) (layer-toggle numbers)
+  (↑↓) (layer-toggle navigation)
+  (␣🔣 ⇧) @meh
+  (↑↓  ⇧) (tap-hold $tt $htl @⮸ ⇪)
 )
 
 (defalias
@@ -227,10 +229,10 @@
   ug  (tap-hold $tt $ht u ⎇›)
 )
 (deflayer graphite
-   b    @lg   @dg   @wg    q     j    @fg   @og   @ug    ;
+   b    @lg   @dg   @wg    z     ;    @fg   @og   @ug    j
    n     r     t     s     g     y     h     a     e     i
-   z     x     m     c     v     k     p     ⸴     .     /
-                   @🔢    @␣🔣  @↑↓   @⇧
+   x     m     c     v     q     k     p     .     ,     /
+                   @🔢     ␣    @↑↓   @⇧
 )
 
 (defalias
@@ -291,3 +293,5 @@
    _     _     _     _     _     _     _     _     _    @̲
                      _     _     _     _
 )
+
+;; vim: set ft=lisp:

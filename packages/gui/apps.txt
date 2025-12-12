@@ -1,0 +1,98 @@
+# Browsers
+zen-browser-bin
+floorp-bin
+helium-browser-bin
+
+# Terminals
+ghostty
+kitty
+alacritty
+foot
+wezterm
+xterm
+
+# File Managers
+pcmanfm-gtk
+gvfs
+gvfs-mtp
+gvfs-nfs
+xdg-user-dirs-gtk
+
+# Archive Managers
+xarchiver
+engrampa
+file-roller
+
+# Office & Productivity
+libreoffice-still
+boost-libs
+obsidian
+
+# Media
+mpv
+zathura
+
+# Torrent
+qbittorrent
+
+# Calculator
+galculator
+
+# Image Viewer
+feh
+
+# Wallpaper & Appearance
+nitrogen
+variety
+waypaper
+lxappearance
+nwg-look
+
+# Password Manager
+bitwarden
+
+# Bluetooth
+blueman
+
+# API Tools
+bruno-bin
+
+# Clipboard
+clipboard-bin
+
+# Drag & Drop
+dragon-drop
+
+# Messaging
+ferdium-bin
+vesktop-bin
+
+# Screenshots
+flameshot
+arandr
+
+# Launchers
+fuzzel
+
+# Container Tools
+lazydocker
+lazysql
+podman
+podman-compose
+podman-desktop
+
+# File Sharing
+localsend-bin
+
+# Audio Control
+pwvucontrol
+
+# Session Management
+sesh-bin
+
+# Documentation
+wiki-tui
+wikiman
+
+# VPN/Proxy
+nekoray-bin

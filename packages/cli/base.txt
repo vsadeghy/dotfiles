@@ -1,0 +1,50 @@
+# Linux & Kernel
+linux-lts
+linux-lts-headers
+base-devel
+
+# Hardware & CPU
+dmidecode
+dmraid
+hdparm
+hwdetect
+mtools
+sof-firmware
+amd-ucode
+acpi
+
+# GPU Drivers
+xf86-video-ati
+xf86-video-amdgpu
+
+# Network
+networkmanager
+
+# Package Management
+pacman-contrib
+reflector
+rebuild-detector
+pkgfile
+
+# Filesystem Tools
+efitools
+nfs-utils
+nilfs-utils
+ouch
+fuse3
+nss-mdns
+ntfs-3g
+
+# System Tools
+sysstat
+hwinfo
+inxi
+arch-install-scripts
+arch-wiki-docs
+
+# Security & Access
+opendoas
+openssh
+
+# Audio
+pipewire

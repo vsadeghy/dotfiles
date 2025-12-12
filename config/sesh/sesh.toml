@@ -5,12 +5,12 @@ startup_command = "nvim ."
 blacklist = ["scratch"]
 
 [[session]]
-name = "webbot"
-path = "~/personal/mbot/web"
+name = "hushline"
+path = "~/projects/hushline/server"
 startup_command = """
   tmux new-window -dc "#{pane_current_path}" -n pnpm
-  tmux send-keys -t:pnpm "pnpm dev" C-m
-  nvim -c ':lua require("harpoon"):list():select(1)'
+  tmux send-keys -t:pnpm "pnpm start:dev" C-m
+  nvim
 """
 
 [[session]]
