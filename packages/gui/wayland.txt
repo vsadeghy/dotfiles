@@ -4,18 +4,20 @@ qt5-wayland
 qt6-wayland
 egl-wayland
 wl-clipboard
-clipse
-
-# Desktop Portal
-xdg-desktop-portal-wlr
-xdg-desktop-portal-hyprland
+lxqt-policykit
+clipse-bin
 
 # Status Bar & Launcher
 waybar
 fuzzel
+
+# Wallpaper & Appearance
+waypaper
+nwg-look
 
 # XWayland
 xwayland-satellite
 
 # Notifications
 mako
+

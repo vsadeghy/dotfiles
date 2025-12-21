@@ -2,6 +2,7 @@
 linux-lts
 linux-lts-headers
 base-devel
+efibootmgr
 
 # Hardware & CPU
 dmidecode
@@ -14,8 +15,10 @@ amd-ucode
 acpi
 
 # GPU Drivers
-xf86-video-ati
-xf86-video-amdgpu
+linux-firmware
+mesa
+libglvnd
+vulkan-icd-loader
 
 # Network
 networkmanager
@@ -45,6 +48,3 @@ arch-wiki-docs
 # Security & Access
 opendoas
 openssh
-
-# Audio
-pipewire

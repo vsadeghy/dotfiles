@@ -20,6 +20,10 @@ jq
 yq
 curlie
 
+# man pages
+man-db
+man-pages
+
 # Search & Navigation
 ripgrep
 ripgrep-all

@@ -14,12 +14,11 @@ awesome-terminal-fonts
 borna-fonts
 
 # Audio & Bluetooth
-alsa-firmware
-alsa-plugins
 alsa-utils
-pavucontrol
-pipewire-pulse
+pwvucontrol
 wireplumber
+pipewire
+pipewire-pulse
 pipewire-alsa
 pipewire-jack
 rtkit
@@ -36,7 +35,6 @@ playerctl
 ffmpegthumbnailer
 
 # System Integration
-polkit-gnome
 xdg-utils
 xdg-user-dirs
 libayatana-appindicator

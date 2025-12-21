@@ -29,3 +29,7 @@ libayatana-appindicator
 
 # Notifications
 dunst
+
+# Wallpaper & Appearance
+nitrogen
+variety

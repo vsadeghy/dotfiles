@@ -42,11 +42,7 @@ galculator
 feh
 
 # Wallpaper & Appearance
-nitrogen
-variety
-waypaper
 lxappearance
-nwg-look
 
 # Password Manager
 bitwarden
