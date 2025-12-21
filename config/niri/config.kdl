@@ -1,0 +1,159 @@
+// https://yalter.github.io/niri/Configuration:-Introduction
+input {
+	keyboard {
+		repeat-rate 35
+		repeat-delay 300
+		xkb {
+			layout "us,ir"
+			options "grp:alts_toggle,caps:escape,compose:menu"
+		}
+	}
+	warp-mouse-to-focus
+	focus-follows-mouse max-scroll-amount="0%"
+	workspace-auto-back-and-forth
+}
+layout {
+	gaps 3
+	center-focused-column "on-overflow" // "never"/"always"/"on-overflow"
+	preset-column-widths {
+		proportion 0.5
+		proportion 1.0
+	}
+	focus-ring { width 1.5; }
+	struts { left 10; right 10; }
+}
+
+prefer-no-csd
+hotkey-overlay { skip-at-startup; }
+recent-windows { off; }
+screenshot-path "~/User/pictures/screenshots/screenshot %Y-%m-%d %H-%M-%S.png"
+
+spawn-at-startup	"waybar"
+spawn-at-startup "lxqt-policykit-agent"
+spawn-sh-at-startup "/usr/lib/nekoray/nekobox -tray -appdata"
+spawn-sh-at-startup "clipse --listen"
+
+window-rule { open-focused true; }
+window-rule {
+	// match app-id=r#"firefox"# title="^Picture-in-Picture$"
+	match app-id=r#"nekobox"#
+	match app-id=r#"blueman"#
+	match app-id=r#"lxqt-policykit-agent"#
+	match title=r#"clipse"#
+	open-floating true
+}
+
+output "DP-2" {
+	mode "1920x1080@144.00"
+	transform "normal" // normal, flipped{-90,-180,-270}
+	position x=1280 y=0
+	focus-at-startup
+	hot-corners { off; }
+}
+output "HDMI-A-1" {
+	mode "1280x1024@75.00"
+	position x=0 y=0
+	hot-corners { off; }
+}
+
+workspace "" { open-on-output "DP-2"; }
+workspace "" { open-on-output "DP-2"; }
+workspace "" { open-on-output "DP-2"; }
+window-rule   { match app-id=r#"(mpv|.*.exe)"#; open-on-workspace ""; open-maximized true; }
+
+workspace "" { open-on-output "HDMI-A-1"; }
+workspace "" { open-on-output "HDMI-A-1"; }
+workspace "󰧑" { open-on-output "HDMI-A-1"; }
+window-rule { match app-id=r#"zen"#; open-on-workspace ""; open-maximized true; }
+window-rule { match app-id=r#"(helium|floorp)"#; open-on-workspace ""; open-maximized true; }
+window-rule { match app-id=r#"Ferdium"#; open-on-workspace "󰧑"; open-maximized true; }
+
+binds {
+	Mod+Return { spawn "foot"; }
+	Mod+D { spawn "fuzzel"; }
+	Mod+Alt+L { spawn "swaylock"; }
+	Mod+Q repeat=false { close-window; }
+	Mod+Shift+x { quit skip-confirmation=true; }
+	Mod+Shift+P { power-off-monitors; }
+	Mod+S repeat=false { toggle-overview; }
+	Mod+V { spawn-sh "foot --title=clipse -e clipse"; }
+
+	Mod+Up    { focus-window-or-workspace-up; }
+	Mod+Down  { focus-window-or-workspace-down; }
+	Mod+Left  { focus-column-left; }
+	Mod+Right { focus-column-right; }
+
+	Mod+Ctrl+Up    { move-window-up-or-to-workspace-up; }
+	Mod+Ctrl+Down  { move-window-down-or-to-workspace-down; }
+	Mod+Ctrl+Left  { consume-or-expel-window-left; }
+	Mod+Ctrl+Right { consume-or-expel-window-right; }
+
+	Mod+Shift+Up    { focus-monitor-up; }
+	Mod+Shift+Down  { focus-monitor-down; }
+	Mod+Shift+Left  { focus-monitor-left; }
+	Mod+Shift+Right { focus-monitor-right; }
+
+	Mod+Alt+Up    { move-window-to-monitor-up; }
+	Mod+Alt+Down  { move-window-to-monitor-down; }
+	Mod+Alt+Left  { move-window-to-monitor-left; }
+	Mod+Alt+Right { move-window-to-monitor-right; }
+
+	Mod+Page_Up   { move-workspace-up; }
+	Mod+Page_Down { move-workspace-down; }
+
+
+	Mod+u { focus-workspace ""; }
+	Mod+i { focus-workspace ""; }
+	Mod+o { focus-workspace "󰧑"; }
+	Mod+j { focus-workspace ""; }
+	Mod+k { focus-workspace ""; }
+	Mod+l { focus-workspace ""; }
+	Mod+1 { focus-workspace 4; }
+	Mod+2 { focus-workspace 5; }
+	Mod+3 { focus-workspace 6; }
+	Mod+Ctrl+u { move-window-to-workspace ""; }
+	Mod+Ctrl+i { move-window-to-workspace ""; }
+	Mod+Ctrl+o { move-window-to-workspace "󰧑"; }
+	Mod+Ctrl+j { move-window-to-workspace ""; }
+	Mod+Ctrl+k { move-window-to-workspace ""; }
+	Mod+Ctrl+l { move-window-to-workspace ""; }
+	Mod+Ctrl+1 { move-window-to-workspace 4; }
+	Mod+Ctrl+2 { move-window-to-workspace 5; }
+	Mod+Ctrl+3 { move-window-to-workspace 6; }
+
+	Mod+Tab { focus-workspace-previous; }
+
+	Mod+F { switch-preset-column-width; }
+	Mod+Shift+F { fullscreen-window; }
+
+	Mod+Space      { toggle-window-floating; }
+	Mod+Ctrl+Space { switch-focus-between-floating-and-tiling; }
+
+	Mod+W { toggle-column-tabbed-display; }
+
+	Print      { screenshot; }
+	Ctrl+Print { screenshot-screen; }
+	Alt+Print  { screenshot-window; }
+
+	Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+
+	XF86AudioRaiseVolume  allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
+	XF86AudioLowerVolume  allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
+	XF86AudioMute         allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+	XF86AudioMicMute      allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+	XF86AudioPlay         allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+	XF86AudioStop         allow-when-locked=true { spawn-sh "playerctl stop"; }
+	XF86AudioPrev         allow-when-locked=true { spawn-sh "playerctl previous"; }
+	XF86AudioNext         allow-when-locked=true { spawn-sh "playerctl next"; }
+	XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
+	XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+	// Mod+TouchpadScrollDown { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02+"; }
+	// Mod+TouchpadScrollUp   { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02-"; }
+}
+
+environment {
+	XDG_CURRENT_DESKTOP "niri"
+	XDG_SESSION_TYPE "wayland"
+	QT_QPA_PLATFORM "wayland"
+	DISPLAY ":0"
+}
