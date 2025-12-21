@@ -11,7 +11,7 @@ prepend_keymap = [
   { on = "F", run = "filter --smart", desc = "Filter files" },
   { on = "f", run = "plugin smart-filter", desc = "Smart filter" },
   { on = [ "g", "d" ], run = "cd ~/downloads", desc = "Go ~/downloads" },
-  { on = [ "g", "a" ], run = "cd /media/Storage/Vahid/Films/Anime", desc = "Go Anime" },
+  { on = [ "g", "a" ], run = "cd /run/media/vss/Storage/Vahid/Films/Anime", desc = "Go Anime" },
 
 
   { on = "'", run = "spot", desc = "spot" },

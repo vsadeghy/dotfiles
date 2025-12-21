@@ -84,13 +84,10 @@ export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 mkdir -p "$XDG_DATA_HOME/wineprefixes"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 
-export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
+export PAGER="bat -plman"
+export MANPAGER="bat -plman"
 
 export TERMINFO="$XDG_DATA_HOME/terminfo"
 export TERMINFO_DIRS="$TERMINFO:/usr/share/terminfo"
 
 export PATH
-#
-# if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" == 1 ]; then
-#     exec startx
-# fi
