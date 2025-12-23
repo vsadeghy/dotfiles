@@ -1,7 +1,4 @@
 # Core CLI Tools
-git
-vi
-vim
 zsh
 stow
 findutils
@@ -20,10 +17,6 @@ jq
 yq
 curlie
 
-# man pages
-man-db
-man-pages
-
 # Search & Navigation
 ripgrep
 ripgrep-all
@@ -36,6 +29,7 @@ imagemagick
 perl-image-exiftool
 rsync
 meld
+ouch
 
 # Development Tools
 nvim
@@ -66,13 +60,10 @@ gdu
 # Network Tools
 inetutils
 inotify-tools
+arch-wiki-docs
 
 # Process Tools
 lsof
-
-# Documentation
-man-db
-man-pages
 
 # Search & Indexing
 plocate
@@ -100,6 +91,3 @@ yay-debug
 # Spellcheck
 aspell
 aspell-en
-
-# Firewall
-firewalld
