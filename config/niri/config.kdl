@@ -8,6 +8,11 @@ input {
 			options "grp:alts_toggle,caps:escape,compose:menu"
 		}
 	}
+	touchpad {
+		tap
+		dwt
+		natural-scroll
+	}
 	warp-mouse-to-focus
 	focus-follows-mouse max-scroll-amount="0%"
 	workspace-auto-back-and-forth
@@ -155,5 +160,5 @@ environment {
 	XDG_CURRENT_DESKTOP "niri"
 	XDG_SESSION_TYPE "wayland"
 	QT_QPA_PLATFORM "wayland"
-	DISPLAY ":0"
+	// DISPLAY ":0"
 }
