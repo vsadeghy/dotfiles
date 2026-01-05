@@ -1,0 +1,31 @@
+# name: 'Catppuccin Macchiato'
+# url: 'https://github.com/catppuccin/fish'
+# preferred_background: 24273a
+
+fish_color_autosuggestion 5b6078
+fish_color_cancel ed8796
+fish_color_command a6da95
+fish_color_comment 5b6078
+fish_color_cwd eed49f
+fish_color_cwd_root ed8796
+fish_color_end f5a97f
+fish_color_error ed8796
+fish_color_escape c6a0f6
+fish_color_gray 5b6078
+fish_color_host 8aadf4
+fish_color_host_remote a6da95
+fish_color_keyword ed8796
+fish_color_normal cad3f5
+fish_color_operator ed8796
+fish_color_option f5a97f
+fish_color_param cad3f5
+fish_color_quote eed49f
+fish_color_redirection cad3f5
+fish_color_search_match --background=363a4f
+fish_color_selection --background=363a4f
+fish_color_status ed8796
+fish_color_user 8aadf4
+fish_pager_color_completion cad3f5
+fish_pager_color_description 5b6078
+fish_pager_color_prefix f5bde6
+fish_pager_color_progress 5b6078
