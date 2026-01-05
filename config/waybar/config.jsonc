@@ -45,9 +45,9 @@
   "group/hardware": {
     "orientation": "horizontal",
     "modules": [
-      // "battery",
-      // "custom/separator",
       "cpu",
+      "custom/separator",
+      "battery",
       "custom/separator",
       "memory"
     ]

@@ -373,9 +373,8 @@ window.left_bar .modules-center {
 
 #battery {
     color: @teal;
-    border-radius: 15 0 0 15;
+    border-radius: 0 0 0 0;
     background-color: alpha(@surface1, 0.7);
-    padding-left: 15;
     margin-top: 5;
     margin-bottom: 5;
 }
