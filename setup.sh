@@ -118,6 +118,7 @@ tmux_setup() {
 kanata_setup() {
     if ! id -u kanata; then
         print "Adding kanata"
+        yay -S --noconfirm --needed kanata
         ! getent group uinput && sudo groupadd --system uinput
         sudo useradd -MG input,uinput -s /bin/false -U kanata
         sudo mkdir -p /etc/udev/rules.d
