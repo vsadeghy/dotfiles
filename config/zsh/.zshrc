@@ -13,13 +13,6 @@ zinit light Aloxaf/fzf-tab
 zinit snippet OMZP::command-not-found
 source /usr/share/doc/pkgfile/command-not-found.zsh
 
-
-# starship
-zinit ice as"command" from"gh-r"\
-  atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
-  atpull"%atclone" src"init.zsh"
-zinit light starship/starship
-
 source $ZDOTDIR/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 fpath=($ZDOTDIR/completions ${fpath})
 [ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
@@ -62,7 +55,7 @@ for f in ~/.config/shell/*; do
 done
 
 pfetch
-eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh --cmd d)"
 
 # function zvm_after_init() {
   autoload -z edit-command-line
@@ -74,4 +67,5 @@ eval "$(zoxide init zsh)"
   bindkey -s "^o" " siscon\n"
 
   eval "$(fzf --zsh)"
+  eval "$(starship init zsh)"
 # }

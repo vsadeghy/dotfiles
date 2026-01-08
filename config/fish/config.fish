@@ -24,4 +24,6 @@ end
 abbr -a -p anywhere BH -- "--help | bat -plhelp"
 
 pfetch
-starship init fish | source
+fzf                 --fish | source
+zoxide   init --cmd=d fish | source
+starship init         fish | source
