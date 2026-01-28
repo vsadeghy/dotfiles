@@ -19,6 +19,7 @@
 	diff-inline = diff --color-words
 	recover = !~/.config/git/recover.sh
 	new = !git init && gh repo create --private --source=. --remote=origin && git push -u --all
+	filter-repo= !~/.config/git/filter-repo.py
 [rerere]
 	enabled = true
 ; [column]
@@ -32,6 +33,7 @@
 	repo = ~/projects/bot/server
 	repo = ~/projects/bot/web
 	repo = ~/.dotfiles
+	repo = ~/projects/rialpayment
 [push]
 	autoSetupRemote = true
 [fetch]
@@ -46,8 +48,12 @@
 [init]
 	defaultBranch = main
 
-; vim: ft=gitconfig
 ; [http]
 ; 	proxy = http://127.0.0.1:2080/
 ; [https]
 ; 	proxy = http://127.0.0.1:2080/
+[pull]
+	rebase = false
+; vim: ft=gitconfig
+[credential]
+	helper = store
