@@ -50,22 +50,24 @@ zstyle ":fzf-tab:complete:*:*" fzf-preview '
   fi
 '
 
+alias sudo="sudo "
 for f in ~/.config/shell/*; do
   source $f
 done
 
-pfetch
-eval "$(zoxide init zsh --cmd d)"
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^e" edit-command-line
 
-# function zvm_after_init() {
-  autoload -z edit-command-line
-  zle -N edit-command-line
-  bindkey "^e" edit-command-line
 
+function init() {
   bindkey -s "^n" " yazi\n"
   bindkey -s "^g" " lazygit\n"
   bindkey -s "^o" " siscon\n"
 
+  pfetch
   eval "$(fzf --zsh)"
   eval "$(starship init zsh)"
-# }
+  eval "$(zoxide init zsh --cmd d)"
+}
+init 2>/dev/null

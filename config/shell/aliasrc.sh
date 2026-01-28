@@ -4,7 +4,6 @@ alias -g ....="../../.."
 alias -g .....="../../../.."
 alias -g ......="../../../../.."
 
-alias sudo="sudo "
 alias v="nvim"
 alias cp="cp -r"
 alias rm="rm -r"
