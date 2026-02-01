@@ -3,7 +3,7 @@
 
 add_newline = false
 palette = "catppuccin_macchiato"
-format = """$hostname$directory$character"""
+format = """$hostname$directory$nodejs$character"""
 right_format = """$all"""
 command_timeout = 1000
 
@@ -27,6 +27,9 @@ disabled = false
 disabled = true
 
 [nodejs]
+disabled = false
+
+[golang]
 disabled = true
 
 [package]
