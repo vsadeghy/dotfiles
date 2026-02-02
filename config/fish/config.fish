@@ -40,3 +40,4 @@ end
 b "!!" "commandline -t \$history[1]"
 b "!*" "commandline -t -- (string join ' ' (string split ' ' $history[1])[2..-1])"
 b "!\$" "commandline -f history-token-search-backward"
+b "ctrl-g" "lazygit"
