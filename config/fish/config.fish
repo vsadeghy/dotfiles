@@ -1,5 +1,6 @@
-function import_zsh_aliases --description "Import zsh/bash aliases as fish abbreviations"
-	for line in (rg 'alias \w' "$argv[1]")
+function import_zsh_aliases -a path packagemanager -d "Import zsh/bash aliases as fish abbreviations"
+	if test -n "$packagemanager" && ! command -v "$packagemanager" &>/dev/null; return 1; end
+	for line in (rg 'alias \w' "$path")
 		set -l parts (string split -m1 '=' "$line")
 		set -l name (string trim $parts[1] | string replace 'alias ' '')
 		set -l cmd (string trim "$parts[2]")
@@ -8,17 +9,15 @@ function import_zsh_aliases --description "Import zsh/bash aliases as fish abbre
 	end
 end
 
-source /usr/share/doc/pkgfile/command-not-found.fish
+source /usr/share/doc/pkgfile/command-not-found.fish &>/dev/null
 
 fish_config theme choose Catppuccin-Macchiato
 set -g fish_greeting
 set -g fish_key_bindings fish_vi_key_bindings
-# set -eU fish_key_bindings
 
 import_zsh_aliases ~/.config/shell/aliasrc.sh
-if command -v pacman &>/dev/null
-	import_zsh_aliases ~/.config/shell/arch.sh
-end
+import_zsh_aliases ~/.config/shell/arch.sh pacman
+import_zsh_aliases ~/.config/shell/ubuntu.sh apt
 abbr -p anywhere BH -- "--help | bat -plhelp"
 
 function run
