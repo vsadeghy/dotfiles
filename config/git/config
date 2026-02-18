@@ -42,6 +42,7 @@
 	updateRefs = true
 [core]
 	excludesfile = ~/.config/git/ignore
+	fileMode = false
 [grep]
 	lineNumber = true
 	patternType = perl
