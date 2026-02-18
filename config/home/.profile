@@ -8,8 +8,9 @@ export XDG_RUNTIME_DIR="/run/user/$UID"
 export XDG_DATA_DIRS="$XDG_DATA_HOME/flatpak/exports/share:/usr/local/share:/usr/share"
 PATH="$HOME/.local/bin:$PATH"
 
-export TERMINAL="ghostty"
+export TERMINAL="foot"
 export EDITOR="nvim"
+export BROWSER="zen-browser"
 PATH="$XDG_DATA_HOME/bob/nvim-bin:$PATH"
 
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
@@ -21,7 +22,7 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
-export PNPM_HOME="/home/vss/.local/share/pnpm"
+export PNPM_HOME="$XDG_DATA_HOME/pnpm"
 PATH="$PATH:$PNPM_HOME"
 
 export GOPATH="$XDG_DATA_HOME/go"
@@ -85,7 +86,7 @@ mkdir -p "$XDG_DATA_HOME/wineprefixes"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 
 export PAGER="bat -plman"
-export MANPAGER="bat -plman"
+export MANPAGER="nvim +Man!"
 
 export TERMINFO="$XDG_DATA_HOME/terminfo"
 export TERMINFO_DIRS="$TERMINFO:/usr/share/terminfo"
