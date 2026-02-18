@@ -1,4 +1,4 @@
-function import_zsh_aliases -a path onpkg -d "Import zsh/bash aliases as fish abbreviations"
+function import_aliases -a path onpkg -d "Import posix/zsh aliases as fish abbreviations"
 	[ -f "$path" ] || return
 	[ -z "$onpkg" ] || command -vq "$onpkg" || return
 	for line in (grep 'alias ' "$path")
