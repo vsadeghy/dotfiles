@@ -5,6 +5,7 @@ source /usr/share/doc/pkgfile/command-not-found.fish 2>/dev/null
 
 import_aliases ~/.config/shell/aliasrc.sh
 import_aliases ~/.config/shell/arch.sh pacman
+import_aliases ~/.config/shell/ubuntu.sh apt
 import_aliases ~/.lconfig/aliases.sh
 
 vbind "!!" "commandline -t \$history[1]"

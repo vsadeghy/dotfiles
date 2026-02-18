@@ -38,10 +38,12 @@ spawn-at-startup "lxqt-policykit-agent"
 spawn-at-startup "swww-daemon"
 spawn-sh-at-startup  "swww img ~/.config/wall.png"
 spawn-sh-at-startup "/usr/lib/nekoray/nekobox -tray -appdata"
-spawn-sh-at-startup "clipse --listen"
+// spawn-sh-at-startup "clipse --listen"
+spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
+spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
 
-window-rule { open-focused true; opacity 0.8; }
-window-rule { match is-active=false; opacity 0.6; }
+// window-rule { open-focused true; opacity 0.8; }
+// window-rule { match is-active=false; opacity 0.6; }
 window-rule {
 	match app-id=r#"zen"#
 	opacity 1.0
@@ -55,8 +57,9 @@ window-rule {
 	open-floating true
 }
 
-output "DP-2" {
-	mode "1920x1080@144.00"
+output "DP-1" {
+	// mode "1920x1080@144.00"
+	mode "1920x1080@60"
 	transform "normal" // normal, flipped{-90,-180,-270}
 	position x=1280 y=0
 	focus-at-startup
@@ -68,9 +71,9 @@ output "HDMI-A-1" {
 	hot-corners { off; }
 }
 
-workspace "" { open-on-output "DP-2"; }
-workspace "" { open-on-output "DP-2"; }
-workspace "" { open-on-output "DP-2"; }
+workspace "" { open-on-output "DP-1"; }
+workspace "" { open-on-output "DP-1"; }
+workspace "" { open-on-output "DP-1"; }
 window-rule   { match app-id=r#"(mpv|.*.exe)"#; open-on-workspace ""; open-maximized true; }
 
 workspace "" { open-on-output "HDMI-A-1"; }
@@ -88,7 +91,8 @@ binds {
 	Mod+Shift+x { quit skip-confirmation=true; }
 	Mod+Shift+P { power-off-monitors; }
 	Mod+S repeat=false { toggle-overview; }
-	Mod+V { spawn-sh "foot --title=clipse -e clipse"; }
+	// Mod+V { spawn-sh "foot --title=clipse -e clipse"; }
+	Mod+V { spawn-sh "cliphist list | fuzzel --dmenu --with-nth 2 | cliphist decode | wl-copy"; }
 
 	Mod+Up    { focus-window-or-workspace-up; }
 	Mod+Down  { focus-window-or-workspace-down; }
