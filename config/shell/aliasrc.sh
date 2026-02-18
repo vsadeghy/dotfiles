@@ -1,8 +1,8 @@
 # everyday
-alias -g ...="../.."
-alias -g ....="../../.."
-alias -g .....="../../../.."
-alias -g ......="../../../../.."
+alias -g 2.="../.."
+alias -g 3.="../../.."
+alias -g 4.="../../../.."
+alias -g 5.="../../../../.."
 
 alias v="nvim"
 alias cp="cp -r"
