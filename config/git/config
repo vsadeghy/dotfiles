@@ -4,6 +4,10 @@
 [alias]
 	aliases = !git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\=\\/
 
+	dl = -c diff.external=difft log -p --ext-diff
+	ds = -c diff.external=difft show --ext-diff
+	df = -c diff.external=difft diff
+
 	s = status -sb
 	st = status
 	co = checkout
