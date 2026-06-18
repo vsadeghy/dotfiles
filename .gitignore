@@ -3,3 +3,4 @@ config/mpv/watch_later/
 config/mpv/mpvHistory.log
 config/mpv/history.log
 config/zsh/.zcompdump
+fish_variables
