@@ -1,5 +1,3 @@
-"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
-
 [mgr]
 prepend_keymap = [
   { on = "q", run = "close", desc = "Close the current tab, or quit if it's last" },
