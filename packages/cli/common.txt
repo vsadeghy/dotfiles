@@ -85,7 +85,7 @@ usbutils
 translate-shell
 
 # Package Managers
-yay
+yay-bin
 yay-debug
 
 # Spellcheck

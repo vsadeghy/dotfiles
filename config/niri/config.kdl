@@ -19,7 +19,7 @@ input {
 }
 layout {
 	gaps 3
-	center-focused-column "on-overflow" // "never"/"always"/"on-overflow"
+	center-focused-column "never" // "never"/"always"/"on-overflow"
 	preset-column-widths {
 		proportion 0.5
 		proportion 1.0
@@ -33,10 +33,11 @@ hotkey-overlay { skip-at-startup; }
 recent-windows { off; }
 screenshot-path "~/Media/pictures/screenshots/screenshot %Y-%m-%d %H-%M-%S.png"
 
-spawn-at-startup	"waybar"
+spawn-at-startup "waybar"
 spawn-at-startup "lxqt-policykit-agent"
-spawn-at-startup "swww-daemon"
-spawn-sh-at-startup  "swww img ~/.config/wall.png"
+spawn-at-startup "awww-daemon"
+// spawn-at-startup "mako"
+spawn-sh-at-startup "awww img ~/.config/wall.png"
 spawn-sh-at-startup "/usr/lib/nekoray/nekobox -tray -appdata"
 // spawn-sh-at-startup "clipse --listen"
 spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
@@ -86,6 +87,8 @@ window-rule { match app-id=r#"Ferdium"#; open-on-workspace "󰧑"; open-maximize
 binds {
 	Mod+Return { spawn "foot"; }
 	Mod+D { spawn "fuzzel"; }
+	Mod+B { spawn "zen-browser"; }
+	Mod+E { spawn "pcmanfm"; }
 	Mod+Alt+L { spawn "swaylock"; }
 	Mod+Q repeat=false { close-window; }
 	Mod+Shift+x { quit skip-confirmation=true; }

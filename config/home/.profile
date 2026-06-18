@@ -33,6 +33,7 @@ export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export PYTHON_HISTORY="$XDG_STATE_HOME/python_history"
 export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME/python"
 export PYTHONUSERBASE="$XDG_DATA_HOME/python"
+export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 
 export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql_history"
 export PSQLRC="$XDG_CONFIG_HOME/pg/psqlrc"
