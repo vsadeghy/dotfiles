@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eou pipefail
 
 print() {
     echo -e "\e[1;35m $1 \e[0m"
@@ -118,7 +119,7 @@ tmux_setup() {
 kanata_setup() {
     if ! id -u kanata; then
         print "Adding kanata"
-        yay -S --noconfirm --needed kanata
+        yay -S --noconfirm --needed kanata-bin
         ! getent group uinput && sudo groupadd --system uinput
         sudo useradd -MG input,uinput -s /bin/false -U kanata
         sudo mkdir -p /etc/udev/rules.d
