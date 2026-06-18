@@ -4,3 +4,5 @@ config/mpv/mpvHistory.log
 config/mpv/history.log
 config/zsh/.zcompdump
 fish_variables
+config/fish/**/_nvm*.fish
+config/fish/**/nvm.fish
