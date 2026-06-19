@@ -23,7 +23,7 @@ export NVM_DIR="$XDG_DATA_HOME/nvm"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
 export PNPM_HOME="$XDG_DATA_HOME/pnpm"
-PATH="$PATH:$PNPM_HOME"
+PATH="$PATH:$PNPM_HOME/bin"
 
 export GOPATH="$XDG_DATA_HOME/go"
 export GOBIN="$HOME/.local/bin"

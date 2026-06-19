@@ -1,5 +1,6 @@
 set -g fish_greeting
-set -g fish_key_bindings fish_vi_key_bindings
+set -g fish_key_bindings fish_default_key_bindings
+set -U nvm_default_version latest
 fish_config theme choose Catppuccin-Macchiato
 source /usr/share/doc/pkgfile/command-not-found.fish 2>/dev/null
 
