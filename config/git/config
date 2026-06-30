@@ -30,9 +30,10 @@
 ; 	ui = auto
 [branch]
 	sort = -committerdate
+	autoSetupMerge = simple
 
-[includeIf "gitdir:~/projects/work"]
-	path = ~/projects/work/.gitconfig
+[include]
+	path = ~/.lconfig/.gitconfig
 [maintenance]
 	repo = ~/projects/bot/server
 	repo = ~/projects/bot/web
