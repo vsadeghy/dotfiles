@@ -1,4 +1,4 @@
---- @since 25.5.31
+--- @since 25.12.29
 
 local shell = os.getenv("SHELL"):match(".*/(.*)")
 local get_cwd = ya.sync(function() return cx.active.current.cwd end)
@@ -13,8 +13,8 @@ local fmt_opts = function(opt)
 	return ""
 end
 
-local get_custom_opts = ya.sync(function(self)
-	local opts = self.custom_opts or {}
+local get_custom_opts = ya.sync(function(state)
+	local opts = state.custom_opts or {}
 
 	return {
 		fzf = fmt_opts(opts.fzf),
@@ -25,7 +25,7 @@ local get_custom_opts = ya.sync(function(self)
 	}
 end)
 
-local fzf_from = function(job_args, opts_tbl)
+local fzf_from = function(job_args, opts_tbl, major, minor)
 	local cmd_tbl = {
 		rg = {
 			grep = "rg --color=always --line-number --smart-case" .. opts_tbl.rg,
@@ -69,7 +69,6 @@ local fzf_from = function(job_args, opts_tbl)
 		"--nth=3..",
 		cmd.prev,
 		cmd.prompt,
-		"--bind='start:reload:" .. cmd.grep .. " {q}'",
 		"--bind='change:reload:sleep 0.1; " .. cmd.grep .. " {q} || true'",
 		"--bind='ctrl-]:change-preview-window(80%|66%)'",
 		"--bind='ctrl-\\:change-preview-window(right|up)'",
@@ -77,17 +76,23 @@ local fzf_from = function(job_args, opts_tbl)
 		opts_tbl.fzf,
 	}
 
-	if cmd.extra then
+	-- start event requires fzf v0.35 or above
+	if major > 0 or minor >= 35 then
+		table.insert(fzf_tbl, "--bind='start:reload:" .. cmd.grep .. " {q}'")
+	end
+
+	-- transform action requires fzf v0.45 or above
+	if (major > 0 or minor >= 45) and cmd.extra then
 		table.insert(fzf_tbl, cmd.extra(cmd.grep))
 	end
 
 	return table.concat(fzf_tbl, " ")
 end
 
-local function setup(self, opts)
+local function setup(state, opts)
 	opts = opts or {}
 
-	self.custom_opts = {
+	state.custom_opts = {
 		fzf = opts.fzf,
 		rg = opts.rg,
 		bat = opts.bat,
@@ -97,26 +102,33 @@ local function setup(self, opts)
 end
 
 local function entry(_, job)
-	local _permit = ya.hide()
+	local _permit = ui.hide()
+
+	local fzf_version, err = Command("fzf"):arg("--version"):output()
+	if err then
+		return fail("`fzf` was not found")
+	end
+	local major, minor = fzf_version.stdout:match("(%d+)%.(%d+)")
+
 	local custom_opts = get_custom_opts()
-	local args = fzf_from(job.args[1], custom_opts)
-	local cwd = tostring(get_cwd())
+	local args = fzf_from(job.args[1], custom_opts, tonumber(major), tonumber(minor))
+	local cwd = get_cwd()
 
 	local child, err = Command(shell)
 		:arg({ "-c", args })
-		:cwd(cwd)
+		:cwd(tostring(cwd))
 		:stdin(Command.INHERIT)
 		:stdout(Command.PIPED)
 		:stderr(Command.INHERIT)
 		:spawn()
 
 	if not child then
-		return fail("Command failed with error code %s", err)
+		return fail("Failed to spawn shell, error: %s", err)
 	end
 
 	local output, err = child:wait_with_output()
-	if not output then -- unreachable?
-		return fail("Cannot read command output, error code %s", err)
+	if not output then
+		return fail("Cannot read command output, error: %s", err)
 	elseif output.status.code == 130 then -- interrupted with <ctrl-c> or <esc>
 		return
 	elseif output.status.code == 1 then -- no match
@@ -128,9 +140,12 @@ local function entry(_, job)
 	local target = output.stdout:gsub("\n$", "")
 	if target ~= "" then
 		local colon_pos = string.find(target, ":")
-		local file_url = colon_pos and string.sub(target, 1, colon_pos - 1) or target
-
-		ya.manager_emit("reveal", { file_url })
+		local file_path = colon_pos and string.sub(target, 1, colon_pos - 1) or target
+		local url = Url(file_path)
+		if not url.is_absolute then
+			url = cwd:join(url)
+		end
+		ya.emit("reveal", { url })
 	end
 end
 
