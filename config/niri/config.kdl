@@ -87,7 +87,7 @@ window-rule { match app-id=r#"(helium|floorp)"#; open-on-workspace ""; open-m
 window-rule { match app-id=r#"Ferdium"#; open-on-workspace "󰧑"; open-maximized true; }
 
 binds {
-	Mod+Return { spawn "foot"; }
+	Mod+Return { spawn "ghostty"; }
 	Mod+D { spawn "fuzzel"; }
 	Mod+B { spawn "zen-browser"; }
 	Mod+E { spawn "pcmanfm"; }
