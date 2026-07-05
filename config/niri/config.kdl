@@ -131,18 +131,26 @@ binds {
 	Mod+j { focus-workspace ""; }
 	Mod+k { focus-workspace ""; }
 	Mod+l { focus-workspace ""; }
-	Mod+1 { focus-workspace 4; }
-	Mod+2 { focus-workspace 5; }
-	Mod+3 { focus-workspace 6; }
+	Mod+p { focus-workspace ""; }
+	Mod+1 { focus-workspace 1; }
+	Mod+2 { focus-workspace 2; }
+	Mod+3 { focus-workspace 3; }
+	Mod+4 { focus-workspace 4; }
+	Mod+5 { focus-workspace 5; }
+	Mod+6 { focus-workspace 6; }
 	Mod+Ctrl+u { move-window-to-workspace ""; }
 	Mod+Ctrl+i { move-window-to-workspace ""; }
 	Mod+Ctrl+o { move-window-to-workspace "󰧑"; }
 	Mod+Ctrl+j { move-window-to-workspace ""; }
 	Mod+Ctrl+k { move-window-to-workspace ""; }
 	Mod+Ctrl+l { move-window-to-workspace ""; }
-	Mod+Ctrl+1 { move-window-to-workspace 4; }
-	Mod+Ctrl+2 { move-window-to-workspace 5; }
-	Mod+Ctrl+3 { move-window-to-workspace 6; }
+	Mod+Ctrl+p { move-window-to-workspace ""; }
+	Mod+Ctrl+1 { move-window-to-workspace 1; }
+	Mod+Ctrl+2 { move-window-to-workspace 2; }
+	Mod+Ctrl+3 { move-window-to-workspace 3; }
+	Mod+Ctrl+4 { move-window-to-workspace 4; }
+	Mod+Ctrl+5 { move-window-to-workspace 5; }
+	Mod+Ctrl+6 { move-window-to-workspace 6; }
 
 	Mod+Tab { focus-workspace-previous; }
 
