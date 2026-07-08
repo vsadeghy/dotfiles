@@ -75,7 +75,7 @@ output "HDMI-A-1" {
 workspace "" { open-on-output "DP-1"; }
 workspace "" { open-on-output "DP-1"; }
 workspace "" { open-on-output "DP-1"; }
-window-rule   { match app-id=r#"(mpv|.*.exe)"#; open-on-workspace ""; open-maximized true; }
+window-rule   { match app-id=r#"(mpv|steam|gamescope|.*.exe)"#; open-on-workspace ""; open-maximized true; }
 
 workspace "" { open-on-output "HDMI-A-1"; }
 workspace "" { open-on-output "HDMI-A-1"; }
@@ -85,6 +85,7 @@ workspace "" { open-on-output "HDMI-A-1"; }
 window-rule { match app-id=r#"zen"#; open-on-workspace ""; open-maximized true; }
 window-rule { match app-id=r#"(helium|floorp)"#; open-on-workspace ""; open-maximized true; }
 window-rule { match app-id=r#"Ferdium"#; open-on-workspace "󰧑"; open-maximized true; }
+window-rule { match app-id=r#"v2ray"#; open-on-workspace ""; open-maximized true; }
 
 binds {
 	Mod+Return { spawn "ghostty"; }
