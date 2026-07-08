@@ -173,7 +173,7 @@
       "Stopped": " "
     },
     "max-length": 35,
-    "exec": "./scripts/fetch_music_metadata.sh",
+    "exec": "~/.config/waybar/scripts/fetch_music_metadata.sh",
     "hide-empty-text": false,
     "on-click": "playerctl play-pause",
     "on-click-right": "playerctl next",
@@ -230,7 +230,7 @@
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t({device_battery_percentage}%)",
     "max-length": 35,
-    "on-click": "./scripts/bluetooth_toggle.sh",
+    "on-click": "~/.config/waybar/scripts/bluetooth_toggle.sh",
     "on-click-right": "blueman-manager"
   },
 
@@ -246,7 +246,7 @@
     "format-linked": "󰈀 {ifname} (No IP)",
     "tooltip-format-ethernet": "Interface: {ifname}\nIP: {ipaddr}\nGW: {gwaddr}\nNetmask: {netmask}\nCIDR: {cidr}\n\n<span color='#a6da95'>{bandwidthUpBits}</span>\t<span color='#ee99a0'>{bandwidthDownBits}</span>\t<span color='#c6a0f6'>󰹹{bandwidthTotalBits}</span>",
     "max-length": 35,
-    "on-click": "./scripts/wifi_toggle.sh",
+    "on-click": "~/.config/waybar/scripts/wifi_toggle.sh",
     "on-click-right": "nm-connection-editor"
   },
 
