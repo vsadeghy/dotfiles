@@ -1,6 +1,11 @@
 if not status is-interactive
 	exit
 end
-if not set -q __fish_env && test -f ~/.profile
-	exec bash -c "source ~/.profile; __fish_env=1 exec fish --login"
+
+if not set -q __fish_env_sourced && test -f ~/.profile
+	for line in (bash -c "source ~/.profile; env")
+		set -l env (string split '=' $line)
+		set -Ux $env[1] $env[2]
+	end
+	set -Ux __fish_env_sourced 1
 end
