@@ -10,8 +10,7 @@
     // "hyprland/workspaces",
     "niri/workspaces",
     // "ext/workspaces",
-    "group/hardware",
-    "tray"
+    "group/hardware"
   ],
   "modules-center": [
     "clock#time",
@@ -23,6 +22,7 @@
     "clock#calendar"
   ],
   "modules-right": [
+    "tray",
     "group/connection",
     "group/audio",
     "custom/notification",
@@ -95,7 +95,8 @@
   },
 
   "clock#time": {
-    "format": "{:%H:%M}"
+    "format": "{:%H:%M}",
+    "tooltip": false
   },
 
   "custom/separator": {
@@ -164,7 +165,7 @@
   },
 
   "custom/media": {
-    "format": "{icon} ",
+    "format": "{icon}",
     "restart-interval": 2,
     "return-type": "json",
     "format-icons": {
@@ -210,7 +211,7 @@
       "hifi": "󰋌",
       "default": ["󰕿", "󰖀", "󰕾"]
     },
-    "on-click": "pwvucontrol"
+    "on-click": "pavucontrol"
   },
 
   "group/connection": {
@@ -230,8 +231,8 @@
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t({device_battery_percentage}%)",
     "max-length": 35,
-    "on-click": "~/.config/waybar/scripts/bluetooth_toggle.sh",
-    "on-click-right": "blueman-manager"
+    "on-click": "~/.config/waybar/scripts/bluetooth-toggle.sh",
+    "on-click-right": "ghostty -e bluetui"
   },
 
   "network": {
@@ -246,15 +247,15 @@
     "format-linked": "󰈀 {ifname} (No IP)",
     "tooltip-format-ethernet": "Interface: {ifname}\nIP: {ipaddr}\nGW: {gwaddr}\nNetmask: {netmask}\nCIDR: {cidr}\n\n<span color='#a6da95'>{bandwidthUpBits}</span>\t<span color='#ee99a0'>{bandwidthDownBits}</span>\t<span color='#c6a0f6'>󰹹{bandwidthTotalBits}</span>",
     "max-length": 35,
-    "on-click": "~/.config/waybar/scripts/wifi_toggle.sh",
-    "on-click-right": "nm-connection-editor"
+    "on-click": "~/.config/waybar/scripts/wifi-toggle.sh",
+    "on-click-right": "ghostty -e wlctl"
   },
 
   "group/audio": {
     "orientation": "horizontal",
     "modules": [
       "custom/media",
-	  "custom/separator",
+      "custom/separator",
       "pulseaudio"
       // "custom/dunst"
       // "custom/airplane_mode",
