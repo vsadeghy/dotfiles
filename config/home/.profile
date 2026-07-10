@@ -8,7 +8,7 @@ export XDG_RUNTIME_DIR="/run/user/$UID"
 export XDG_DATA_DIRS="$XDG_DATA_HOME/flatpak/exports/share:/usr/local/share:/usr/share"
 PATH="$HOME/.local/bin:$PATH"
 
-export TERMINAL="foot"
+export TERMINAL="ghostty"
 export EDITOR="nvim"
 export BROWSER="zen-browser"
 PATH="$XDG_DATA_HOME/bob/nvim-bin:$PATH"
