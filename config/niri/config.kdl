@@ -1,4 +1,6 @@
 // https://yalter.github.io/niri/Configuration:-Introduction
+
+include "./display.kdl"
 input {
 	keyboard {
 		repeat-rate 35
@@ -58,29 +60,15 @@ window-rule {
 	open-floating true
 }
 
-output "DP-1" {
-	// mode "1920x1080@144.00"
-	mode "1920x1080@60"
-	transform "normal" // normal, flipped{-90,-180,-270}
-	position x=1280 y=0
-	focus-at-startup
-	hot-corners { off; }
-}
-output "HDMI-A-1" {
-	mode "1280x1024@75.00"
-	position x=0 y=0
-	hot-corners { off; }
-}
+workspace ""
+workspace ""
+workspace ""
+window-rule { match app-id=r#"(mpv|steam|gamescope|.*.exe)"#; open-on-workspace ""; open-maximized true; }
 
-workspace "" { open-on-output "DP-1"; }
-workspace "" { open-on-output "DP-1"; }
-workspace "" { open-on-output "DP-1"; }
-window-rule   { match app-id=r#"(mpv|steam|gamescope|.*.exe)"#; open-on-workspace ""; open-maximized true; }
-
-workspace "" { open-on-output "HDMI-A-1"; }
-workspace "" { open-on-output "HDMI-A-1"; }
-workspace "󰧑" { open-on-output "HDMI-A-1"; }
-workspace "" { open-on-output "HDMI-A-1"; }
+workspace ""
+workspace ""
+workspace "󰧑"
+workspace ""
 
 window-rule { match app-id=r#"zen"#; open-on-workspace ""; open-maximized true; }
 window-rule { match app-id=r#"(helium|floorp)"#; open-on-workspace ""; open-maximized true; }
