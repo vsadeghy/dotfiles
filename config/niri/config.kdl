@@ -73,7 +73,7 @@ workspace ""
 window-rule { match app-id=r#"zen"#; open-on-workspace ""; open-maximized true; }
 window-rule { match app-id=r#"(helium|floorp)"#; open-on-workspace ""; open-maximized true; }
 window-rule { match app-id=r#"Ferdium"#; open-on-workspace "󰧑"; open-maximized true; }
-window-rule { match app-id=r#"v2ray"#; open-on-workspace ""; open-maximized true; }
+window-rule { match app-id=r#"(v2ray|XPipe)"#; open-on-workspace ""; open-maximized true; }
 
 binds {
 	Mod+Return { spawn "ghostty"; }
