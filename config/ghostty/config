@@ -5,3 +5,4 @@ window-decoration = server
 shell-integration-features = true
 confirm-close-surface = false
 keybind = ctrl+shift+p=unbind
+clipboard-read=allow
