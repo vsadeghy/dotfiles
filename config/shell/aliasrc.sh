@@ -23,6 +23,8 @@ alias wi="witr --pid"
 alias px="ps aux | rg"
 alias b="bat"
 alias -g BH="--help | bat -plain --language help"
+alias nus="nvm use"
+alias nud="nvm use default"
 
 alias p="podman"
 alias pu="podman compose up"
