@@ -82,6 +82,7 @@ binds {
 	Mod+E { spawn "pcmanfm"; }
 	Mod+X { spawn "xpipe"; }
 	Mod+Semicolon { spawn "~/.config/fuzzel/fuzzel-emoji"; }
+	Mod+c { spawn "~/.config/fuzzel/fuzzel-calc"; }
 	Mod+Alt+L { spawn "swaylock"; }
 	Mod+Q repeat=false { close-window; }
 	Mod+Shift+x { quit skip-confirmation=true; }
