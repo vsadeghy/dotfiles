@@ -21,7 +21,6 @@ alias w="witr"
 alias wp="witr --port"
 alias wi="witr --pid"
 alias px="ps aux | rg"
-alias bc="bc -l"
 alias b="bat"
 alias -g BH="--help | bat -plain --language help"
 

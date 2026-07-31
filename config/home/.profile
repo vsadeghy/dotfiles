@@ -13,6 +13,8 @@ export EDITOR="nvim"
 export BROWSER="zen-browser"
 PATH="$XDG_DATA_HOME/bob/nvim-bin:$PATH"
 
+export BC_ENV_ARGS="-l $HOME/.config/bc/config.bc"
+
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 
 export GTK_RC_FILES="$XDG_CONFIG_HOME/gtk-1.0/gtkrc"
