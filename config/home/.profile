@@ -67,6 +67,7 @@ export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
 # export WLR_DRM_NO_ATOMIC=1
 export GSK_RENDERER=ngl
 
+
 export FFMPEG_DATADIR="$XDG_CONFIG_HOME/ffmpeg"
 export HISTFILE="$XDG_STATE_HOME/history"
 export HISTSIZE=5000
@@ -78,6 +79,7 @@ export W3M_DIR="$XDG_STATE_HOME/w3m"
 export SCREENRC="$XDG_CONFIG_HOME/screen/screenrc"
 export SCREENDIR="$XDG_RUNTIME_DIR/screen"
 export SINGULARITY_CACHEDIR="$XDG_CACHE_HOME/singularity"
+export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
