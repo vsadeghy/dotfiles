@@ -19,7 +19,7 @@ export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 
 export GTK_RC_FILES="$XDG_CONFIG_HOME/gtk-1.0/gtkrc"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
-export QT_QPA_PLATFORMTHEME="qt5ct:qt6ct"
+export QT_QPA_PLATFORMTHEME="qt6ct"
 export QT_SELECT=5
 
 export NVM_DIR="$XDG_DATA_HOME/nvm"
@@ -94,5 +94,6 @@ export MANPAGER="nvim +Man!"
 
 export TERMINFO="$XDG_DATA_HOME/terminfo"
 export TERMINFO_DIRS="$TERMINFO:/usr/share/terminfo"
+export TMUX_TMPDIR="${XDG_RUNTIME_DIR:-/tmp}"
 
 export PATH
