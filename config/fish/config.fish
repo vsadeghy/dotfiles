@@ -8,6 +8,7 @@ fish_config theme choose Catppuccin-Macchiato
 import_aliases ~/.config/shell/aliasrc.sh
 import_aliases ~/.config/shell/arch.sh pacman
 import_aliases ~/.config/shell/ubuntu.sh apt
+for i in ~/.config/shell/*.fish; source $i; end
 
 vbind "!!" 'commandline -t \$history[1]'
 vbind "!*" "commandline -t -- (string join ' ' (string split ' ' $history[1])[2..-1])"
