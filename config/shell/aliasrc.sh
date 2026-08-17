@@ -5,6 +5,7 @@ alias -g 4.="../../../.."
 alias -g 5.="../../../../.."
 
 alias v="nvim"
+alias sv="sudoedit"
 alias cp="cp -r"
 alias rm="rm -r"
 alias md="mkdir -p"
