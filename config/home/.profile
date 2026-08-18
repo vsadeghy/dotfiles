@@ -8,16 +8,19 @@ export XDG_RUNTIME_DIR="/run/user/$UID"
 export XDG_DATA_DIRS="$XDG_DATA_HOME/flatpak/exports/share:/usr/local/share:/usr/share"
 PATH="$HOME/.local/bin:$PATH"
 
-export TERMINAL="foot"
+export TERMINAL="ghostty"
 export EDITOR="nvim"
 export BROWSER="zen-browser"
 PATH="$XDG_DATA_HOME/bob/nvim-bin:$PATH"
+
+export BC_ENV_ARGS="-l $HOME/.config/bc/config.bc"
 
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 
 export GTK_RC_FILES="$XDG_CONFIG_HOME/gtk-1.0/gtkrc"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
-export QT_QPA_PLATFORMTHEME="qt5ct"
+export QT_QPA_PLATFORMTHEME="qt6ct"
+export QT_SELECT=5
 
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
@@ -91,5 +94,6 @@ export MANPAGER="nvim +Man!"
 
 export TERMINFO="$XDG_DATA_HOME/terminfo"
 export TERMINFO_DIRS="$TERMINFO:/usr/share/terminfo"
+export TMUX_TMPDIR="${XDG_RUNTIME_DIR:-/tmp}"
 
 export PATH

@@ -6,3 +6,4 @@ config/zsh/.zcompdump
 fish_variables
 config/fish/**/_nvm*.fish
 config/fish/**/nvm.fish
+config/niri/display.kdl

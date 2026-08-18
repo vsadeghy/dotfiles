@@ -73,7 +73,7 @@ window.top_bar .modules-center {
     color: @mauve;
     border-radius: 0;
     background-color: alpha(@surface1, 0.7);
-    padding-left: 5;
+    padding-left: 0;
     padding-right: 5;
     margin-top: 5;
     margin-bottom: 5;
@@ -114,6 +114,7 @@ window.top_bar .modules-center {
     border-radius: 15 0 0 15;
     /* border-radius:  0 15 15 0; */
     padding-left: 15;
+    padding-right: 5;
     margin-top: 5;
     margin-bottom: 5;
 }

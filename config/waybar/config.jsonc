@@ -10,8 +10,7 @@
     // "hyprland/workspaces",
     "niri/workspaces",
     // "ext/workspaces",
-    "group/hardware",
-    "tray"
+    "group/hardware"
   ],
   "modules-center": [
     "clock#time",
@@ -23,6 +22,7 @@
     "clock#calendar"
   ],
   "modules-right": [
+    "tray",
     "group/connection",
     "group/audio",
     "custom/notification",
@@ -95,7 +95,8 @@
   },
 
   "clock#time": {
-    "format": "{:%H:%M}"
+    "format": "{:%H:%M}",
+    "tooltip": false
   },
 
   "custom/separator": {
@@ -164,7 +165,7 @@
   },
 
   "custom/media": {
-    "format": "{icon} ",
+    "format": "{icon}",
     "restart-interval": 2,
     "return-type": "json",
     "format-icons": {
@@ -173,7 +174,7 @@
       "Stopped": " "
     },
     "max-length": 35,
-    "exec": "./scripts/fetch_music_metadata.sh",
+    "exec": "~/.config/waybar/scripts/fetch_music_metadata.sh",
     "hide-empty-text": false,
     "on-click": "playerctl play-pause",
     "on-click-right": "playerctl next",
@@ -210,7 +211,7 @@
       "hifi": "󰋌",
       "default": ["󰕿", "󰖀", "󰕾"]
     },
-    "on-click": "pwvucontrol"
+    "on-click": "pavucontrol"
   },
 
   "group/connection": {
@@ -230,8 +231,8 @@
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t({device_battery_percentage}%)",
     "max-length": 35,
-    "on-click": "./scripts/bluetooth_toggle.sh",
-    "on-click-right": "blueman-manager"
+    "on-click": "~/.config/waybar/scripts/bluetooth-toggle.sh",
+    "on-click-right": "ghostty -e bluetui"
   },
 
   "network": {
@@ -246,15 +247,15 @@
     "format-linked": "󰈀 {ifname} (No IP)",
     "tooltip-format-ethernet": "Interface: {ifname}\nIP: {ipaddr}\nGW: {gwaddr}\nNetmask: {netmask}\nCIDR: {cidr}\n\n<span color='#a6da95'>{bandwidthUpBits}</span>\t<span color='#ee99a0'>{bandwidthDownBits}</span>\t<span color='#c6a0f6'>󰹹{bandwidthTotalBits}</span>",
     "max-length": 35,
-    "on-click": "./scripts/wifi_toggle.sh",
-    "on-click-right": "nm-connection-editor"
+    "on-click": "~/.config/waybar/scripts/wifi-toggle.sh",
+    "on-click-right": "ghostty -e wlctl"
   },
 
   "group/audio": {
     "orientation": "horizontal",
     "modules": [
       "custom/media",
-	  "custom/separator",
+      "custom/separator",
       "pulseaudio"
       // "custom/dunst"
       // "custom/airplane_mode",
@@ -273,23 +274,18 @@
   },
 
   "custom/notification": {
-    "tooltip": false,
-    "format": "{icon}",
-    "format-icons": {
-      "notification": "<span foreground='red'><sup></sup></span>",
-      "none": "",
-      "dnd-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-none": "",
-      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "inhibited-none": "",
-      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-inhibited-none": ""
-    },
+    "justify": "center",
+    "align": 0.5,
+    "tooltip-format": "Left Click: Launch Mako\nMiddle Click: Clear All\nRight Click: Do Not Disturb",
+    "format": "{}",
     "return-type": "json",
-    // "exec-if": "which swaync-client",
-    // "exec": "swaync-client -swb",
-    // "on-click": "swaync-client -t -sw",
-    // "on-click-right": "swaync-client -d -sw",
+    "exec-if": "which makoctl",
+    "exec": "~/.config/waybar/scripts/mako.sh --horizontal",
+    "interval": 2,
+    // "on-click": "~/user_scripts/rofi/rofi_mako.sh",
+    "on-click-middle": "~/.config/waybar/scripts/mako.sh --clear && pkill -RTMIN+8 waybar",
+    "on-click-right": "makoctl mode -t do-not-disturb && pkill -RTMIN+8 waybar",
+    "signal": 8,
     "escape": true
   },
 
@@ -302,7 +298,8 @@
       "shutdown": "systemctl poweroff",
       "reboot": "systemctl reboot",
       "suspend": "systemctl suspend",
-      "hibernate": "systemctl hibernate"
+      "hibernate": "systemctl hibernate",
+      "reload-waybar": "pkill waybar; waybar &"
     }
   },
 

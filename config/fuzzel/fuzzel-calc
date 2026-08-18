@@ -1,0 +1,6 @@
+#!/bin/sh
+CACHEFILE="${XDG_CACHE_HOME:-$HOME/.cache}/fuzzel-calc"
+prompt=$(cat $CACHEFILE | fuzzel --dmenu --mesg Calculator --placeholder "prompt: ")
+[[ -z $prompt ]] && exit
+echo $prompt | bc -l 2>&1 | xargs -r printf "%'.2f\n" | xargs -r notify-send "Calculator"
+echo $prompt >> $CACHEFILE

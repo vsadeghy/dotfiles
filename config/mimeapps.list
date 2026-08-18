@@ -12,6 +12,10 @@ application/x-extension-xht=zen.desktop
 text/plain=nvim.desktop
 application/pdf=org.pwmt.zathura.desktop
 application/json=nvim.desktop
+image/png=nsxiv.desktop
+image/jpeg=nsxiv.desktop
+image/webp=nsxiv.desktop
+image/gif=nsxiv.desktop
 
 [Added Associations]
 x-scheme-handler/http=zen.desktop;

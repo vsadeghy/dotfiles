@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/sh
 set -euo pipefail
 
 EMOJI="$(sed '1,/^### DATA ###$/d' $0 | fuzzel --dmenu --prompt="emoji: " | cut -d ' ' -f 1 | tr -d '\n')"

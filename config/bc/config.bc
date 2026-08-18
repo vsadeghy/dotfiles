@@ -1,0 +1,18 @@
+pi=4*a(1)
+define f(n){ if(n<=1) return 1; return n*f(n-1); };
+define sgn(n){ if(n>0) return 1; if(n<0) return -1; return 0; };
+define abs(n){ return n*sgn(n); };
+define log(n, base){ return l(n)/l(base); };
+define l10(n){ return log(n, 10); };
+define l2(n){ return log(n, 2); };
+define pow(a, b) { return e(l(a)*b); };
+define root(n, base) { return pow(n, 1/base); };
+define cbrt(n){ return root(n, 3); };
+define mod(a, b) { auto scl, ans; scl=scale; scale=0; ans=a%b; scale=scl; return ans; };
+define int(n) { auto scl, ans; scl=scale; scale=0; ans=n/1; scale=scl; return ans; };
+define floor(n){ auto t; t=int(n); return t-(t>n); };
+define ceil(n){ auto t; t=int(n); return t+(t<n); };
+define round(n){ return int(n + .5*sgn(n)); };
+define fix(n, digits) { auto scl, ans; scl=scale; scale=digits; ans=round(n*10^digits)/10^digits; scale=scl; return ans; };
+
+# vim: commentstring=#\ %s

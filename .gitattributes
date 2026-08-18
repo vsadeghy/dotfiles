@@ -1,0 +1,3 @@
+**/*.glsl linguist-vendored
+themes/** linguist-vendored
+qt5ct.conf filter=strip-geometry
