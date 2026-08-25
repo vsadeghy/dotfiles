@@ -208,16 +208,16 @@
   🔄🖱️ (layer-switch mouser)
 )
 (deflayer mouse
-   •    @wu   @mu   @wd   @🔄🖱️  •     •    ‹⇧     •    @s2
-  @wl   @ml   @md   @mr   @wr   mmid  ‹❖    ‹⌃    ‹⎇    @s1
-   •     •     •     •     •     •    mbtp  mftp   •    @s0
-                     @🔠   •    mlft  mrgt
+  @s2   @wu   @mu   @wd   @🔄🖱️  •     •    ‹⇧     •    @s2
+  @s0   @ml   @md   @mr   mbtp   •    ‹❖    ‹⌃    ‹⎇    @s0
+  @s1   mmid  @wl   @wr   mftp   •     •     •     •    @s1
+                     @🔠  mrgt  mlft   •  
 )
 (deflayer mouser
-  @s2    •    ‹⇧     •     •    @🖱️   @wd   @mu   @wu    •
-  @s1   ‹⎇    ‹⌃    ‹❖    mmid  @wl   @ml   @md   @mr   @wr
-  @s0    •     •     •     •     •     •     •     •     •
-                     @🔠   •    mlft  mrgt
+  @s2    •    ‹⇧     •     •    @🖱️   @wd   @mu   @wu   @s2
+  @s0   ‹⎇    ‹⌃    ‹❖     •    mbtp  @ml   @md   @mr   @s0
+  @s1    •     •     •     •    mftp  @wl   @wr   mmid  @s1
+                     @🔠  mrgt   •    mlft
 )
 
 (defalias
