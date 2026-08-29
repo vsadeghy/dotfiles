@@ -110,7 +110,6 @@ tmux_setup() {
     install_plugins=~/.config/tmux/plugins/tpm/bin/install_plugins
     if [ ! -e $install_plugins ]; then
         print "Tmux config not found. Cloning tmux..."
-        mkdir -p ~/.config/tmux/plugins
         git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
     fi
     $install_plugins
