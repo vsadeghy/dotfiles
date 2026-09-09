@@ -16,6 +16,7 @@
 )
 (defchordsv2
   (t! crd (i o) ')
+  (t! crd (k l) `) 
   (t! crd (s d) C-c)
   (t! crd (d f) C-v)
   (t! crd (s f) C-x)
