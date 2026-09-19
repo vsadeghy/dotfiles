@@ -20,6 +20,11 @@
 	rss = restore --staged
 	rms = rm --staged
 	track = add --intent-to-add
+	staged = diff --name-only --cached
+	unstaged = diff --name-only
+	tracked = diff --name-only HEAD
+	untracked = ls-files --others --exclude-standard
+	all=!"{ git diff --name-only HEAD; git ls-files --others --exclude-standard; } | sort -u"
 	diff-inline = diff --color-words
 	recover = !~/.config/git/recover.sh
 	new = !git init && gh repo create --private --source=. --remote=origin && git push -u --all
