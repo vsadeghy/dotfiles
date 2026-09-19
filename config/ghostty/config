@@ -6,3 +6,4 @@ shell-integration-features = true
 confirm-close-surface = false
 keybind = ctrl+shift+p=unbind
 clipboard-read=allow
+background-opacity=0.7
