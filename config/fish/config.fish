@@ -11,6 +11,7 @@ import_aliases ~/.config/shell/ubuntu.sh apt
 for i in ~/.config/shell/*.fish; source $i; end
 
 vbind "!!" 'commandline -t \$history[1]'
+vbind '$?' 'commandline -t \$status'
 vbind "!*" "commandline -t -- (string join ' ' (string split ' ' $history[1])[2..-1])"
 vbind '!$' "commandline -f history-token-search-backward"
 
