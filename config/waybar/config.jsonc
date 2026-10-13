@@ -1,310 +1,301 @@
-// based on https://github.com/XNM1/linux-nixos-hyprland-config-dotfiles
 {
-  // Main Config
-  "name": "top_bar",
-  "layer": "top", // Waybar at top layer
-  "position": "top", // Waybar position (top|bottom|left|right)
-  "height": 36, // Waybar height (to be removed for auto height)
-  "spacing": 4, // Gaps between modules (4px)
-  "modules-left": [
-    // "hyprland/workspaces",
-    "niri/workspaces",
-    // "ext/workspaces",
-    "group/hardware"
-  ],
-  "modules-center": [
-    "clock#time",
-    // "custom/separator",
-    // "clock#week",
-    "custom/separator_dot",
-    // "clock#month",
-    // "custom/separator",
-    "clock#calendar"
-  ],
-  "modules-right": [
-    "tray",
-    "group/connection",
-    "group/audio",
-    "custom/notification",
-    "custom/logout_menu"
-  ],
-
-  "hyprland/workspaces": {
-    "format": "{icon}",
-    "format-icons": {
-      "active": "",
-      "default": "",
-      "empty": "",
-      "special": ""
-    },
-    "ignore-workspaces": ["(special:)?chrome-sharing-indicator"],
-    "show-special": true,
-    "max-height": 26
-  },
-
-  "group/hardware": {
-    "orientation": "horizontal",
-    "modules": [
-      "cpu",
-      "custom/separator",
-      "battery",
-      "custom/separator",
-      "memory"
-    ]
-  },
-
-  "battery": {
-    "states": {
-      "high": 90,
-      "upper-medium": 70,
-      "medium": 50,
-      "lower-medium": 30,
-      "low": 10
-    },
-    "format": "{icon} {capacity}%",
-    "format-charging": "󱐋{icon} {capacity}%",
-    "format-plugged": "󰚥{icon} {capacity}%",
-    "format-time": "{H} h {M} min",
-    "format-icons": ["󱃍", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-    "tooltip-format": "{timeTo}"
-  },
-
-  "cpu": {
-    "format": "󰍛 {usage}%",
-    "states": {
-      "high": 90,
-      "upper-medium": 70,
-      "medium": 50,
-      "lower-medium": 30,
-      "low": 10
-    },
-    "on-click": "ghostty -e htop"
-  },
-
-  "memory": {
-    "format": " {percentage}%",
-    "tooltip-format": "Main: ({used} GiB/{total} GiB)({percentage}%), available {avail} GiB\nSwap: ({swapUsed} GiB/{swapTotal} GiB)({swapPercentage}%), available {swapAvail} GiB",
-    "states": {
-      "high": 90,
-      "upper-medium": 70,
-      "medium": 50,
-      "lower-medium": 30,
-      "low": 10
-    },
-    "on-click": "ghostty -e htop"
-  },
-
-  "clock#time": {
-    "format": "{:%H:%M}",
-    "tooltip": false
-  },
-
-  "custom/separator": {
-    "format": "|",
-    "tooltip": false
-  },
-
-  "custom/separator_dot": {
-    "format": "•",
-    "tooltip": false
-  },
-
-  "clock#week": {
-    "format": "{:%a}"
-  },
-
-  "clock#month": {
-    "format": "{:%h}"
-  },
-
-  "clock#calendar": {
-    "format": "{:%d-%m}",
-    "tooltip-format": "<tt><small>{calendar}</small></tt>",
-    "actions": {
-      "on-click-right": "mode"
-    },
-    "calendar": {
-      "mode": "month",
-      "mode-mon-col": 3,
-      "weeks-pos": "right",
-      "on-scroll": 1,
-      "on-click-right": "mode",
-      "format": {
-        "months": "<span color='#f4dbd6'><b>{}</b></span>",
-        "days": "<span color='#cad3f5'><b>{}</b></span>",
-        "weeks": "<span color='#c6a0f6'><b>W{}</b></span>",
-        "weekdays": "<span color='#a6da95'><b>{}</b></span>",
-        "today": "<span color='#8bd5ca'><b><u>{}</u></b></span>"
-      }
-    }
-  },
-
-  "clock": {
-    "format": "{:%I:%M %p %Ez | %a • %h | %F}",
-    "format-alt": "{:%I:%M %p}",
-    "tooltip-format": "<tt><small>{calendar}</small></tt>",
-    // "locale": "en_US.UTF-8",
-    // "timezones": [ "Europe/Kyiv", "America/New_York" ],
-    "actions": {
-      "on-click-right": "mode"
-    },
-    "calendar": {
-      "mode": "month",
-      "mode-mon-col": 3,
-      "weeks-pos": "right",
-      "on-scroll": 1,
-      "on-click-right": "mode",
-      "format": {
-        "months": "<span color='#f4dbd6'><b>{}</b></span>",
-        "days": "<span color='#cad3f5'><b>{}</b></span>",
-        "weeks": "<span color='#c6a0f6'><b>W{}</b></span>",
-        "weekdays": "<span color='#a6da95'><b>{}</b></span>",
-        "today": "<span color='#8bd5ca'><b><u>{}</u></b></span>"
-      }
-    }
-  },
-
-  "custom/media": {
-    "format": "{icon}",
-    "restart-interval": 2,
-    "return-type": "json",
-    "format-icons": {
-      "Playing": " ",
-      "Paused": " ",
-      "Stopped": " "
-    },
-    "max-length": 35,
-    "exec": "~/.config/waybar/scripts/fetch_music_metadata.sh",
-    "hide-empty-text": false,
-    "on-click": "playerctl play-pause",
-    "on-click-right": "playerctl next",
-    "on-click-middle": "playerctl prev",
-    "on-scroll-up": "playerctl volume 0.05-",
-    "on-scroll-down": "playerctl volume 0.05+",
-    "smooth-scrolling-threshold": "0.5"
-  },
-
-  "pulseaudio": {
-    "states": {
-      "high": 90,
-      "upper-medium": 70,
-      "medium": 50,
-      "lower-medium": 30,
-      "low": 10
-    },
-    "tooltip-format": "{desc}",
-    "format": "{icon} {volume}% {format_source}",
-    "format-bluetooth": "{icon} 󰂱 {volume}% | {format_source}",
-    "format-bluetooth-muted": "󰝟 󰂱 {volume}% | {format_source}",
-    "format-muted": "󰝟 {volume}% {format_source}",
-    "format-source": "󰍬 {volume}%",
-    "format-source-muted": "󰍭 {volume}%",
-    "format-icons": {
-      "headphone": "󰋋",
-      "hands-free": "",
-      "headset": "󰋎",
-      "phone": "󰄜",
-      "portable": "󰦧",
-      "car": "󰄋",
-      "speaker": "󰓃",
-      "hdmi": "󰡁",
-      "hifi": "󰋌",
-      "default": ["󰕿", "󰖀", "󰕾"]
-    },
-    "on-click": "pavucontrol"
-  },
-
-  "group/connection": {
-    "orientation": "horizontal",
-    "modules": ["bluetooth", "custom/separator", "network"]
-  },
-
-  "bluetooth": {
-    "format": "󰂯",
-    "format-disabled": "󰂲",
-    "format-connected": "󰂱 ",
-    "format-connected-battery": "󰂱 (󰥉 {device_battery_percentage}%)",
-    // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
-    "tooltip-format": "{num_connections} connected",
-    "tooltip-format-disabled": "bluetooth off",
-    "tooltip-format-connected": "{num_connections} connected\n\n{device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t({device_battery_percentage}%)",
-    "max-length": 35,
-    "on-click": "~/.config/waybar/scripts/bluetooth-toggle.sh",
-    "on-click-right": "ghostty -e bluetui"
-  },
-
-  "network": {
-    "format": "󰤭",
-    "format-wifi": "{icon} ({signalStrength}%)",
-    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-    "format-disconnected": "󰤫 ",
-    "tooltip-format": "wifi <span color='#ee99a0'>off</span>",
-    "tooltip-format-wifi": "SSID: {essid}({signalStrength}%), {frequency} MHz\nInterface: {ifname}\nIP: {ipaddr}\nGW: {gwaddr}\n\n<span color='#a6da95'>{bandwidthUpBits}</span>\t<span color='#ee99a0'>{bandwidthDownBits}</span>\t<span color='#c6a0f6'>󰹹{bandwidthTotalBits}</span>",
-    "tooltip-format-disconnected": "<span color='#ed8796'>disconnected</span>",
-    "format-ethernet": "󰈀 {ipaddr}/{cidr}",
-    "format-linked": "󰈀 {ifname} (No IP)",
-    "tooltip-format-ethernet": "Interface: {ifname}\nIP: {ipaddr}\nGW: {gwaddr}\nNetmask: {netmask}\nCIDR: {cidr}\n\n<span color='#a6da95'>{bandwidthUpBits}</span>\t<span color='#ee99a0'>{bandwidthDownBits}</span>\t<span color='#c6a0f6'>󰹹{bandwidthTotalBits}</span>",
-    "max-length": 35,
-    "on-click": "~/.config/waybar/scripts/wifi-toggle.sh",
-    "on-click-right": "ghostty -e wlctl"
-  },
-
-  "group/audio": {
-    "orientation": "horizontal",
-    "modules": [
-      "custom/media",
-      "custom/separator",
-      "pulseaudio"
-      // "custom/dunst"
-      // "custom/airplane_mode",
-    ]
-  },
-
-  "idle_inhibitor": {
-    "format": "{icon}",
-    "format-icons": {
-      "activated": "󰛐",
-      "deactivated": "󰛑"
-    },
-    "tooltip-format-activated": "idle-inhibitor <span color='#a6da95'>on</span>",
-    "tooltip-format-deactivated": "idle-inhibitor <span color='#ee99a0'>off</span>",
-    "start-activated": true
-  },
-
-  "custom/notification": {
-    "justify": "center",
-    "align": 0.5,
-    "tooltip-format": "Left Click: Launch Mako\nMiddle Click: Clear All\nRight Click: Do Not Disturb",
-    "format": "{}",
-    "return-type": "json",
-    "exec-if": "which makoctl",
-    "exec": "~/.config/waybar/scripts/mako.sh --horizontal",
-    "interval": 2,
-    // "on-click": "~/user_scripts/rofi/rofi_mako.sh",
-    "on-click-middle": "~/.config/waybar/scripts/mako.sh --clear && pkill -RTMIN+8 waybar",
-    "on-click-right": "makoctl mode -t do-not-disturb && pkill -RTMIN+8 waybar",
-    "signal": 8,
-    "escape": true
-  },
-
-  "custom/logout_menu": {
-    "return-type": "json",
-    "exec": "echo '{ \"text\":\"󰐥\", \"tooltip\": \"logout menu\" }'",
-    "menu": "on-click",
-    "menu-file": "~/.config/waybar/logout_menu.xml",
-    "menu-actions": {
-      "shutdown": "systemctl poweroff",
-      "reboot": "systemctl reboot",
-      "suspend": "systemctl suspend",
-      "hibernate": "systemctl hibernate",
-      "reload-waybar": "pkill waybar; waybar &"
-    }
-  },
-
-  "tray": {
-    "icon-size": 20,
-    "spacing": 2
-  }
+	"name": "top_bar",
+	"layer": "top",
+	"position": "top",
+	"height": 36,
+	"spacing": 4,
+	"modules-left": [
+		"niri/workspaces",
+		"group/hardware"
+	],
+	"modules-center": [
+		"group/datetime"
+	],
+	"modules-right": [
+		"tray",
+		"group/connection",
+		"group/audio",
+		"custom/notification",
+		"custom/logout_menu"
+	],
+	"battery": {
+		"format": "{icon} {capacity}%",
+		"format-charging": "󱐋{icon} {capacity}%",
+		"format-icons": [ "󱃍", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹" ],
+		"format-plugged": "󰚥{icon} {capacity}%",
+		"format-time": "{H} h {M} min",
+		"states": {
+			"high": 90,
+			"low": 10,
+			"lower-medium": 30,
+			"medium": 50,
+			"upper-medium": 70
+		},
+		"tooltip-format": "{timeTo}"
+	},
+	"bluetooth": {
+		"format": "󰂯",
+		"format-connected": "󰂱 ",
+		"format-connected-battery": "󰂱 (󰥉 {device_battery_percentage}%)",
+		"format-disabled": "󰂲",
+		"max-length": 35,
+		"on-click": "~/.config/waybar/scripts/bluetooth-toggle.sh",
+		"on-click-right": "ghostty -e bluetui",
+		"tooltip-format": "{num_connections} connected",
+		"tooltip-format-connected": "{num_connections} connected\n\n{device_enumerate}",
+		"tooltip-format-disabled": "bluetooth off",
+		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+		"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t({device_battery_percentage}%)"
+	},
+	"clock": {
+		"actions": {
+			"on-click-right": "mode"
+		},
+		"calendar": {
+			"format": {
+				"days": "<span color='#cad3f5'><b>{}</b></span>",
+				"months": "<span color='#f4dbd6'><b>{}</b></span>",
+				"today": "<span color='#8bd5ca'><b><u>{}</u></b></span>",
+				"weekdays": "<span color='#a6da95'><b>{}</b></span>",
+				"weeks": "<span color='#c6a0f6'><b>W{}</b></span>"
+			},
+			"mode": "month",
+			"mode-mon-col": 3,
+			"on-click-right": "mode",
+			"on-scroll": 1,
+			"weeks-pos": "right"
+		},
+		"format": "{:%I:%M %p %Ez | %a • %h | %F}",
+		"format-alt": "{:%I:%M %p}",
+		"tooltip-format": "<tt><small>{calendar}</small></tt>"
+	},
+	"clock#calendar": {
+		"actions": {
+			"on-click-right": "mode"
+		},
+		"calendar": {
+			"format": {
+				"days": "<span color='#cad3f5'><b>{}</b></span>",
+				"months": "<span color='#f4dbd6'><b>{}</b></span>",
+				"today": "<span color='#8bd5ca'><b><u>{}</u></b></span>",
+				"weekdays": "<span color='#a6da95'><b>{}</b></span>",
+				"weeks": "<span color='#c6a0f6'><b>W{}</b></span>"
+			},
+			"mode": "month",
+			"mode-mon-col": 3,
+			"on-click-right": "mode",
+			"on-scroll": 1,
+			"weeks-pos": "right"
+		},
+		"format": "{:%d-%m}",
+		"tooltip-format": "<tt><small>{calendar}</small></tt>"
+	},
+	"clock#month": {
+		"format": "{:%h}"
+	},
+	"clock#time": {
+		"format": "{:%H:%M}",
+		"tooltip": false
+	},
+	"clock#week": {
+		"format": "{:%a}"
+	},
+	"cpu": {
+		"format": "󰍛 {usage}%",
+		"on-click": "ghostty -e htop",
+		"states": {
+			"high": 90,
+			"low": 10,
+			"lower-medium": 30,
+			"medium": 50,
+			"upper-medium": 70
+		}
+	},
+	"custom/logout_menu": {
+		"exec": "echo '{ \"text\":\"󰐥\", \"tooltip\": \"logout menu\" }'",
+		"menu": "on-click",
+		"menu-actions": {
+			"hibernate": "systemctl hibernate",
+			"reboot": "systemctl reboot",
+			"reload-waybar": "pkill waybar; waybar &",
+			"shutdown": "systemctl poweroff",
+			"suspend": "systemctl suspend"
+		},
+		"menu-file": "~/.config/waybar/logout_menu.xml",
+		"return-type": "json"
+	},
+	"custom/media": {
+		"exec": "~/.config/waybar/scripts/fetch_music_metadata.sh",
+		"format": "{icon}",
+		"format-icons": {
+			"Paused": " ",
+			"Playing": " ",
+			"Stopped": " "
+		},
+		"hide-empty-text": false,
+		"max-length": 35,
+		"on-click": "playerctl play-pause",
+		"on-click-middle": "playerctl prev",
+		"on-click-right": "playerctl next",
+		"on-scroll-down": "playerctl volume 0.05+",
+		"on-scroll-up": "playerctl volume 0.05-",
+		"restart-interval": 2,
+		"return-type": "json",
+		"smooth-scrolling-threshold": "0.5"
+	},
+	"custom/notification": {
+		"align": 0.5,
+		"escape": true,
+		"exec": "~/.config/waybar/scripts/mako.sh --horizontal",
+		"exec-if": "which makoctl",
+		"format": "{}",
+		"interval": 2,
+		"justify": "center",
+		"on-click-middle": "~/.config/waybar/scripts/mako.sh --clear && pkill -RTMIN+8 waybar",
+		"on-click-right": "makoctl mode -t do-not-disturb && pkill -RTMIN+8 waybar",
+		"return-type": "json",
+		"signal": 8,
+		"tooltip-format": "Left Click: Launch Mako\nMiddle Click: Clear All\nRight Click: Do Not Disturb"
+	},
+	"custom/separator": {
+		"format": "|",
+		"tooltip": false
+	},
+	"custom/separator_dot": {
+		"format": "•",
+		"tooltip": false
+	},
+	"group/audio": {
+		"modules": [
+			"custom/media",
+			"custom/separator",
+			"pulseaudio"
+		],
+		"orientation": "horizontal"
+	},
+	"group/connection": {
+		"modules": [
+			"bluetooth",
+			"custom/separator",
+			"network",
+			"custom/separator",
+			"niri/language"
+		],
+		"orientation": "horizontal"
+	},
+	"niri/language": {
+		"format": "{shortDescription}"
+	},
+	"group/datetime": {
+		"modules": [
+			"clock#time",
+			"custom/separator_dot",
+			"clock#calendar"
+		],
+		"orientation": "horizontal"
+	},
+	"group/hardware": {
+		"modules": [
+			"cpu",
+			"custom/separator",
+			"battery",
+			"custom/separator",
+			"memory"
+		],
+		"orientation": "horizontal"
+	},
+	"hyprland/workspaces": {
+		"format": "{icon}",
+		"format-icons": {
+			"active": "",
+			"default": "",
+			"empty": "",
+			"special": ""
+		},
+		"ignore-workspaces": [
+			"(special:)?chrome-sharing-indicator"
+		],
+		"max-height": 26,
+		"show-special": true
+	},
+	"idle_inhibitor": {
+		"format": "{icon}",
+		"format-icons": {
+			"activated": "󰛐",
+			"deactivated": "󰛑"
+		},
+		"start-activated": true,
+		"tooltip-format-activated": "idle-inhibitor <span color='#a6da95'>on</span>",
+		"tooltip-format-deactivated": "idle-inhibitor <span color='#ee99a0'>off</span>"
+	},
+	"memory": {
+		"format": " {percentage}%",
+		"on-click": "ghostty -e htop",
+		"states": {
+			"high": 90,
+			"low": 10,
+			"lower-medium": 30,
+			"medium": 50,
+			"upper-medium": 70
+		},
+		"tooltip-format": "Main: ({used} GiB/{total} GiB)({percentage}%), available {avail} GiB\nSwap: ({swapUsed} GiB/{swapTotal} GiB)({swapPercentage}%), available {swapAvail} GiB"
+	},
+	"network": {
+		"format": "󰤭",
+		"format-disconnected": "󰤫 ",
+		"format-ethernet": "󰈀 {ipaddr}/{cidr}",
+		"format-icons": [
+			"󰤯",
+			"󰤟",
+			"󰤢",
+			"󰤥",
+			"󰤨"
+		],
+		"format-linked": "󰈀 {ifname} (No IP)",
+		"format-wifi": "{icon} ({signalStrength}%)",
+		"max-length": 35,
+		"on-click": "~/.config/waybar/scripts/wifi-toggle.sh",
+		"on-click-right": "ghostty -e wlctl",
+		"tooltip-format": "wifi <span color='#ee99a0'>off</span>",
+		"tooltip-format-disconnected": "<span color='#ed8796'>disconnected</span>",
+		"tooltip-format-ethernet": "Interface: {ifname}\nIP: {ipaddr}\nGW: {gwaddr}\nNetmask: {netmask}\nCIDR: {cidr}\n\n<span color='#a6da95'>{bandwidthUpBits}</span>\t<span color='#ee99a0'>{bandwidthDownBits}</span>\t<span color='#c6a0f6'>󰹹{bandwidthTotalBits}</span>",
+		"tooltip-format-wifi": "SSID: {essid}({signalStrength}%), {frequency} MHz\nInterface: {ifname}\nIP: {ipaddr}\nGW: {gwaddr}\n\n<span color='#a6da95'>{bandwidthUpBits}</span>\t<span color='#ee99a0'>{bandwidthDownBits}</span>\t<span color='#c6a0f6'>󰹹{bandwidthTotalBits}</span>"
+	},
+	"pulseaudio": {
+		"format": "{icon} {volume}% {format_source}",
+		"format-bluetooth": "{icon} 󰂱 {volume}% | {format_source}",
+		"format-bluetooth-muted": "󰝟 󰂱 {volume}% | {format_source}",
+		"format-icons": {
+			"car": "󰄋",
+			"default": [
+				"󰕿",
+				"󰖀",
+				"󰕾"
+			],
+			"hands-free": "",
+			"hdmi": "󰡁",
+			"headphone": "󰋋",
+			"headset": "󰋎",
+			"hifi": "󰋌",
+			"phone": "󰄜",
+			"portable": "󰦧",
+			"speaker": "󰓃"
+		},
+		"format-muted": "󰝟 {volume}% {format_source}",
+		"format-source": "󰍬 {volume}%",
+		"format-source-muted": "󰍭 {volume}%",
+		"on-click": "pavucontrol",
+		"states": {
+			"high": 90,
+			"low": 10,
+			"lower-medium": 30,
+			"medium": 50,
+			"upper-medium": 70
+		},
+		"tooltip-format": "{desc}"
+	},
+	"tray": {
+		"icon-size": 20,
+		"spacing": 2
+	}
 }
