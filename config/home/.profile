@@ -91,7 +91,7 @@ export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 mkdir -p "$XDG_DATA_HOME/wineprefixes"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 
-export PAGER="bat -plman"
+export PAGER="nvim +Man!"
 export MANPAGER="nvim +Man!"
 
 export TERMINFO="$XDG_DATA_HOME/terminfo"
