@@ -29,3 +29,49 @@ gui:
 
   authorColors:
     "*": "#b7bdf8"
+
+customCommands:
+  - key: "x"
+    description: "Mark"
+    commandMenu:
+      - key: "u"
+        description: "Set assume [u]nchanged"
+        context: files
+        command: git reset --quiet {{ .Form.File }} && git update-index --skip-worktree {{ .Form.File }}
+        prompts:
+          - type: "input"
+            title: "Choose file to set assume unchanged:"
+            key: "File"
+            initialValue: "{{ if .SelectedFile }}{{ .SelectedFile.Name }}{{ end }}"
+            suggestions:
+              command: git status --porcelain | awk '{print $2}'
+      - key: "U"
+        description: "[U]nset assume unchanged..."
+        context: files
+        command: git update-index --no-skip-worktree {{ .Form.File }}
+        prompts:
+          - type: "input"
+            title: "Choose file to unset assume unchanged:"
+            key: "File"
+            suggestions:
+              command: git ls-files -v | grep ^S | awk '{print $2}'
+  - key: t
+    context: files
+    description: "Skip worktree - untrack file temporarily"
+    prompts:
+      - type: "confirm"
+        title: "Confirmation"
+        body: "Do you want to skip worktree (untrack) {{ .SelectedFile.Name }}?"
+    command: git update-index --skip-worktree {{ .SelectedFile.Name }}
+
+  - key: T
+    context: files
+    description: "No-skip worktree - restore file tracking"
+    prompts:
+      - type: "menuFromCommand"
+        title: "Choose File to restore tracking"
+        key: "FileToReconsider"
+        command: bash -c "git ls-files -v | grep ^S"
+        filter: S (?P<fileToReconsider>.*)
+        valueFormat: "{{ .fileToReconsider }}"
+    command: git update-index --no-skip-worktree {{ .Form.FileToReconsider }}
