@@ -1,0 +1,40 @@
+// https://github.com/GGEZUS/niri-tablet
+// ./config.kdl
+gestures {
+    show-touch-points "gestures" // "gestures" "all"
+    // debug-log
+
+    touchscreen-swipe {
+        fingers 3
+        horizontal-swipe "resize-column" // resize-column / move-view
+
+        tap { switch-preset-column-width; } // maximize / restore
+        tap-more { spawn-sh "pkill fuzzel || fuzzel"; }
+        swipe-more-down { close-window; }
+        swipe-more-up   { fullscreen-window; } // fullscreen on/off
+
+        swipe-more-left { focus-column-right; }
+        swipe-more-right { focus-column-left; }
+
+        hold {
+            left { move-column-left; }
+            right { move-column-right; }
+            up { move-window-to-workspace-up; }
+            down { move-window-to-workspace-down; }
+        }
+    }
+
+    touchscreen-edge-swipe {
+        bottom { spawn-sh "~/.local/bin/niri-osk.sh"; }
+        top { toggle-overview; }
+        left { focus-column-left; }
+        right { focus-column-right; }
+    }
+
+    touchscreen-corner-swipe {
+        top-left { maximize-column; }
+        top-right { spawn "zen-browser"; }
+        bottom-left { spawn "ghostty"; }
+        bottom-right { close-window; }
+    }
+}
