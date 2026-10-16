@@ -17,6 +17,9 @@ image/jpeg=nsxiv.desktop
 image/webp=nsxiv.desktop
 image/gif=nsxiv.desktop
 inode/directory=pcmanfm.desktop
+text/x-shellscript=vim.desktop
+text/x-python=vim.desktop
+text/x-script.python=vim.desktop
 
 [Added Associations]
 x-scheme-handler/http=zen.desktop;

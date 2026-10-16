@@ -1,187 +1,51 @@
-// https://niri-wm.github.io/niri/Configuration:-Introduction
+// ─────────────────────────────────────────────────────────────────────────────
+// iNiR — Niri Compositor Configuration
+// ─────────────────────────────────────────────────────────────────────────────
+//
+// This config is split into modular files under config.d/ so you can edit
+// individual sections without touching the rest. Niri auto-reloads on save.
+//
+//   10  Input, touchpad, mouse, cursor
+//   20  Layout, gaps, borders, shadows, overview
+//   30  Window rules (corner radius, per-app tweaks)
+//   40  Environment variables (Qt, XDG, theming)
+//   50  Processes spawned at login
+//   60  Animations (spring physics tuning)
+//   70  Key bindings (iNiR shell + window management)
+//   80  Layer rules (backdrop surfaces for iNiR panels)
+//   90  Your personal overrides (never touched by updates)
+//
+// Docs: https://niri-wm.github.io/niri/Configuration:-Introduction
+// KDL format: https://kdl.dev
+// ─────────────────────────────────────────────────────────────────────────────
 
-include "./display.kdl"
-include "./gestures.kdl"
-input {
-	keyboard {
-		repeat-rate 35
-		repeat-delay 300
-		xkb {
-			layout "us,ir"
-			options "grp:alts_toggle,caps:escape,compose:menu"
-		}
-	}
-	touchpad {
-		tap
-		dwt
-		natural-scroll
-	}
-	warp-mouse-to-focus
-	focus-follows-mouse max-scroll-amount="5%"
-	workspace-auto-back-and-forth
-}
-layout {
-	gaps 3
-	center-focused-column "never" // "never"/"always"/"on-overflow"
-	preset-column-widths {
-		proportion 0.5
-		proportion 1.0
-	}
-	focus-ring { width 1.5; }
-	struts { left 10; right 10; }
-}
-
+// Ask apps to drop client-side decorations so Niri draws borders around them.
+// This also fixes border/focus-ring rendering behind semitransparent windows.
+// Restart apps after toggling this.
 prefer-no-csd
-hotkey-overlay { skip-at-startup; }
-recent-windows { off; }
-screenshot-path "~/Media/pictures/screenshots/screenshot %Y-%m-%d %H-%M-%S.png"
 
-spawn-at-startup "waybar"
-spawn-at-startup "lxqt-policykit-agent"
-spawn-at-startup "awww-daemon"
-// spawn-at-startup "mako"
-spawn-sh-at-startup "awww img ~/.config/wall.png"
-spawn-sh-at-startup "/usr/lib/nekoray/nekobox -tray -appdata"
-// spawn-sh-at-startup "clipse --listen"
-spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
-spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
-
-// window-rule { open-focused true; opacity 0.8; }
-// window-rule { match is-active=false; opacity 0.6; }
-window-rule {
-	match app-id=r#"ghostty"#
-	background-effect {
-		blur true
-	}
-}
-window-rule {
-	match app-id=r#"zen"#
-	opacity 1.0
+// Hide the built-in hotkey cheatsheet on startup (iNiR has its own: Mod+/).
+hotkey-overlay {
+    skip-at-startup
 }
 
-window-rule {
-	// match app-id=r#"firefox"# title="^Picture-in-Picture$"
-	match app-id=r#"nekobox"#
-	match app-id=r#"blueman"#
-	match app-id=r#"lxqt-policykit-agent"#
-	match title=r#"clipse"#
-	open-floating true
+// Honor activation tokens even with invalid serials — lets apps like VS Code,
+// Firefox, etc. steal focus when another app requests it (e.g. Nautilus open-with).
+debug {
+    honor-xdg-activation-with-invalid-serial
 }
 
-workspace ""
-workspace ""
-workspace ""
-window-rule { match app-id=r#"(mpv|steam|gamescope|.*.exe)"#; open-on-workspace ""; open-maximized true; }
+// Where native Niri screenshots land (Print key).
+// iNiR's region selector (Mod+Shift+S) uses its own path.
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
-workspace ""
-workspace ""
-workspace "󰧑"
-workspace ""
-
-window-rule { match app-id=r#"zen"#; open-on-workspace ""; open-maximized true; }
-window-rule { match app-id=r#"(helium|floorp)"#; open-on-workspace ""; open-maximized true; }
-window-rule { match app-id=r#"Ferdium"#; open-on-workspace "󰧑"; open-maximized true; }
-window-rule { match app-id=r#"(v2ray|XPipe)"#; open-on-workspace ""; open-maximized true; }
-
-binds {
-	Mod+Return { spawn "ghostty"; }
-	Mod+D { spawn "fuzzel"; }
-	Mod+B { spawn "zen-browser"; }
-	Mod+E { spawn "pcmanfm"; }
-	Mod+X { spawn "xpipe"; }
-	Mod+Semicolon { spawn "~/.config/fuzzel/fuzzel-emoji"; }
-	Mod+c { spawn "~/.config/fuzzel/fuzzel-calc"; }
-	Mod+Alt+L { spawn "swaylock"; }
-	Mod+Q repeat=false { close-window; }
-	Mod+Shift+x { quit skip-confirmation=true; }
-	Mod+Shift+P { power-off-monitors; }
-	Mod+Slash repeat=false { toggle-overview; }
-	// Mod+V { spawn-sh "foot --title=clipse -e clipse"; }
-	Mod+V { spawn-sh "cliphist list | fuzzel --dmenu --with-nth 2 --width 60 | cliphist decode | wl-copy"; }
-
-	Mod+Up    { focus-window-or-workspace-up; }
-	Mod+Down  { focus-window-or-workspace-down; }
-	Mod+Left  { focus-column-left; }
-	Mod+Right { focus-column-right; }
-
-	Mod+Ctrl+Up    { move-window-up-or-to-workspace-up; }
-	Mod+Ctrl+Down  { move-window-down-or-to-workspace-down; }
-	Mod+Ctrl+Left  { consume-or-expel-window-left; }
-	Mod+Ctrl+Right { consume-or-expel-window-right; }
-
-	Mod+Shift+Up    { focus-monitor-up; }
-	Mod+Shift+Down  { focus-monitor-down; }
-	Mod+Shift+Left  { focus-monitor-left; }
-	Mod+Shift+Right { focus-monitor-right; }
-
-	Mod+Alt+Up    { move-window-to-monitor-up; }
-	Mod+Alt+Down  { move-window-to-monitor-down; }
-	Mod+Alt+Left  { move-window-to-monitor-left; }
-	Mod+Alt+Right { move-window-to-monitor-right; }
-
-	Mod+Page_Up   { move-workspace-up; }
-	Mod+Page_Down { move-workspace-down; }
-
-
-	Mod+u { focus-workspace ""; }
-	Mod+i { focus-workspace ""; }
-	Mod+o { focus-workspace "󰧑"; }
-	Mod+j { focus-workspace ""; }
-	Mod+k { focus-workspace ""; }
-	Mod+l { focus-workspace ""; }
-	Mod+p { focus-workspace ""; }
-	Mod+1 { focus-workspace 1; }
-	Mod+2 { focus-workspace 2; }
-	Mod+3 { focus-workspace 3; }
-	Mod+4 { focus-workspace 4; }
-	Mod+5 { focus-workspace 5; }
-	Mod+6 { focus-workspace 6; }
-	Mod+Ctrl+u { move-window-to-workspace ""; }
-	Mod+Ctrl+i { move-window-to-workspace ""; }
-	Mod+Ctrl+o { move-window-to-workspace "󰧑"; }
-	Mod+Ctrl+j { move-window-to-workspace ""; }
-	Mod+Ctrl+k { move-window-to-workspace ""; }
-	Mod+Ctrl+l { move-window-to-workspace ""; }
-	Mod+Ctrl+p { move-window-to-workspace ""; }
-	Mod+Ctrl+1 { move-window-to-workspace 1; }
-	Mod+Ctrl+2 { move-window-to-workspace 2; }
-	Mod+Ctrl+3 { move-window-to-workspace 3; }
-	Mod+Ctrl+4 { move-window-to-workspace 4; }
-	Mod+Ctrl+5 { move-window-to-workspace 5; }
-	Mod+Ctrl+6 { move-window-to-workspace 6; }
-
-	Mod+Tab { focus-workspace-previous; }
-
-	Mod+F { switch-preset-column-width; }
-	Mod+Shift+F { fullscreen-window; }
-
-	Mod+Space      { toggle-window-floating; }
-	Mod+Ctrl+Space { switch-focus-between-floating-and-tiling; }
-
-	Mod+W { toggle-column-tabbed-display; }
-
-	Print      { screenshot; }
-	Ctrl+Print { screenshot-screen; }
-	Alt+Print  { screenshot-window; }
-
-	Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
-
-	XF86AudioRaiseVolume  allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"; }
-	XF86AudioLowerVolume  allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"; }
-	XF86AudioMute         allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-	XF86AudioMicMute      allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-	XF86AudioPlay         allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-	XF86AudioStop         allow-when-locked=true { spawn-sh "playerctl stop"; }
-	XF86AudioPrev         allow-when-locked=true { spawn-sh "playerctl previous"; }
-	XF86AudioNext         allow-when-locked=true { spawn-sh "playerctl next"; }
-	XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+5%"; }
-	XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "5%-"; }
-	// Mod+TouchpadScrollDown { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02+"; }
-	// Mod+TouchpadScrollUp   { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02-"; }
-}
-
-environment {
-	XDG_CURRENT_DESKTOP "niri"
-	XDG_SESSION_TYPE "wayland"
-	QT_QPA_PLATFORM "wayland"
-}
+// ── Modular includes ────────────────────────────────────────────────────────
+include "config.d/10-input-and-cursor.kdl"
+include "config.d/20-layout-and-overview.kdl"
+include "config.d/30-window-rules.kdl"
+include "config.d/40-environment.kdl"
+include "config.d/50-startup.kdl"
+include "config.d/60-animations.kdl"
+include "config.d/70-binds.kdl"
+include "config.d/80-layer-rules.kdl"
+include "config.d/90-user-extra.kdl"

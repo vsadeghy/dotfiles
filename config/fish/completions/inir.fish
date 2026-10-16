@@ -1,0 +1,1 @@
+/home/vss/.config/quickshell/inir/scripts/completions/inir.fish
