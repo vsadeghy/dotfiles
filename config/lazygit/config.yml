@@ -1,8 +1,9 @@
 promptToReturnFromSubprocess: false
 git:
-  pagers:
-    - externalDiffCommand: difft --color=always --display=inline
-    # - pager: delta --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+  diffRenderers:
+    - command: difft --color=always --display=inline
+      type: extDiff
+      # - pager: delta --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
 gui:
   screenMode: half
   mainPanelSplitMode: horizontal
@@ -26,10 +27,8 @@ gui:
       - "#cad3f5"
     searchingActiveBorderColor:
       - "#eed49f"
-
-  authorColors:
-    "*": "#b7bdf8"
-
+    authorColors:
+      "*": "#b7bdf8"
 customCommands:
   - key: "x"
     description: "Mark"
@@ -63,7 +62,6 @@ customCommands:
         title: "Confirmation"
         body: "Do you want to skip worktree (untrack) {{ .SelectedFile.Name }}?"
     command: git update-index --skip-worktree {{ .SelectedFile.Name }}
-
   - key: T
     context: files
     description: "No-skip worktree - restore file tracking"
