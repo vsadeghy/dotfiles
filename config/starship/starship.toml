@@ -3,7 +3,7 @@
 
 add_newline = false
 palette = "catppuccin_macchiato"
-format = """$hostname$directory$nodejs$character"""
+format = """$hostname$directory$nodejs$status$character"""
 right_format = """$all"""
 command_timeout = 1000
 
@@ -11,6 +11,10 @@ command_timeout = 1000
 format = '[$symbol$branch(:$remote_branch)]($style) '
 style = "bold mauve"
 ignore_branches = ['master', 'main']
+
+[status]
+format = '[$maybe_int](bold red)'
+disabled = false
 
 [directory]
 fish_style_pwd_dir_length = 3
@@ -25,9 +29,6 @@ disabled = false
 
 [lua]
 disabled = true
-
-[nodejs]
-disabled = false
 
 [golang]
 disabled = true
