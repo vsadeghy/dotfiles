@@ -24,9 +24,6 @@ truncation_length = 1
 [hostname]
 format = "[$ssh_symbol$hostname]($style) "
 
-[direnv]
-disabled = false
-
 [lua]
 disabled = true
 
