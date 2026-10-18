@@ -18,5 +18,6 @@ vbind '!$' "commandline -f history-token-search-backward"
 try fzf                 --fish | source
 try zoxide   init --cmd=d fish | source
 try starship init         fish | source
+try direnv   hook         fish | source
 
 source ~/.lconfig/config.fish 2>/dev/null
