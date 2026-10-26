@@ -2,7 +2,7 @@ function fish_greeting
 	try pfetch
 end
 set -g fish_key_bindings fish_default_key_bindings
-set -U nvm_default_version lts
+set -U nvm_default_version 24
 fish_config theme choose Catppuccin-Macchiato
 
 import_aliases ~/.config/shell/aliasrc.sh
