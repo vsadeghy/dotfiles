@@ -50,6 +50,7 @@
 	writeCommitGraph = true
 [rebase]
 	updateRefs = true
+	autoStash = true
 [core]
 	excludesfile = ~/.config/git/ignore
 	fileMode = false
@@ -62,7 +63,7 @@
 [init]
 	defaultBranch = main
 [pull]
-	rebase = false
+	rebase = true
 [credential]
 	helper = cache
 [pager]
