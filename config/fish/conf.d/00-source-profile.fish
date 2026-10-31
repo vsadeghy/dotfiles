@@ -6,6 +6,11 @@ if test -f $pro_file && ! test ~/.profile -nt $pro_file
 end
 
 env -i HOME=$HOME bash --noprofile --norc -c '
+    export XDG_CONFIG_HOME="$HOME/.config"
+    export XDG_CACHE_HOME="$HOME/.local/cache"
+    export XDG_DATA_HOME="$HOME/.local/share"
+    export XDG_STATE_HOME="$HOME/.local/state"
+    export XDG_RUNTIME_DIR="/run/user/$UID"
     test -f /etc/profile && . /etc/profile >/dev/null 2>&1
     test -f ~/.profile && . ~/.profile >/dev/null 2>&1
     env
