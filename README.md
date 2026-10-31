@@ -9,7 +9,7 @@ My dotfiles managed with [stow](https://www.gnu.org/software/stow/).
 | Terminal             | [~~alacritty~~](https://github.com/alacritty/alacritty)/[~~kitty~~](https://github.com/kovidgoyal/kitty)/[~~ghostty~~](https://github.com/ghostty-org/ghostty)/[~~foot~~](https://codeberg.org/dnkl/foot)/[ghostty](https://github.com/ghostty-org/ghostty)
 | Shell                | [~~zsh~~](https://github.com/zsh-users/zsh)/[fish](https://fishshell.com)
 | Text Editor          | [neovim](https://neovim.io)
-|
+||
 | (un)Archiver         | [ouch](https://github.com/ouch-org/ouch)
 | AUR Helper           | [yay](https://github.com/Jguer/yay)
 | Application Launcher | [~~dmenu~~](https://tools.suckless.org/dmenu/)/[~~rofi~~](https://github.com/davatorium/rofi)/[fuzzel](https://codeberg.org/dnkl/fuzzel)
