@@ -81,6 +81,7 @@ export SCREENRC="$XDG_CONFIG_HOME/screen/screenrc"
 export SCREENDIR="$XDG_RUNTIME_DIR/screen"
 export SINGULARITY_CACHEDIR="$XDG_CACHE_HOME/singularity"
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+export DOCKER_SOCK="${DOCKER_HOST#unix://}"
 
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx

@@ -62,4 +62,4 @@ mantle = "#1e2030"
 crust = "#181926"
 
 [docker_context]
-disabled = true
+disabled = false

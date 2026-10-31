@@ -1,6 +1,7 @@
 // https://niri-wm.github.io/niri/Configuration:-Introduction
 
 include "./display.kdl"
+include "./gestures.kdl"
 input {
 	keyboard {
 		repeat-rate 35
